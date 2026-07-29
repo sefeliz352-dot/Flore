@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLORÉ</title>
+    <link rel="stylesheet" href="ESTILO.css">
+     <link rel="icon" href="IMAGENES/flore-icono.png" type="image/png">
+    <style>
+        .boton-eliminar-fav {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.85);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 15;
+        }
+        .boton-eliminar-fav img {
+            width: 20px;
+            height: 20px;
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+        .boton-eliminar-fav:hover {
+            background: #ca4c1e;
+            transform: scale(1.1);
+        }
+        .boton-eliminar-fav:hover img {
+            opacity: 1;
+            filter: brightness(10);
+        }
+
+        /* ✅ ESTILOS CORREGIDOS DEL CORAZÓN */
+        .boton-favorito {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            z-index: 15;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        .corazon-icono {
+            width: 22px;
+            height: 22px;
+            stroke: #885a49;
+            fill: transparent;
+            transition: all 0.3s ease;
+        }
+        .boton-favorito.activo .corazon-icono {
+            stroke: #ca4c1e;
+            fill: #ca4c1e;
+        }
+        .boton-favorito:hover {
+            transform: scale(1.15);
+        }
+
+        .producto-item {
+            position: relative;
+            overflow: hidden;
+        }
+        header {
+            background-image: url(IMAGENES/01.jpeg);
+            height: 155px;
+             min-height: 125px;
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-color: #ebceb7;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .barra-busqueda {
+            position: relative;
+            width: 165px;  
+            height: 50px;  
+            margin: 0 5px; 
+        }
+        .barra-busqueda input {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #5f2c19; 
+            border-radius: 25px; 
+            padding: 0 40px 0 18px; 
+            font-size: 14px;
+            color: #5f2c19;
+            background: transparent;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .barra-busqueda input::placeholder {
+            color: #5f2c19; 
+        }
+        .barra-busqueda button {
+            position: absolute;
+            right: 10%; 
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+        }
+        .icono-busqueda{
+            width: 18px;
+            height: 18px;
+        }
+        .barra-busqueda button:hover {
+            transform: translateY(-50%) scale(1.1); 
+        }
+        /* ✅ AMBOS TÍTULOS AHORA PEQUEÑOS DESDE EL INICIO */
+        .prod-header .title {
+            font-size: 20px !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="menu container">
+            <a href="FLORÉ.html"> 
+                <img src="IMAGENES/FloréLOGO.png" class="logo" alt="">
+            </a>
+            <nav class="navbar">
+                 <ul>
+                      <li><a href="FLORÉ.html">Inicio</a></li>
+                      <li><a href="velas.html">Velas</a></li>
+                      <li><a href="jabones.html">Jabones</a></li>
+                       <li><a href="favoritos.html" style="color:#ca4c1e;">Mis Favoritos</a></li>
+                     <div class="barra-busqueda">
+                        <input type="text" id="texto-busqueda" placeholder="Buscar artículos...">
+                        <button type="button">
+                            <img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda">
+                        </button>
+                       </div>
+                        <li class="carrito-item">
+                        <a href="carrito.html" class="enlace-carrito">
+                            <img src="IMAGENES/carro compras- cafe.png" alt="Carrito" class="icon-carrito">
+                            <span class="contador-carrito" id="contador-carrito">0</span>
+                        </a>
+                        </li>
+
+                        <li class="perfil-item">
+                        <a href="perfil.html" class="enlace-perfil">
+                            <img src="IMAGENES/usuario.png" alt="Carrito" class="icon-perfil">
+                        </a>
+                    </li>
+
+
+                  </ul>
+            </nav>
+        </div>
+        <div class="header-content container" style="height: 15vh;"></div>
+    </header>
+    <main class="producto-menu">
+        <div class="container">
+            <div class="prod-header" style="text-align:center; margin-bottom:40px;"> 
+                <h2 class="title" id="titulo-principal">Mis Productos Favoritos</h2>
+            </div>
+            <!-- Vista normal: solo favoritos -->
+            <div class="contenedor-productos-todos" id="vista-normal">
+                <div class="box-container-general" id="lista-favoritos">
+                    <p class="texto-vacio">Aún no tienes productos guardados en favoritos.</p>
+                </div>
+            </div>
+            <!-- Vista búsqueda: TODOS LOS PRODUCTOS -->
+            <div class="contenedor-productos-todos" id="vista-busqueda" style="display: none;">
+                <div class="box-container-general" id="resultados-busqueda"></div>
+            </div>
+        </div>
+    </main>
+
+    <div class="derechos">
+            <p>© 2026 Floré - Todos los derechos reservados</p>
+        </div>
+
+    
+    <script>
+       document.addEventListener('DOMContentLoaded', function () {
+    // 🧩 ELEMENTOS GENERALES
+    const contenedorFavoritos = document.getElementById('lista-favoritos');
+    let listaFavoritos = JSON.parse(localStorage.getItem('listaFavoritos')) || [];
+    const contadorCarrito = document.getElementById('contador-carrito');
+    let productosEnCarrito = JSON.parse(localStorage.getItem('carritoProductos')) || [];
+
+    const tituloPrincipal = document.getElementById('titulo-principal');
+    const vistaNormal = document.getElementById('vista-normal');
+    const vistaBusqueda = document.getElementById('vista-busqueda');
+    const contenedorResultados = document.getElementById('resultados-busqueda');
+    const inputBuscar = document.getElementById('texto-busqueda');
+    let resultadosActivos = false;
+    let baseDeDatosGlobal = [];
+    let cargando = false;
+
+    // 📄 LISTA DE TODAS LAS PÁGINAS A BUSCAR
+    const misPaginasConProductos = [
+        "FLORÉ.html", "velas.html", "ramos.html", "jabones.html"
+    ];
+
+    // 🔧 QUITAR ACENTOS PARA BÚSQUEDA PERFECTA
+    function quitarAcentos(texto) {
+        return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+
+    // 🛒 ACTUALIZAR CONTADOR CARRITO
+    function actualizarContadorCarrito() {
+        let total = productosEnCarrito.reduce((suma, item) => suma + item.cantidad, 0);
+        if(contadorCarrito) contadorCarrito.textContent = total;
+    }
+    actualizarContadorCarrito();
+
+    // 📥 CARGAR TODOS LOS PRODUCTOS - ✅ AHORA SEPARA CORTA Y LARGA
+    async function cargarTodosLosProductos() {
+        if(baseDeDatosGlobal.length > 0) return; // No recargar si ya está cargado
+        try {
+            baseDeDatosGlobal = [];
+            for (const pagina of misPaginasConProductos) {
+                try {
+                    const respuesta = await fetch(pagina);
+                    if (!respuesta.ok) continue;
+                    const textoHtml = await respuesta.text();
+                    const parser = new DOMParser();
+                    const documento = parser.parseFromString(textoHtml, 'text/html');
+
+                    const productosDeEstaPagina = documento.querySelectorAll('.box-producto');
+                    productosDeEstaPagina.forEach(prod => {
+                        const nombre = prod.querySelector('h3')?.textContent.trim() || "";
+                        
+                        // ✅ DESCRIPCIÓN CORTA: Para mostrar en tarjeta
+                        const parrafoDesc = prod.querySelector('.contenido-producto > p:first-of-type');
+                        const descripcionCorta = parrafoDesc ? parrafoDesc.textContent.trim() : "Sin descripción disponible";
+
+                        // ✅ DESCRIPCIÓN LARGA: Para enviar al detalle
+                        const botonDatos = prod.querySelector('.comprar');
+                        if (!botonDatos) return;
+
+                        const descripcionLarga = botonDatos.dataset.descripcion?.trim() || descripcionCorta;
+                        const imagen = prod.querySelector('img')?.getAttribute('src') || "";
+
+                        if (nombre && botonDatos) {
+                            baseDeDatosGlobal.push({
+                                nombre: nombre,
+                                descripcion_corta: descripcionCorta,
+                                descripcion_larga: descripcionLarga,
+                                imagen: imagen,
+                                precio: botonDatos.dataset.precio || "",
+                                peso: botonDatos.dataset.peso || "",
+                                colores: botonDatos.dataset.colores || "",
+                                aromas: botonDatos.dataset.aromas || ""
+                            });
+                        }
+                    });
+                } catch(err) {
+                    console.warn("No se pudo cargar:", pagina);
+                }
+            }
+        } catch (error) {
+            console.error("❌ Error al cargar catálogo:", error);
+        }
+    }
+
+    // ❤️ MOSTRAR SOLO MIS FAVORITOS (VISTA INICIAL)
+    function mostrarVistaFavoritos() {
+        contenedorFavoritos.innerHTML = '';
+        if (listaFavoritos.length === 0) {
+            contenedorFavoritos.innerHTML = `<p class="texto-vacio">Aún no tienes productos guardados en favoritos.</p>`;
+            return;
+        }
+        listaFavoritos.forEach((producto, indice) => {
+            const tarjeta = document.createElement('div');
+            tarjeta.className = 'box-producto';
+            const coloresGuardados = producto.colores || "";
+            const aromasGuardados = producto.aromas || "";
+            tarjeta.innerHTML = `
+                <div class="producto-item">
+                    <button class="boton-eliminar-fav" data-indice="${indice}">
+                        <img src="IMAGENES/Basura-cafe.png" alt="Eliminar de favoritos">
+                    </button>
+                    <div class="imagen-producto">
+                        <img src="${producto.imagen}" alt="${producto.nombre}">
+                    </div>
+                    <div class="contenido-producto">
+                        <h3>${producto.nombre}</h3>
+                        <p>Producto agregado a tus favoritos</p>
+                        <p class="peso-producto">Peso: ${producto.peso || 'Sin peso'}</p>
+                        <div class="iconos-compra">
+                            <div class="comprar" 
+                                data-nombre="${producto.nombre}" 
+                                data-precio="${producto.precio || 0}" 
+                                data-peso="${producto.peso || '100g'}"
+                                data-imagen="${producto.imagen}"
+                                data-descripcion="${producto.descripcion || 'Sin descripción'}"
+                                data-colores="${coloresGuardados}"
+                                data-aromas="${aromasGuardados}">
+                                <span>COMPRAR</span>
+                                <img src="IMAGENES/flecha arriba.png" alt="flecha-arriba">
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            contenedorFavoritos.appendChild(tarjeta);
+        });
+        asignarEventosVistaFavoritos();
+    }
+
+    // 🔍 BUSCAR EN TODOS LOS PRODUCTOS GLOBALES
+    async function buscarEnTiempoReal() {
+        if(!inputBuscar || cargando) return;
+        cargando = true;
+
+        const textoBuscar = quitarAcentos(inputBuscar.value.trim());
+
+        // ✅ VOLVER A VISTA NORMAL AL BORRAR
+        if (textoBuscar === "") {
+            if(resultadosActivos) {
+                vistaBusqueda.style.display = "none";
+                vistaNormal.style.display = "block";
+                tituloPrincipal.textContent = "Mis Productos Favoritos";
+                resultadosActivos = false;
+            }
+            cargando = false;
+            return;
+        }
+
+        // ✅ CAMBIAR A MODO BÚSQUEDA
+        resultadosActivos = true;
+        vistaNormal.style.display = "none";
+        vistaBusqueda.style.display = "block";
+        contenedorResultados.innerHTML = "";
+
+        await cargarTodosLosProductos();
+
+        // ✅ FILTRAR EN TODO EL CATÁLOGO (por nombre o descripción CORTA)
+        const resultados = baseDeDatosGlobal.filter(producto => 
+            quitarAcentos(producto.nombre).includes(textoBuscar) ||
+            quitarAcentos(producto.descripcion_corta).includes(textoBuscar)
+        );
+
+        tituloPrincipal.textContent = resultados.length > 0 
+            ? `PRODUCTOS ENCONTRADOS (${resultados.length})` 
+            : `NINGÚN PRODUCTO COINCIDE`;
+
+        if(resultados.length === 0) {
+            contenedorResultados.innerHTML = `<p class="texto-vacio">❌ No se encontraron productos con: "${inputBuscar.value}"</p>`;
+            cargando = false;
+            return;
+        }
+
+        // ✅ DIBUJAR RESULTADOS: MUESTRA CORTA, ENVÍA LARGA
+        const caja = document.createElement('div');
+        caja.className = 'box-container-general';
+        resultados.forEach(prod => {
+            const esFavorito = listaFavoritos.some(fav => fav.nombre === prod.nombre);
+            const tarjeta = document.createElement('div');
+            tarjeta.className = 'box-producto';
+            tarjeta.innerHTML = `
+                <div class="producto-item">
+                    <div class="boton-favorito ${esFavorito ? 'activo' : ''}"
+                        data-nombre="${prod.nombre}"
+                        data-peso="${prod.peso}"
+                        data-precio="${prod.precio}"
+                        data-imagen="${prod.imagen}"
+                        data-descripcion="${prod.descripcion_larga}"
+                        data-colores="${prod.colores}"
+                        data-aromas="${prod.aromas}">
+                        <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </div>
+                    <div class="imagen-producto">
+                        <img src="${prod.imagen}" alt="${prod.nombre}">
+                    </div>
+                    <div class="contenido-producto">
+                        <h3>${prod.nombre}</h3>
+                        <p>${prod.descripcion_corta}</p>
+                        <p class="peso-producto">Peso: ${prod.peso || 'Sin peso'}</p>
+                        <div class="iconos-compra">
+                            <div class="comprar" 
+                                data-nombre="${prod.nombre}" 
+                                data-precio="${prod.precio}" 
+                                data-peso="${prod.peso}"
+                                data-imagen="${prod.imagen}"
+                                data-descripcion="${prod.descripcion_larga}"
+                                data-colores="${prod.colores}"
+                                data-aromas="${prod.aromas}">
+                                <span>COMPRAR</span>
+                                <img src="IMAGENES/flecha arriba.png" alt="flecha-arriba">
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            caja.appendChild(tarjeta);
+        });
+        contenedorResultados.appendChild(caja);
+
+        // ✅ ACTIVAR TODOS LOS EVENTOS
+        activarEventosGlobales();
+        cargando = false;
+    }
+
+    // ⚙️ EVENTOS SOLO PARA LA VISTA DE MIS FAVORITOS
+    function asignarEventosVistaFavoritos() {
+        document.querySelectorAll('.boton-eliminar-fav').forEach(boton => {
+            boton.addEventListener('click', function () {
+                const idx = parseInt(this.dataset.indice);
+                listaFavoritos.splice(idx, 1);
+                localStorage.setItem('listaFavoritos', JSON.stringify(listaFavoritos));
+                mostrarVistaFavoritos();
+            });
+        });
+        document.querySelectorAll('.comprar').forEach(btn => btn.addEventListener('click', irAProducto));
+    }
+
+    // ⚙️ EVENTOS GLOBALES: CORAZONES, COMPRAR
+    function activarEventosGlobales() {
+        // ✅ Corregido: Corazones favoritos
+        document.querySelectorAll('.boton-favorito').forEach(corazon => {
+            corazon.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const datos = {
+                    nombre: this.dataset.nombre,
+                    imagen: this.dataset.imagen,
+                    peso: this.dataset.peso,
+                    precio: this.dataset.precio,
+                    descripcion: this.dataset.descripcion,
+                    colores: this.dataset.colores,
+                    aromas: this.dataset.aromas
+                };
+
+                const existe = listaFavoritos.some(f => f.nombre === datos.nombre);
+                if(existe) {
+                    listaFavoritos = listaFavoritos.filter(f => f.nombre !== datos.nombre);
+                    this.classList.remove('activo');
+                } else {
+                    listaFavoritos.push(datos);
+                    this.classList.add('activo');
+                }
+
+                localStorage.setItem('listaFavoritos', JSON.stringify(listaFavoritos));
+            });
+        });
+        // Botones comprar
+        document.querySelectorAll('.comprar').forEach(btn => btn.addEventListener('click', irAProducto));
+    }
+
+    // 🔗 FUNCIÓN ÚNICA IR A DETALLE - ✅ CORREGIDO PARA CODIFICAR BIEN LA DESCRIPCIÓN
+    function irAProducto() {
+        const nombre = encodeURIComponent(this.dataset.nombre);
+        const precio = this.dataset.precio;
+        const peso = encodeURIComponent(this.dataset.peso);
+        const imagen = encodeURIComponent(this.dataset.imagen);
+        const descripcion = encodeURIComponent(this.dataset.descripcion || "Sin descripción");
+        const colores = encodeURIComponent(this.dataset.colores || "");
+        const aromas = encodeURIComponent(this.dataset.aromas || "");
+        window.location.href = `producto.html?nombre=${nombre}&precio=${precio}&peso=${peso}&imagen=${imagen}&descripcion=${descripcion}&colores=${colores}&aromas=${aromas}`;
+    }
+
+    // 🚀 INICIAR TODO
+    if(inputBuscar) inputBuscar.addEventListener('input', buscarEnTiempoReal);
+    mostrarVistaFavoritos();
+});
+    </script>
+</body>
+</html>

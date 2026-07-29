@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto</title>
+    <link rel="stylesheet" href="Estilo.css"> 
+     <link rel="icon" href="IMAGENES/flore-icono.png" type="image/png">
+    <style>
+        /* ✅ SOLO ARREGLAMOS LA BARRA, EL RESTO SE QUEDA IGUAL */
+        .encabezado {
+            background-image: url(IMAGENES/01.jpeg);
+            min-height: 150px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            z-index: 99999 !important;
+        }
+
+        .menu.container, .header-content.container {
+            position: relative;
+            z-index: 99999 !important;
+            background: transparent !important;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar ul {
+            position: relative;
+            z-index: 99999 !important;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            list-style: none;
+            padding: 0 !important;
+            margin: 0 !important;
+            line-height: normal;
+            flex-wrap: nowrap;
+        }
+        .navbar ul li,
+        .navbar ul li a,
+        .barra-busqueda {
+            pointer-events: auto !important;
+            cursor: pointer;
+            position: relative;
+            z-index: 99999 !important;
+            padding: 5px !important;
+            margin: 0 !important;
+            line-height: inherit;
+            white-space: nowrap;
+        }
+
+        .navbar ul li a {
+            display: inline;
+            color: #5f2c19;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .navbar ul li a:hover {
+            color: #ca4c1e;
+            text-shadow: none !important;
+            transform: none !important;
+        }
+
+        .barra-busqueda {
+            position: relative;
+            width: 165px;  
+            height: 50px;  
+            margin: 0 5px; 
+            filter: none !important;
+        }
+        .barra-busqueda input {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #5f2c19; 
+            border-radius: 25px; 
+            padding: 0 40px 0 18px; 
+            font-size: 14px;
+            color: #5f2c19;
+            background: transparent;
+            outline: none;
+            box-sizing: border-box;
+            box-shadow: none !important;
+        }
+        .barra-busqueda input:focus {
+            box-shadow: none !important;
+            border-color: #ca4c1e;
+        }
+        .barra-busqueda input::placeholder { color: #5f2c19; }
+        .barra-busqueda button {
+            position: absolute;
+            right: 10%; 
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+            filter: none !important;
+        }
+        .icono-busqueda{
+            width: 18px;
+            height: 18px;
+            transition: none !important;
+            filter: none !important;
+        }
+
+        /* ✅ ESTILOS CORREGIDOS PARA EL CONTADOR DEL CARRITO */
+        .carrito-item {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+        .icon-carrito, .icon-perfil {
+            transition: none !important;
+            filter: none !important;
+            width: 24px;
+            height: 24px;
+        }
+        .icon-carrito:hover, .icon-perfil:hover {
+            filter: none !important;
+            transform: none !important;
+        }
+        .contador-carrito {
+            position: absolute;
+            top: -15px;
+            right: -8px;
+            background: #ca4c1e;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .contenedor-pagina {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            position: relative;
+            z-index: 1 !important;
+        }
+
+        .prod-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .prod-header .title {
+            color: #8b4513;
+            font-size: 36px;
+            font-family: 'serif';
+            margin: 0;
+        }
+
+        .contenedor-perfil {
+            display: flex;
+            gap: 40px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.1);
+            padding: 30px;
+        }
+
+        .menu-perfil {
+            min-width: 220px;
+        }
+
+        .menu-perfil ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .opcion-perfil {
+            padding: 15px 20px;
+            color: #8b4513;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .opcion-perfil.activa, .opcion-perfil:hover {
+            background: #fff3ed;
+            border-left: 3px solid #8b4513;
+            color: #8b4513;
+        }
+
+        .contenido-perfil {
+            flex: 1;
+        }
+
+        .subtitulo-seccion {
+            color: #8b4513;
+            font-size: 22px;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e8c8ad;
+            font-family: 'serif';
+        }
+
+        .formulario-perfil {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .grupo-input {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .grupo-input label {
+            color: #8b4513;
+            font-weight: 500;
+        }
+
+        .grupo-input input, .grupo-input textarea {
+            padding: 12px 15px;
+            border: 1px solid #e8c8ad;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #5a2e10;
+            background: #fff;
+        }
+
+        .grupo-input input:focus, .grupo-input textarea:focus {
+            outline: none;
+            border-color: #8b4513;
+            box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.1);
+        }
+
+        .grupo-input small {
+            color: #b07a57;
+            font-size: 12px;
+        }
+
+        .boton-principal {
+            background: #8b4513;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .boton-principal:hover {
+            background: #a0522d;
+        }
+
+        .texto-ayuda, .texto-vacio {
+            color: #b07a57;
+            font-style: italic;
+        }
+
+        /* ✅ Tarjeta donde se muestran todos los datos guardados */
+        .datos-guardados {
+            margin-top: 25px;
+            padding: 20px;
+            background: #fff3ed;
+            border-radius: 8px;
+            border-left: 3px solid #8b4513;
+        }
+        .datos-guardados h3 {
+            color: #8b4513;
+            margin: 0 0 12px 0;
+            font-size: 18px;
+        }
+        .entrada-datos {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 8px 0;
+            border-bottom: 1px solid #e8c8ad;
+            gap: 10px;
+        }
+        .entrada-datos:last-child {
+            border-bottom: none;
+        }
+        .dato-registrado {
+            color: #5a2e10;
+            font-size: 15px;
+            flex: 1;
+        }
+        .dato-registrado strong {
+            color: #8b4513;
+        }
+        .btn-eliminar {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+        .btn-eliminar:hover {
+            background: #c82333;
+        }
+
+        .item-pedido {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
+            border-bottom: 1px solid #e8c8ad;
+        }
+
+        .img-pedido {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 6px;
+            background: #fff;
+        }
+
+        .detalle-pedido h4 {
+            margin: 0 0 5px 0;
+            color: #8b4513;
+            font-size: 15px;
+        }
+
+        .detalle-pedido p {
+            margin: 2px 0;
+            font-size: 13px;
+            color: #b07a57;
+        }
+
+        .estado-pedido {
+            font-size: 12px;
+            font-weight: bold;
+            color: #28a745;
+            margin-left: auto;
+        }
+
+        .mensaje-error {
+            color: #dc3545;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .pie-pagina {
+            background: #f3d4b7;
+            padding: 40px 20px 20px;
+            margin-top: 50px;
+        }
+
+        .contenido-pie {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .columna-pie h3 {
+            color: #8b4513;
+            font-family: 'serif';
+        }
+
+        .columna-pie p, .columna-pie a {
+            color: #5a2e10;
+            text-decoration: none;
+        }
+
+        .sociales {
+            display: flex;
+            gap: 10px;
+        }
+        .social img {
+            width: 28px;
+            filter: invert(30%) sepia(60%) saturate(400%) hue-rotate(340deg);
+        }
+
+        .derechos {
+            text-align: center;
+            margin-top: 20px;
+            color: #b07a57;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .encabezado {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+            .menu-navegacion {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .contenedor-perfil {
+                flex-direction: column;
+            }
+            .navbar ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="encabezado">
+        <div class="menu container">
+            <a href="FLORÉ.html">
+                <img src="IMAGENES/FloréLOGO.png" class="logo" alt="Logo Floré">
+            </a>
+
+            <nav class="navbar">
+                <ul>
+                    <li><a href="velas.html">Velas</a></li>
+                    <li><a href="jabones.html">Jabones</a></li>
+                    <li><a href="favoritos.html">Mis Favoritos</a></li>
+
+                    <li class="barra-busqueda">
+                        <input type="text" id="texto-busqueda" placeholder="Buscar artículos...">
+                        <button type="button">
+                            <img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda">
+                        </button>
+                    </li>
+
+                    <li class="carrito-item">
+                        <a href="carrito.html" class="enlace-carrito">
+                            <img src="IMAGENES/carro compras- cafe.png" alt="Carrito" class="icon-carrito">
+                            <span class="contador-carrito" id="contador-carrito">0</span>
+                        </a>
+                    </li>
+
+                    <li class="perfil-item">
+                        <a href="perfil.html" class="enlace-perfil">
+                            <img src="IMAGENES/usuario.png" alt="Perfil" class="icon-perfil">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <main class="contenedor-pagina">
+        <div class="prod-header">
+            <h1 class="title">MI PERFIL</h1>
+        </div>
+
+        <div class="contenedor-perfil">
+            <div class="menu-perfil">
+                <ul>
+                    <li class="opcion-perfil activa" data-seccion="datos">Mis Datos</li>
+                    <li class="opcion-perfil" data-seccion="pedidos">Mis Pedidos</li>
+                </ul>
+            </div>
+
+            <div class="contenido-perfil">
+                <section class="seccion-perfil" id="datos" style="display:block;">
+                    <h2 class="subtitulo-seccion">Información Personal</h2>
+                    <form id="form-datos" class="formulario-perfil">
+                        <div class="grupo-input">
+                            <label>Nombre Completo</label>
+                            <input type="text" id="perfil-nombre" placeholder="Tu nombre completo">
+                        </div>
+                        <div class="grupo-input">
+                            <label>Correo Electrónico</label>
+                            <input type="email" id="perfil-correo" placeholder="correo@ejemplo.com">
+                            <small>Puedes agregar o modificar tu correo</small>
+                        </div>
+                        <div class="grupo-input">
+                            <label>Teléfono</label>
+                            <input type="tel" id="perfil-telefono" placeholder="Ej: 5555-1234">
+                        </div>
+                        <div class="grupo-input">
+                            <label>Dirección de Envío</label>
+                            <textarea id="perfil-direccion" rows="3" placeholder="Dirección completa, ciudad, municipio..."></textarea>
+                        </div>
+
+                        <button type="submit" class="boton-principal">GUARDAR CAMBIOS</button>
+                    </form>
+
+                    <!-- ✅ Aquí se muestran TODOS los datos guardados con opción de eliminar -->
+                    <div class="datos-guardados">
+                        <h3>Tus Datos Registrados</h3>
+                        <div id="mostrar-datos">
+                            <p class="texto-vacio">Aún no has guardado tus datos.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="seccion-perfil" id="pedidos">
+                    <h2 class="subtitulo-seccion">Historial de Pedidos</h2>
+                    <div id="lista-pedidos">
+                        <p class="texto-vacio">Aún no has realizado ninguna compra.</p>
+                    </div>
+                </section>
+                
+            </div>
+        </div>
+    </main>
+
+    <footer class="pie-pagina">
+        <div class="contenido-pie">
+            <div class="columna-pie">
+                <h3>Contáctanos</h3>
+                <p>📍 Guatemala, Ciudad</p>
+                <p>📞 +502 3214-0196</p>
+                <p>📞 +502 5564-8946</p>
+                <p>✉️ contacto@flore.com</p>
+            </div>
+        
+            <div class="columna-pie">
+                <h3>Síguenos</h3>
+                <div class="sociales">
+                <a href="https://www.facebook.com/profile.php?id=61588585256446"><div class="social"><img src="IMAGENES/facebook-cafe.svg" alt=""></div></a>
+                <a href="https://www.instagram.com/flore_arregloseternos/"><div class="social"><img src="IMAGENES/instagram-cafe.svg" alt=""></div></a>
+                <a href="#"><div class="social"><img src="IMAGENES/whatsapp-cafe.svg" alt=""></div></a>
+            </div>
+            </div>
+        </div>
+        <div class="derechos">
+            <p>© 2026 Floré - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const contadorCarritoEl = document.getElementById('contador-carrito');
+        let listaDatosGuardados = JSON.parse(localStorage.getItem('lista_usuarios')) || [];
+
+        function actualizarContador() {
+            const carrito = JSON.parse(localStorage.getItem('carritoProductos')) || [];
+            const total = carrito.reduce((sum, item) => sum + (Number(item.cantidad) || 0), 0);
+            if(contadorCarritoEl) contadorCarritoEl.textContent = total;
+        }
+        actualizarContador();
+
+        // ✅ Mostrar todos los datos guardados con botón de eliminar
+        function mostrarDatosGuardados() {
+            const contenedor = document.getElementById('mostrar-datos');
+            if(listaDatosGuardados.length === 0) {
+                contenedor.innerHTML = `<p class="texto-vacio">Aún no has guardado tus datos.</p>`;
+                return;
+            }
+
+            contenedor.innerHTML = "";
+            listaDatosGuardados.forEach((dato, indice) => {
+                const elemento = document.createElement('div');
+                elemento.className = "entrada-datos";
+                elemento.innerHTML = `
+                    <div class="dato-registrado">
+                        <div><strong>Nombre:</strong> ${dato.nombre || 'No especificado'}</div>
+                        <div><strong>Correo:</strong> ${dato.correo || 'No especificado'}</div>
+                        <div><strong>Teléfono:</strong> ${dato.telefono || 'No especificado'}</div>
+                        <div><strong>Dirección:</strong> ${dato.direccion || 'No especificado'}</div>
+                    </div>
+                    <button class="btn-eliminar" data-indice="${indice}">Eliminar</button>
+                `;
+                contenedor.appendChild(elemento);
+            });
+
+            // ✅ Asignar función a los botones de eliminar
+            document.querySelectorAll('.btn-eliminar').forEach(boton => {
+                boton.addEventListener('click', function() {
+                    const indice = parseInt(this.getAttribute('data-indice'));
+                    listaDatosGuardados.splice(indice, 1);
+                    localStorage.setItem('lista_usuarios', JSON.stringify(listaDatosGuardados));
+                    mostrarDatosGuardados();
+                });
+            });
+        }
+
+        // ✅ Cargar datos al iniciar
+        mostrarDatosGuardados();
+        mostrarPedidos();
+
+        document.getElementById('form-datos').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // ✅ Obtener nuevos datos
+            const nuevoDato = {
+                nombre: document.getElementById('perfil-nombre').value.trim(),
+                correo: document.getElementById('perfil-correo').value.trim(),
+                telefono: document.getElementById('perfil-telefono').value.trim(),
+                direccion: document.getElementById('perfil-direccion').value.trim()
+            };
+
+            // ✅ Solo guardar si al menos un campo no está vacío
+            if(nuevoDato.nombre || nuevoDato.correo || nuevoDato.telefono || nuevoDato.direccion) {
+                listaDatosGuardados.push(nuevoDato);
+                localStorage.setItem('lista_usuarios', JSON.stringify(listaDatosGuardados));
+                
+                // ✅ GUARDAR TAMBIÉN EN datosPerfil PARA QUE LO LEA pedido.html
+                localStorage.setItem('datosPerfil', JSON.stringify(nuevoDato));
+                
+                mostrarDatosGuardados();
+                alert("✅ Datos guardados correctamente");
+            }
+
+            // ✅ VACIAR TODOS LOS CAMPOS AUTOMÁTICAMENTE
+            document.getElementById('perfil-nombre').value = "";
+            document.getElementById('perfil-correo').value = "";
+            document.getElementById('perfil-telefono').value = "";
+            document.getElementById('perfil-direccion').value = "";
+        });
+
+        document.querySelectorAll('.opcion-perfil').forEach(opcion => {
+            opcion.addEventListener('click', function() {
+                document.querySelectorAll('.opcion-perfil').forEach(opt => opt.classList.remove('activa'));
+                document.querySelectorAll('.seccion-perfil').forEach(sec => sec.style.display = 'none');
+                
+                this.classList.add('activa');
+                document.getElementById(this.getAttribute('data-seccion')).style.display = 'block';
+            });
+        });
+
+        function mostrarPedidos() {
+            const contenedor = document.getElementById('lista-pedidos');
+            const carrito = JSON.parse(localStorage.getItem('carritoProductos')) || [];
+            
+            if(carrito.length === 0) {
+                contenedor.innerHTML = `<p class="texto-vacio">Aún no has realizado ninguna compra.</p>`;
+                return;
+            }
+
+            let html = "";
+            carrito.forEach(ped => {
+                html += `
+                <div class="item-pedido">
+                    <img src="${ped.imagen}" alt="${ped.nombre}" class="img-pedido">
+                    <div class="detalle-pedido">
+                        <h4>${ped.nombre}</h4>
+                        <p>Cantidad: ${ped.cantidad} | Precio: Q${ped.precio.toFixed(2)}</p>
+                        <p>Color: ${ped.color || 'Único'} | Aroma: ${ped.aroma || 'Sin aroma'}</p>
+                        <span class="estado-pedido">✅ Pendiente de confirmación</span>
+                    </div>
+                </div>`;
+            });
+
+            contenedor.innerHTML = html;
+        }
+
+    });
+    </script>
+
+</body>
+</html>

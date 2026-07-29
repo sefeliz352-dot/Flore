@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLORÉ</title>
+    <link rel="stylesheet" href="ESTILO.css">
+     <link rel="icon" href="IMAGENES/flore-icono.png" type="image/png">
+    <style>
+        /* -------------------------- */
+        /* ESTILOS DEL CONTENEDOR Y PRODUCTOS */
+        /* -------------------------- */
+         header {
+            background-image: url(IMAGENES/01.jpeg);
+            height: 115px;
+             min-height: 150px;
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-color: #ebceb7;
+            position: relative;
+            z-index: 10;
+        }
+        .contenedor-carrito {
+            max-width: 900px;
+            margin: 0 auto 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+        .titulo-carrito {
+            text-align: center;
+            color: #5f2c19;
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+
+        .lista-productos {
+            margin-bottom: 30px;
+        }
+
+        .producto-carrito {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* ✅ IMAGEN CLICKEABLE */
+        .imagen-producto-carrito {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .imagen-producto-carrito:hover {
+            transform: scale(1.05);
+        }
+
+        .info-producto {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        /* ✅ TEXTO CLICKEABLE */
+        .nombre-producto {
+            font-size: 22px;
+            color: #5f2c19;
+            margin-bottom: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .nombre-producto:hover {
+            color: #ca4c1e;
+            text-decoration: underline;
+        }
+
+        /* ✅ ESTILO PARA COLOR Y AROMA */
+        .color-producto, .aroma-producto {
+            font-size: 14px;
+            color: #ca4c1e;
+            font-weight: 500;
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+
+        .precio-producto {
+            font-size: 15px; 
+            color: #885a49;
+            font-weight: 600; 
+        }
+
+        .cantidad-producto {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px; 
+            color: #5f2c19;
+            font-weight: 600; 
+        }
+
+        .btn-cantidad {
+            width: 28px;
+            height: 28px;
+            border: none;
+            background-color: #ebceb7;
+            color: #5f2c19;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .btn-cantidad:hover {
+            background-color: #8f4226;
+            color: white;
+        }
+
+        .subtotal-producto {
+            font-size: 18px; 
+            color: #5f2c19;
+            font-weight: 600; 
+            min-width: 90px;
+            text-align: right;
+        }
+
+        .btn-eliminar {
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            margin-left: 5px;
+        }
+
+        .btn-eliminar:hover {
+            transform: scale(1.2);
+        }
+
+        .total-carrito {
+            padding: 20px;
+            text-align: right;
+            font-size: 22px;
+            color: #5f2c19;
+            font-weight: bold; 
+            border-top: 2px solid #8f4226;
+            margin-top: 20px;
+        }
+
+        .boton-finalizar {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 30px auto 0;
+            padding: 15px;
+            background: linear-gradient(90deg,#D96F32 0%, #C75D2C 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: center;
+            transition: opacity 0.2s ease;
+        }
+
+        .boton-finalizar:hover {
+            opacity: 0.9;
+        }
+
+        .carrito-vacio {
+            text-align: center;
+            padding: 50px;
+            color: #885a49;
+            font-size: 20px;
+        }
+
+        header {
+            background-image: url(IMAGENES/01.jpeg);
+            height: 115px;
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-color: #ebceb7;
+            position: relative;
+            z-index: 10;
+        }
+
+
+        .barra-busqueda {
+            position: relative;
+            width: 165px;  
+            height: 50px;  
+            margin: 0 5px; 
+        }
+
+        .barra-busqueda input {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #5f2c19; 
+            border-radius: 25px; 
+            padding: 0 40px 0 18px; 
+            font-size: 14px;
+            color: #5f2c19;
+            background: transparent;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .barra-busqueda input::placeholder {
+            color: #5f2c19; 
+        }
+
+        .barra-busqueda button {
+            position: absolute;
+            right: 10%; 
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+        }
+        .icono-busqueda{
+            width: 18px;
+            height: 18px;
+        }
+
+        .barra-busqueda button:hover {
+            transform: translateY(-50%) scale(1.1); 
+        }
+
+        /* ✅ ESTILOS PARA LA VISTA DE BÚSQUEDA (IGUAL AL RESTO DEL SITIO) */
+        .vista-busqueda {
+            background-color: #f2eae3;
+            padding: 30px 0;
+            display: none;
+        }
+        .vista-busqueda .title {
+            text-align: center;
+            color: #5f2c19;
+            margin-bottom: 40px;
+            font-size: 20px;
+        }
+        .boton-favorito {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            z-index: 15;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .boton-favorito .corazon-icono {
+            color: #885a49;
+            fill: transparent;
+            transition: all 0.3s ease;
+            width: 22px;
+            height: 22px;
+        }
+        .boton-favorito.activo .corazon-icono {
+            color: #ca4c1e;
+            fill: #ca4c1e;
+        }
+        .boton-favorito:hover {
+            transform: scale(1.15);
+        }
+        .producto-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 600px) {
+            .producto-carrito {
+                flex-direction: column;
+                text-align: center;
+            }
+            .subtotal-producto {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ✅ BARRA DE NAVEGACIÓN IGUAL AL RESTO -->
+    <header>
+        <div class="menu container">
+            <a href="FLORÉ.html"> 
+                <img src="IMAGENES/FloréLOGO.png" class="logo" alt="">
+            </a>
+
+            <nav class="navbar">
+                <ul>
+                    <li><a href="FLORÉ.html">Inicio</a></li>
+                    <li><a href="velas.html">Velas</a></li>
+                    <li><a href="jabones.html">Jabones</a></li>
+                    <li><a href="favoritos.html">Mis Favoritos</a></li>
+                    
+
+                    <!-- ✅ BARRA DE BÚSQUEDA -->
+                    <div class="barra-busqueda">
+                        <input type="text" id="texto-busqueda" placeholder="Buscar artículos...">
+                        <button type="button">
+                            <img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda">
+                        </button>
+                    </div>
+
+                    <li class="carrito-item">
+                        <a href="carrito.html" class="enlace-carrito" style="color:#ca4c1e;">
+                            <img src="IMAGENES/carro compras- cafe.png" alt="Carrito" class="icon-carrito">
+                            <span class="contador-carrito" id="contador-carrito">0</span>
+                        </a>
+                    </li>
+
+                    <li class="perfil-item">
+                        <a href="perfil.html" class="enlace-perfil">
+                            <img src="IMAGENES/usuario.png" alt="Carrito" class="icon-perfil">
+                        </a>
+                    </li>
+
+                    
+                </ul>
+            </nav>
+        </div>
+
+        <div class="header-content container" style="height: 15vh;">
+        </div>
+    </header>
+
+
+    <!-- ✅ VISTA NORMAL: TU CARRITO -->
+    <main id="vista-carrito">
+        <div class="contenedor-carrito">
+            <h1 class="titulo-carrito">Tu Carrito de Compras</h1>
+
+            <div id="contenido-carrito">
+                <div class="carrito-vacio">
+                    <img src="IMAGENES/carro compras- cafe.png" alt="Carrito vacío">
+                    <p>No has agregado ningún producto aún</p>
+                </div>
+            </div>
+
+            <div class="total-carrito">
+                Total a Pagar: <span id="total">Q0.00</span>
+            </div>
+
+            <!-- ✅ BOTÓN AHORA REDIRIGE A pedido.html -->
+            <button class="boton-finalizar" id="btn-pedido">Hacer pedido</button>
+        </div> 
+    </main>
+
+    <!-- ✅ VISTA BÚSQUEDA: IGUAL QUE EN LAS OTRAS PÁGINAS -->
+    <main class="vista-busqueda" id="vista-busqueda">
+        <div class="container">
+            <h2 class="title" id="titulo-busqueda">PRODUCTOS ENCONTRADOS</h2>
+            <div class="box-container-general" id="resultados-busqueda"></div>
+        </div>
+    </main>
+
+
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    // 🛒 CARGAR Y LEER CARRITO - ✅ LECTURA SEGURA Y CORREGIDA
+    let productosEnCarrito;
+    try {
+        const datosGuardados = localStorage.getItem('carritoProductos');
+        productosEnCarrito = datosGuardados ? JSON.parse(datosGuardados) : [];
+    } catch (e) {
+        productosEnCarrito = []; // Si hay error, inicia vacío
+    }
+    
+    const contenedorCarrito = document.getElementById('contenido-carrito'); 
+    const totalPagarEl = document.getElementById('total'); 
+    const contadorCarritoEl = document.getElementById('contador-carrito');
+    const btnPedido = document.getElementById('btn-pedido');
+
+    // ✅ REDIRIGIR A pedido.html AL HACER CLIC
+    btnPedido.addEventListener('click', function(){
+        window.location.href = 'pedido.html';
+    });
+
+    // ✅ ACTUALIZAR CONTADOR
+    function actualizarContador() {
+        if (!contadorCarritoEl) return;
+        const total = productosEnCarrito.reduce((sum, item) => {
+            return sum + (Number(item.cantidad) || 0);
+        }, 0);
+        contadorCarritoEl.textContent = total;
+    }
+    actualizarContador();
+
+
+    // ✅ MOSTRAR PRODUCTOS EN PANTALLA
+    function mostrarCarrito() {
+        if (!contenedorCarrito) return;
+
+        // Si está vacío
+        if (productosEnCarrito.length === 0) {
+            contenedorCarrito.innerHTML = `
+                <div class="carrito-vacio">
+                    <img src="IMAGENES/carro compras- cafe.png" alt="Carrito vacío">
+                    <p>No has agregado ningún producto aún</p>
+                </div>`;
+            if(totalPagarEl) totalPagarEl.textContent = 'Q0.00';
+            return;
+        }
+
+        // Si hay productos
+        contenedorCarrito.innerHTML = ''; 
+        let sumaTotal = 0;
+
+        productosEnCarrito.forEach((producto, indice) => {
+            // ✅ VALORES SEGUROS: aseguramos que no falte nada, ESPECIALMENTE LAS IMÁGENES
+            const nombre = producto.nombre || "Producto sin nombre";
+            const precio = parseFloat(producto.precio) || 0;
+            const cantidad = Number(producto.cantidad) || 1;
+            const imagen = producto.imagen || "IMAGENES/default.jpg";
+            const peso = producto.peso || "No especificado";
+            const descripcion = producto.descripcion || "Sin descripción";
+            const colores = producto.colores_disponibles || producto.colores || ""; // Lee ambos formatos
+            const aromas = producto.aromas_disponibles || producto.aromas || "";   // Lee ambos formatos
+            const colorSel = producto.color || "";
+            const aromaSel = producto.aroma || "";
+            // ✅ ¡LO MÁS IMPORTANTE! GUARDAMOS LA LISTA COMPLETA DE IMÁGENES TAL CUAL VIENE
+            const imagenes = producto.imagenes || ""; 
+
+            const subtotal = precio * cantidad;
+            sumaTotal += subtotal;
+
+            // Texto de color y aroma seleccionado
+            let textoColor = colorSel && colorSel !== "Único" ? `<p class="color-producto">Color: ${colorSel}</p>` : '';
+            let textoAroma = aromaSel && aromaSel !== "Sin aroma" ? `<p class="aroma-producto">Aroma: ${aromaSel}</p>` : '';
+
+            const itemHTML = document.createElement('div');
+            itemHTML.className = 'producto-carrito';
+            
+            // ✅ GUARDAMOS TODOS LOS DATOS COMPLETOS EN EL HTML PARA EL CLIC
+            itemHTML.dataset.nombre = nombre;
+            itemHTML.dataset.precio = precio;
+            itemHTML.dataset.peso = peso;
+            itemHTML.dataset.imagen = imagen;
+            itemHTML.dataset.imagenes = imagenes; // ✅ ASEGURADO: Lista de imágenes original
+            itemHTML.dataset.descripcion = descripcion;
+            itemHTML.dataset.colores = colores;
+            itemHTML.dataset.aromas = aromas;
+            itemHTML.dataset.colorSel = colorSel; 
+            itemHTML.dataset.aromaSel = aromaSel; 
+
+            itemHTML.innerHTML = `
+                <img src="${imagen}" alt="${nombre}" class="imagen-producto-carrito">
+                
+                <div class="info-producto">
+                    <h3 class="nombre-producto">${nombre}</h3>
+                    ${textoColor}
+                    ${textoAroma}
+                    <p class="precio-producto">Precio: Q${precio.toFixed(2)}</p>
+                </div>
+
+                <div class="cantidad-producto">
+                    <button class="btn-cantidad restar" data-indice="${indice}">-</button>
+                    <span>${cantidad}</span>
+                    <button class="btn-cantidad sumar" data-indice="${indice}">+</button>
+                </div>
+
+                <div class="subtotal-producto">
+                    Subtotal: Q${subtotal.toFixed(2)}
+                </div>
+
+                <button class="btn-eliminar" data-indice="${indice}"> 
+                    <img src="IMAGENES/Basura-cafe.png" alt="Eliminar"> 
+                </button>
+            `;
+            contenedorCarrito.appendChild(itemHTML);
+        });
+
+        if(totalPagarEl) totalPagarEl.textContent = 'Q' + sumaTotal.toFixed(2);
+        
+        activarBotones();
+        activarEnlacesVistaPrevia(); 
+    }
+
+    // ✅ FUNCIÓN CLAVE: URL COMPLETA CON TODOS LOS DATOS (incluye imagenes)
+    function activarEnlacesVistaPrevia(){
+        document.querySelectorAll('.imagen-producto-carrito, .nombre-producto').forEach(elemento => {
+            elemento.addEventListener('click', function() {
+                const item = this.closest('.producto-carrito');
+                
+                // ✅ CODIFICACIÓN SEGURA PARA QUE NO SE ROMPAN LOS DATOS NI LAS RUTAS
+                const nombre = encodeURIComponent(item.dataset.nombre);
+                const precio = item.dataset.precio;
+                const peso = encodeURIComponent(item.dataset.peso);
+                const imagen = encodeURIComponent(item.dataset.imagen);
+                const imagenes = encodeURIComponent(item.dataset.imagenes || ""); // ✅ ENVÍA LA LISTA COMPLETA
+                const descripcion = encodeURIComponent(item.dataset.descripcion);
+                const colores = encodeURIComponent(item.dataset.colores);
+                const aromas = encodeURIComponent(item.dataset.aromas);
+                const colorSel = encodeURIComponent(item.dataset.colorSel);
+                const aromaSel = encodeURIComponent(item.dataset.aromaSel);
+
+                // ✅ URL FINAL CORRECTA Y COMPLETA: Producto.html recibirá todo
+                window.location.href = `producto.html?nombre=${nombre}&precio=${precio}&peso=${peso}&imagen=${imagen}&imagenes=${imagenes}&descripcion=${descripcion}&colores=${colores}&aromas=${aromas}&color=${colorSel}&aroma=${aromaSel}`;
+            });
+        });
+    }
+
+
+    // ✅ BOTONES: SUMAR, RESTAR, ELIMINAR
+    function activarBotones(){
+        // Eliminar
+        document.querySelectorAll('.btn-eliminar').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const i = parseInt(this.dataset.indice);
+                productosEnCarrito.splice(i, 1);
+                guardarCambios();
+            });
+        });
+        // Restar
+        document.querySelectorAll('.restar').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const i = parseInt(this.dataset.indice);
+                if(productosEnCarrito[i].cantidad > 1){
+                    productosEnCarrito[i].cantidad--;
+                } else {
+                    productosEnCarrito.splice(i, 1);
+                }
+                guardarCambios();
+            });
+        });
+        // Sumar
+        document.querySelectorAll('.sumar').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const i = parseInt(this.dataset.indice);
+                productosEnCarrito[i].cantidad++;
+                guardarCambios();
+            });
+        });
+    }
+
+    // ✅ GUARDAR EN LOCALSTORAGE Y ACTUALIZAR VISTA
+    function guardarCambios(){
+        localStorage.setItem('carritoProductos', JSON.stringify(productosEnCarrito));
+        mostrarCarrito();
+        actualizarContador();
+    }
+
+    // ✅ INICIAR
+    mostrarCarrito();
+
+    // ==========================================================
+    // 🔍 SISTEMA DE BÚSQUEDA - ✅ CORREGIDO Y FUNCIONAL
+    // ==========================================================
+    const inputBuscar = document.getElementById('texto-busqueda');
+    const vistaCarrito = document.getElementById('vista-carrito');
+    const vistaBusqueda = document.getElementById('vista-busqueda');
+    const tituloBusqueda = document.getElementById('titulo-busqueda');
+    const contenedorResultados = document.getElementById('resultados-busqueda');
+
+    let resultadosActivos = false;
+    let baseDeDatosGlobal = [];
+    let cargando = false;
+    let listaFavoritos = JSON.parse(localStorage.getItem('listaFavoritos')) || [];
+
+    const misPaginasConProductos = [
+        "FLORÉ.html", "velas.html", "ramos.html", "jabones.html"
+    ];
+
+    // ✅ QUITAR ACENTOS PARA BÚSQUEDA PERFECTA
+    function quitarAcentos(texto) {
+        if(!texto) return "";
+        return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+
+    // ✅ CARGAR TODOS LOS PRODUCTOS
+    async function cargarTodosLosProductos() {
+        if(baseDeDatosGlobal.length > 0) return;
+        try {
+            baseDeDatosGlobal = [];
+            for (const pagina of misPaginasConProductos) {
+                try {
+                    const respuesta = await fetch(pagina);
+                    if (!respuesta.ok) continue;
+                    const textoHtml = await respuesta.text();
+                    const parser = new DOMParser();
+                    const documento = parser.parseFromString(textoHtml, 'text/html');
+
+                    const productosDeEstaPagina = documento.querySelectorAll('.box-producto');
+                    productosDeEstaPagina.forEach(prod => {
+                        const nombre = prod.querySelector('h3')?.textContent.trim() || "";
+                        const parrafoDesc = prod.querySelector('.contenido-producto > p:first-of-type');
+                        const descripcion = parrafoDesc ? parrafoDesc.textContent.trim() : "Sin descripción disponible";
+                        const imagen = prod.querySelector('img')?.getAttribute('src') || "";
+                        const botonDatos = prod.querySelector('.comprar');
+
+                        if (nombre && botonDatos) {
+                            baseDeDatosGlobal.push({
+                                nombre: nombre,
+                                descripcion: descripcion,
+                                imagen: imagen,
+                                // ✅ LEE Y GUARDA LAS IMÁGENES TAL CUAL ESTÁN EN velas.html
+                                imagenes: botonDatos.dataset.imagenes || "", 
+                                precio: botonDatos.dataset.precio || "",
+                                peso: botonDatos.dataset.peso || "",
+                                colores: botonDatos.dataset.colores || "",
+                                aromas: botonDatos.dataset.aromas || ""
+                            });
+                        }
+                    });
+                } catch(err) { 
+                    console.warn("Error al cargar página:", pagina);
+                }
+            }
+        } catch (error) { 
+            console.error("❌ Error al cargar catálogo:", error);
+        }
+    }
+
+    // ✅ FUNCIÓN PRINCIPAL DE BÚSQUEDA
+    async function buscarEnTiempoReal() {
+        if(!inputBuscar || cargando) return;
+        cargando = true;
+
+        const textoBuscar = quitarAcentos(inputBuscar.value.trim());
+
+        if (textoBuscar === "") {
+            if(resultadosActivos) {
+                vistaBusqueda.style.display = "none";
+                vistaCarrito.style.display = "block";
+                resultadosActivos = false;
+            }
+            cargando = false;
+            return;
+        }
+
+        resultadosActivos = true;
+        vistaCarrito.style.display = "none";
+        vistaBusqueda.style.display = "block";
+        contenedorResultados.innerHTML = "";
+
+        await cargarTodosLosProductos();
+
+        const resultados = baseDeDatosGlobal.filter(producto => 
+            quitarAcentos(producto.nombre).includes(textoBuscar) ||
+            quitarAcentos(producto.descripcion).includes(textoBuscar)
+        );
+
+        tituloBusqueda.textContent = resultados.length > 0 
+            ? `PRODUCTOS ENCONTRADOS (${resultados.length})` 
+            : `NINGÚN PRODUCTO COINCIDE`;
+
+        if(resultados.length === 0) {
+            contenedorResultados.innerHTML = `<p class="texto-vacio">❌ No se encontraron productos con: "${inputBuscar.value}"</p>`;
+            cargando = false;
+            return;
+        }
+
+        resultados.forEach(prod => {
+            const esFavorito = listaFavoritos.some(fav => fav.nombre === prod.nombre);
+            const tarjeta = document.createElement('div');
+            tarjeta.className = 'box-producto';
+            tarjeta.innerHTML = `
+                <div class="producto-item">
+                    <div class="boton-favorito ${esFavorito ? 'activo' : ''}"
+                        data-nombre="${prod.nombre}"
+                        data-peso="${prod.peso}"
+                        data-precio="${prod.precio}"
+                        data-imagen="${prod.imagen}"
+                        data-descripcion="${prod.descripcion}"
+                        data-colores="${prod.colores}"
+                        data-aromas="${prod.aromas}"
+                        data-imagenes="${prod.imagenes}">
+                        <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </div>
+                    <div class="imagen-producto">
+                        <img src="${prod.imagen}" alt="${prod.nombre}">
+                    </div>
+                    <div class="contenido-producto">
+                        <h3>${prod.nombre}</h3>
+                        <p>${prod.descripcion}</p>
+                        <p class="peso-producto">Peso: ${prod.peso || 'Sin peso'}</p>
+                        <div class="iconos-compra">
+                            <div class="comprar" 
+                                data-nombre="${prod.nombre}" 
+                                data-precio="${prod.precio}" 
+                                data-peso="${prod.peso}"
+                                data-imagen="${prod.imagen}"
+                                data-descripcion="${prod.descripcion}"
+                                data-colores="${prod.colores}"
+                                data-aromas="${prod.aromas}"
+                                data-imagenes="${prod.imagenes}">
+                                <span>COMPRAR</span>
+                                <img src="IMAGENES/flecha arriba.png" alt="flecha-arriba">
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            contenedorResultados.appendChild(tarjeta);
+        });
+
+        activarEventosBusqueda();
+        cargando = false;
+    }
+
+    // ✅ ACTIVAR CORAZONES Y BOTONES DE BÚSQUEDA
+    function activarEventosBusqueda() {
+        document.querySelectorAll('.boton-favorito').forEach(corazon => {
+            corazon.addEventListener('click', function() {
+                const datos = {
+                    nombre: this.dataset.nombre,
+                    imagen: this.dataset.imagen,
+                    peso: this.dataset.peso,
+                    precio: this.dataset.precio,
+                    descripcion: this.dataset.descripcion,
+                    colores: this.dataset.colores,
+                    aromas: this.dataset.aromas,
+                    imagenes: this.dataset.imagenes || ""
+                };
+                const existe = listaFavoritos.some(f => f.nombre === datos.nombre);
+                if(existe) {
+                    listaFavoritos = listaFavoritos.filter(f => f.nombre !== datos.nombre);
+                    this.classList.remove('activo');
+                } else {
+                    listaFavoritos.push(datos);
+                    this.classList.add('activo');
+                }
+                localStorage.setItem('listaFavoritos', JSON.stringify(listaFavoritos));
+            });
+        });
+
+        document.querySelectorAll('.comprar').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const nombre = encodeURIComponent(this.dataset.nombre);
+                const precio = this.dataset.precio;
+                const peso = encodeURIComponent(this.dataset.peso);
+                const imagen = encodeURIComponent(this.dataset.imagen);
+                const imagenes = encodeURIComponent(this.dataset.imagenes || "");
+                const descripcion = encodeURIComponent(this.dataset.descripcion || "Sin descripción");
+                const colores = encodeURIComponent(this.dataset.colores || "");
+                const aromas = encodeURIComponent(this.dataset.aromas || "");
+                
+                window.location.href = `producto.html?nombre=${nombre}&precio=${precio}&peso=${peso}&imagen=${imagen}&imagenes=${imagenes}&descripcion=${descripcion}&colores=${colores}&aromas=${aromas}`;
+            });
+        });
+    }
+
+    if(inputBuscar) {
+        inputBuscar.addEventListener('input', buscarEnTiempoReal);
+    }
+
+});
+</script>
+
+</body>
+</html>

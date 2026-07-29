@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Producto - FLORÉ</title>
+    <link rel="stylesheet" href="ESTILO.css">
+     <link rel="icon" href="IMAGENES/flore-icono.png" type="image/png">
+    <style>
+        /* ✅ ESTILOS GENERALES Y ENCABEZADO */
+        .barra-busqueda {
+            position: relative;
+            width: 165px;  
+            height: 50px;  
+            margin: 0 5px; 
+        }
+        .barra-busqueda input {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #5f2c19; 
+            border-radius: 25px; 
+            padding: 0 40px 0 18px; 
+            font-size: 14px;
+            color: #5f2c19;
+            background: transparent;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .barra-busqueda input::placeholder {
+            color: #5f2c19; 
+        }
+        .barra-busqueda button {
+            position: absolute;
+            right: 10%; 
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+        }
+        .icono-busqueda{
+            width: 18px;
+            height: 18px;
+        }
+        .barra-busqueda button:hover {
+            transform: translateY(-50%) scale(1.1); 
+        }
+
+        header {
+            background-image: url('IMAGENES/01.jpeg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-color: #ebceb7;
+            position: relative;
+            z-index: 10;
+            min-height: 155px;
+            padding: 10px 0 30px 0;
+        }
+       
+        /* ============================================== */
+        /* ✅ ESTILOS DE LA PÁGINA DE PRODUCTO */
+        /* ============================================== */
+        .detalle-producto {
+            padding: 60px 20px;
+            background-color: #f6e9de;
+        }
+
+        .contenedor-detalle {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* ✅ SECCIÓN IMAGEN CON FLECHAS Y MINIATURAS */
+        .imagen-grande {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        /* ✅ IMAGEN PRINCIPAL Y FLECHAS */
+        .imagen-principal {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .imagen-principal img {
+            width: 100%;
+            max-height: 450px;
+            object-fit: contain;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .flecha {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(90deg, #5f2c19 0%, #885a49 100%);
+            color: #fff;
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .flecha:hover {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.08);
+            background: linear-gradient(90deg, #8f4226 0%, #a16d5a 100%);
+        }
+        .flecha-izquierda { left: 10px; }
+        .flecha-derecha { right: 10px; }
+
+        /* ✅ MINIATURAS DE COLORES */
+        .miniaturas-colores {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 5px 0;
+        }
+
+        .miniatura-item {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(95, 44, 25, 0.12);
+            background-color: #fff;
+            padding: 3px;
+        }
+        .miniatura-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .miniatura-item.activo {
+            border-color: #ca4c1e;
+            transform: scale(1.1);
+        }
+        .miniatura-item:hover {
+            border-color: #D96F32;
+            transform: scale(1.05);
+        }
+
+        /* ✅ CORAZÓN DE FAVORITOS - ESTILO CORREGIDO */
+        .corazon-fav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            z-index: 15;
+            border: none;
+        }
+
+        .corazon-fav svg {
+            width: 24px;
+            height: 24px;
+            stroke: #885a49;
+            stroke-width: 2;
+            fill: transparent;
+            transition: all 0.3s ease;
+        }
+        .corazon-fav.activo svg {
+            stroke: #ca4c1e;
+            fill: #ca4c1e;
+        }
+        .corazon-fav:hover { transform: scale(1.1); }
+
+
+        /* ✅ SECCIÓN INFORMACIÓN */
+        .info-producto h1 {
+            font-size: 42px;
+            color: #5f2c19;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        .estrellas {
+            color: #D96F32;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        .precio {
+            font-size: 28px;
+            font-weight: bold;
+            color: #5f2c19;
+            margin-bottom: 8px;
+        }
+        .peso {
+            font-size: 18px;
+            color: #885a49;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        /* ✅ AVISOS DE SELECCIÓN */
+        .color-seleccionado-texto, .aroma-seleccionado-texto {
+            font-size: 15px;
+            color: #ca4c1e;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        /* ✅ ESTILO BOTONES DE COLORES Y AROMAS */
+        .opciones-colores {
+            margin: 15px 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .boton-color {
+            display: inline-block;
+            padding: 10px 18px;
+            background-color: #fff;
+            border: 2px solid #d1b8a6;
+            border-radius: 25px;
+            font-size: 15px;
+            color: #5f2c19;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .boton-color:hover {
+            border-color: #D96F32;
+            transform: translateY(-2px);
+        }
+        .boton-color.activo {
+            background-color: #D96F32;
+            color: white;
+            border-color: #D96F32;
+            transform: scale(1.08);
+        }
+
+
+        /* ✅ BARRA DE CANTIDAD + / - */
+        .cantidad {
+            display: flex;
+            align-items: center;
+            border: 1px solid #d1b8a6;
+            border-radius: 30px;
+            width: 220px;
+            height: 50px;
+            justify-content: space-between;
+            padding: 0 20px;
+            margin-bottom: 25px;
+            background-color: #fff;
+        }
+        .cantidad button {
+            border: none;
+            background: transparent;
+            font-size: 22px;
+            color: #5f2c19;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .cantidad span {
+            font-size: 18px;
+            font-weight: 600;
+            color: #5f2c19;
+        }
+
+        /* ✅ BOTÓN AÑADIR CARRITO */
+        .btn-anadir-carrito {
+            width: 100%;
+            max-width: 400px;
+            background: linear-gradient(90deg,#D96F32 0%, #C75D2c 100%);
+            color: white;
+            border: none;
+            padding: 15px 0;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 40px;
+        }
+        .btn-anadir-carrito:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        /* ✅ PESTAÑAS: AHORA 3 */
+        .pestanas {
+            display: flex;
+            gap: 30px;
+            border-bottom: 1px solid #d1b8a6;
+            margin-bottom: 20px;
+        }
+        .tab {
+            font-size: 18px;
+            font-weight: bold;
+            color: #885a49;
+            padding-bottom: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+        .tab.activo {
+            color: #5f2c19;
+            border-bottom: 2px solid #5f2c19;
+        }
+        .contenido-pestana {
+            font-size: 16px;
+            color: #5f2c19;
+            line-height: 1.6;
+            min-height: 80px;
+        }
+
+        /* ✅ ESTILO PARA RESULTADOS DE BÚSQUEDA - FORMATO VERTICAL */
+        .producto-menu {
+            background-color: #f6e9de;
+            padding: 40px 20px;
+        }
+        .producto-menu .title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .producto-menu .title h2 {
+            color: #5f2c19;
+            font-size: 32px;
+        }
+        .producto-menu .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* ✅ TARJETA VERTICAL: MARCO, FONDO, IMAGEN GRANDE ARRIBA */
+        .box-producto {
+            border: 12px solid;
+            border-image: url('IMAGENES/01.jpeg') 30 stretch;
+            background: #f3e9e0;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px 15px 30px 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ✅ CORAZÓN: ARRIBA PERO MÁS ABAJO PARA NO TAPAR NADA */
+        .corazon-tarjeta {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 38px;
+            height: 38px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0.1);
+            z-index: 5;
+        }
+        .corazon-tarjeta svg {
+            width: 20px;
+            height: 20px;
+            stroke: #885a49;
+            stroke-width: 2;
+            fill: transparent;
+        }
+        .corazon-tarjeta.activo svg {
+            fill: #ca4c1e;
+            stroke: #ca4c1e;
+        }
+
+        /* ✅ IMAGEN GRANDE ARRIBA */
+        .imagen-producto {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            order: 1;
+        }
+        .imagen-producto img {
+            width: auto;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* ✅ TEXTO Y BOTÓN ABAJO */
+        .contenido-producto {
+            width: 100%;
+            order: 2;
+        }
+        .contenido-producto h3 {
+            font-size: 20px;
+            color: #5f2c19;
+            margin: 0 0 10px 0;
+            font-weight: bold;
+            text-align: center;
+            padding: 0 10px;
+        }
+        .contenido-producto p {
+            font-size: 15px;
+            color: #7a5a4b;
+            margin: 0 0 25px 0;
+            line-height: 1.4;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        /* ✅ BOTÓN COMPRAR */
+        .iconos-compra {
+            display: flex;
+            justify-content: center;
+        }
+        .comprar {
+            background: linear-gradient(90deg,#D96F32 0%, #C75D2c 100%);
+            color: white;
+            padding: 10px 35px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+        .comprar img {
+            width: 14px;
+            height: auto;
+        }
+
+
+        /* ✅ RESPONSIVO */
+        @media(max-width: 900px){
+            .contenedor-detalle { grid-template-columns: 1fr; }
+            .info-producto h1 { font-size: 32px; }
+            .pestanas { gap: 15px; }
+            .producto-menu .container { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+            .miniaturas-colores { gap: 8px; }
+            .miniatura-item { width: 45px; height: 45px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="menu container">
+            <a href="FLORÉ.html"> 
+                <img src="IMAGENES/FloréLOGO.png" class="logo" alt="">
+            </a>
+
+            <nav class="navbar">
+                <ul>
+                    <li><a href="FLORÉ.html">Inicio</a></li>
+                    <li><a href="velas.html">Velas</a></li>
+                    <li><a href="jabones.html">Jabones</a></li>
+                    <li><a href="favoritos.html">Mis Favoritos</a></li>
+
+                    <div class="barra-busqueda">
+                        <input type="text" id="texto-busqueda" placeholder="Buscar artículos...">
+                        <button type="button">
+                            <img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda">
+                        </button>
+                    </div>
+
+                    <li class="carrito-item">
+                        <a href="carrito.html" class="enlace-carrito">
+                            <img src="IMAGENES/carro compras- cafe.png" alt="Carrito" class="icon-carrito">
+                            <span class="contador-carrito" id="contador-carrito">0</span>
+                        </a>
+                    </li>
+
+                    <li class="perfil-item">
+                        <a href="perfil.html" class="enlace-perfil">
+                            <img src="IMAGENES/usuario.png" alt="Carrito" class="icon-perfil">
+                        </a>
+                    </li>
+
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <main class="detalle-producto" id="seccion-producto">
+        <div class="contenedor-detalle">
+            <!-- ✅ IMAGENES CON FLECHAS Y MINIATURAS -->
+            <div class="imagen-grande">
+                <!-- ✅ CORAZÓN DE FAVORITOS -->
+                <div class="corazon-fav" id="corazon-fav">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+
+                <!-- ✅ IMAGEN PRINCIPAL Y FLECHAS -->
+                <div class="imagen-principal">
+                    <button class="flecha flecha-izquierda" id="anterior">←</button>
+                    <img id="imagen-producto" src="" alt="Producto">
+                    <button class="flecha flecha-derecha" id="siguiente">→</button>
+                </div>
+
+                <!-- ✅ MINIATURAS DE COLORES -->
+                <div class="miniaturas-colores" id="lista-miniaturas">
+                    <!-- Se cargan automáticamente -->
+                </div>
+            </div>
+
+            <!-- ✅ INFORMACIÓN DEL PRODUCTO -->
+            <div class="info-producto">
+                <h1 id="nombre-producto"></h1>
+                <div class="estrellas">★★★★★</div>
+                <div class="precio" id="precio-producto"></div>
+                <div class="peso" id="peso-producto"></div>
+                
+                <!-- ✅ AVISOS DE LO SELECCIONADO -->
+                <div class="color-seleccionado-texto" id="color-elegido">Color: Sin seleccionar</div>
+                <div class="aroma-seleccionado-texto" id="aroma-elegido">Aroma: Sin seleccionar</div>
+
+                <!-- ✅ CANTIDAD + / - -->
+                <div class="cantidad">
+                    <button id="menos">-</button>
+                    <span id="valor-cantidad">1</span>
+                    <button id="mas">+</button>
+                </div>
+
+                <!-- ✅ BOTÓN AÑADIR CARRITO -->
+                <button class="btn-anadir-carrito" id="btn-anadir">📥 Añadir al Carrito</button>
+
+                <!-- ✅ TUS 3 PESTAÑAS: DESCRIPCIÓN - COLORES - AROMAS -->
+                <div class="pestanas">
+                    <div class="tab activo" id="tab-desc">DESCRIPCIÓN</div>
+                    <div class="tab" id="tab-colores">COLORES</div>
+                    <div class="tab" id="tab-aromas">AROMAS</div>
+                </div>
+
+                <div class="contenido-pestana" id="texto-pestana">
+                    <!-- Aquí carga el contenido de cada pestaña -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div class="derechos">
+            <p>© 2026 Floré - Todos los derechos reservados</p>
+        </div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    // 📥 RECIBIR DATOS DESDE LA URL - ✅ CORREGIDO: Lectura segura y sin errores
+    const parametros = new URLSearchParams(window.location.search);
+    
+    // ✅ LEEMOS Y ASEGURAMOS QUE CADA DATO TENGA UN VALOR POR DEFECTO
+    const nombre = parametros.get('nombre') || "Producto sin nombre";
+    const precio = parametros.get('precio') || "0.00"; 
+    const peso = parametros.get('peso') || "No especificado";
+    const imagen = parametros.get('imagen') || "IMAGENES/default.jpg"; 
+    const imagenesExtra = parametros.get('imagenes') || "";
+    const descripcion = parametros.get('descripcion') || "Sin descripción disponible";
+    const coloresDisponibles = parametros.get('colores') || "";
+    const aromasDisponibles = parametros.get('aromas') || "";
+    const colorQueTrae = parametros.get('color') || ""; 
+    const aromaQueTrae = parametros.get('aroma') || "";
+
+    // 📥 ELEMENTOS DEL DOM
+    const nombreEl = document.getElementById('nombre-producto');
+    const precioEl = document.getElementById('precio-producto');
+    const pesoEl = document.getElementById('peso-producto');
+    const imagenEl = document.getElementById('imagen-producto');
+    const textoPestanaEl = document.getElementById('texto-pestana'); 
+    const contadorCarritoEl = document.getElementById('contador-carrito');
+    const corazonEl = document.getElementById('corazon-fav');
+    const btnAnadir = document.getElementById('btn-anadir');
+    const colorElegidoEl = document.getElementById('color-elegido');
+    const aromaElegidoEl = document.getElementById('aroma-elegido');
+    const cantidadEl = document.getElementById('valor-cantidad');
+    const btnMas = document.getElementById('mas');             
+    const btnMenos = document.getElementById('menos');         
+    const seccionProducto = document.getElementById('seccion-producto');
+
+    // ✅ ELEMENTOS NUEVOS DE GALERÍA
+    const contenedorMiniaturas = document.getElementById('lista-miniaturas');
+    const btnAnterior = document.getElementById('anterior');
+    const btnSiguiente = document.getElementById('siguiente');
+    let indiceActual = 0;
+    let listaImagenes = [];
+
+    let cantidad = 1;
+    let colorSeleccionado = ""; 
+    let aromaSeleccionado = "";
+    let listaColores = []; 
+    let listaAromas = [];
+
+    // ✅ CARGAMOS DATOS LOCALES
+    let listaFavoritos = JSON.parse(localStorage.getItem('listaFavoritos')) || [];
+    let productosEnCarrito = JSON.parse(localStorage.getItem('carritoProductos')) || [];
+
+
+    // ✅ PROCESAMOS LOS DATOS RECIBIDOS
+    if (coloresDisponibles && coloresDisponibles !== "" && coloresDisponibles !== "undefined") {
+        try {
+            listaColores = decodeURIComponent(coloresDisponibles).split(',');
+            listaColores = listaColores.map(c => c.trim());
+            listaColores = listaColores.filter(c => c !== "" && c !== "undefined");
+        } catch(e) {
+            listaColores = [];
+        }
+    }
+
+    if (aromasDisponibles && aromasDisponibles !== "" && aromasDisponibles !== "undefined") {
+        try {
+            listaAromas = decodeURIComponent(aromasDisponibles).split(',');
+            listaAromas = listaAromas.map(a => a.trim());
+            listaAromas = listaAromas.filter(a => a !== "" && a !== "undefined");
+        } catch(e) {
+            listaAromas = [];
+        }
+    }
+
+    // ✅ SI VIENEN DATOS DEL CARRITO, LOS MARCAMOS AUTOMÁTICAMENTE
+    if(colorQueTrae && colorQueTrae !== "") {
+        try { colorSeleccionado = decodeURIComponent(colorQueTrae); } catch(e) { colorSeleccionado = colorQueTrae; }
+        colorElegidoEl.textContent = `Color seleccionado: ${colorSeleccionado}`;
+        colorElegidoEl.style.color = '#28a745';
+    }
+    if(aromaQueTrae && aromaQueTrae !== "") {
+        try { aromaSeleccionado = decodeURIComponent(aromaQueTrae); } catch(e) { aromaSeleccionado = aromaQueTrae; }
+        aromaElegidoEl.textContent = `Aroma seleccionado: ${aromaSeleccionado}`;
+        aromaElegidoEl.style.color = '#28a745';
+    }
+
+    // 🔧 FUNCIÓN AUXILIAR: QUITAR TILDES
+    function quitarAcentos(texto) {
+        if (!texto) return "";
+        return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    // ✅ FUNCIÓN: CAMBIAR IMAGEN
+    function cambiarImagen() {
+        if(listaImagenes.length === 0) return;
+        imagenEl.src = listaImagenes[indiceActual];
+        document.querySelectorAll('.miniatura-item').forEach((mini, i) => {
+            mini.classList.toggle('activo', i === indiceActual);
+        });
+    }
+
+    // ✅ FUNCIÓN: CARGAR GALERÍA DE IMÁGENES
+    function cargarGaleria() {
+        if(imagenesExtra && imagenesExtra !== "") {
+            try {
+                listaImagenes = decodeURIComponent(imagenesExtra).split(',');
+                listaImagenes = listaImagenes.map(ruta => ruta.trim());
+                listaImagenes = listaImagenes.filter(ruta => ruta !== "");
+            } catch(e) {
+                listaImagenes = [imagen];
+            }
+        } else {
+            listaImagenes = [imagen];
+            btnAnterior.style.display = 'none';
+            btnSiguiente.style.display = 'none';
+            contenedorMiniaturas.innerHTML = "";
+            imagenEl.src = imagen;
+            return;
+        }
+
+        if(listaImagenes.length > 1) {
+            btnAnterior.style.display = 'flex';
+            btnSiguiente.style.display = 'flex';
+
+            contenedorMiniaturas.innerHTML = "";
+            listaImagenes.forEach((ruta, index) => {
+                const miniDiv = document.createElement('div');
+                miniDiv.className = `miniatura-item ${index === 0 ? 'activo' : ''}`;
+                miniDiv.innerHTML = `<img src="${ruta}" alt="Vista ${index+1}" loading="lazy">`;
+                
+                miniDiv.addEventListener('click', () => {
+                    indiceActual = index;
+                    cambiarImagen();
+                });
+                contenedorMiniaturas.appendChild(miniDiv);
+            });
+
+            btnAnterior.onclick = () => { 
+                indiceActual--; 
+                if(indiceActual < 0) indiceActual = listaImagenes.length - 1; 
+                cambiarImagen(); 
+            };
+            btnSiguiente.onclick = () => { 
+                indiceActual++; 
+                if(indiceActual >= listaImagenes.length) indiceActual = 0; 
+                cambiarImagen(); 
+            };
+        } else {
+            btnAnterior.style.display = 'none';
+            btnSiguiente.style.display = 'none';
+            contenedorMiniaturas.innerHTML = "";
+        }
+
+        cambiarImagen();
+    }
+
+
+    // ✅ MOSTRAR DATOS EN PANTALLA
+    try { nombreEl.textContent = decodeURIComponent(nombre); } catch(e) { nombreEl.textContent = nombre; }
+    try { precioEl.textContent = `Q${parseFloat(precio).toFixed(2)} / Unidad`; } catch(e) { precioEl.textContent = `Q0.00 / Unidad`; }
+    try { pesoEl.textContent = `Peso: ${decodeURIComponent(peso)}`; } catch(e) { pesoEl.textContent = `Peso: ${peso}`; } 
+    try { imagenEl.src = decodeURIComponent(imagen); } catch(e) { imagenEl.src = imagen; }
+    try { imagenEl.alt = decodeURIComponent(nombre); } catch(e) { imagenEl.alt = nombre; }
+
+    // ✅ DESCRIPCIÓN: Manejo especial para saltos de línea
+    let descDecodificada = "";
+    try { descDecodificada = decodeURIComponent(descripcion); } catch(e) { descDecodificada = descripcion; }
+    let descLimpia = descDecodificada.replaceAll('||', '<br><br>');
+    textoPestanaEl.innerHTML = descLimpia;
+
+    // ✅ CARGAR GALERÍA AL INICIO
+    cargarGaleria();
+
+
+    // ✅ LÓGICA DE LAS 3 PESTAÑAS
+    const tabDesc = document.getElementById('tab-desc');
+    const tabColores = document.getElementById('tab-colores');
+    const tabAromas = document.getElementById('tab-aromas');
+
+    tabDesc.addEventListener('click', function() {
+        quitarActivoPestanas();
+        tabDesc.classList.add('activo');
+        let descDec = "";
+        try { descDec = decodeURIComponent(descripcion); } catch(e) { descDec = descripcion; }
+        let descLimp = descDec.replaceAll('||', '<br><br>');
+        textoPestanaEl.innerHTML = descLimp;
+    });
+
+    tabColores.addEventListener('click', function() {
+        quitarActivoPestanas();
+        tabColores.classList.add('activo');
+        let contenido = "";
+        if(listaColores.length > 0) {
+            contenido += `<h4 style="margin-bottom:10px; color:#5f2c19;">Elige tu color:</h4><div class="opciones-colores">`;
+            listaColores.forEach(color => {
+                let activo = (colorSeleccionado === color) ? 'activo' : '';
+                contenido += `<span class="boton-color ${activo}" data-color="${color}">${color}</span>`;
+            });
+            contenido += `</div>`;
+        } else {
+            contenido += `<p style="color:#885a49;">Este producto no tiene colores disponibles.</p>`;
+        }
+        textoPestanaEl.innerHTML = contenido;
+        activarBotonesColor();
+    });
+
+    tabAromas.addEventListener('click', function() {
+        quitarActivoPestanas();
+        tabAromas.classList.add('activo');
+        let contenido = "";
+        if(listaAromas.length > 0) {
+            contenido += `<h4 style="margin-bottom:10px; color:#5f2c19;">Elige tu aroma:</h4><div class="opciones-colores">`;
+            listaAromas.forEach(aroma => {
+                let activo = (aromaSeleccionado === aroma) ? 'activo' : '';
+                contenido += `<span class="boton-color ${activo}" data-aroma="${aroma}">${aroma}</span>`;
+            });
+            contenido += `</div>`;
+        } else {
+            contenido += `<p style="color:#885a49;">Este producto no tiene aromas disponibles.</p>`;
+        }
+        textoPestanaEl.innerHTML = contenido;
+        activarBotonesAroma();
+    });
+
+    function quitarActivoPestanas(){
+        tabDesc.classList.remove('activo');
+        tabColores.classList.remove('activo');
+        tabAromas.classList.remove('activo');
+    }
+
+    function activarBotonesColor(){
+        document.querySelectorAll('.boton-color[data-color]').forEach(boton => {
+            boton.addEventListener('click', function() {
+                document.querySelectorAll('.boton-color[data-color]').forEach(btn => btn.classList.remove('activo'));
+                this.classList.add('activo');
+                colorSeleccionado = this.dataset.color;
+                colorElegidoEl.textContent = `Color seleccionado: ${colorSeleccionado}`;
+                colorElegidoEl.style.color = '#28a745';
+            });
+        });
+    }
+
+    function activarBotonesAroma(){
+        document.querySelectorAll('.boton-color[data-aroma]').forEach(boton => {
+            boton.addEventListener('click', function() {
+                document.querySelectorAll('.boton-color[data-aroma]').forEach(btn => btn.classList.remove('activo'));
+                this.classList.add('activo');
+                aromaSeleccionado = this.dataset.aroma;
+                aromaElegidoEl.textContent = `Aroma seleccionado: ${aromaSeleccionado}`;
+                aromaElegidoEl.style.color = '#28a745';
+            });
+        });
+    }
+
+
+    // ✅ LÓGICA DE FAVORITOS - CORREGIDA COMPLETAMENTE
+    function verificarFav() {
+        let nombreDec = "";
+        try { nombreDec = decodeURIComponent(nombre); } catch(e) { nombreDec = nombre; }
+        const existe = listaFavoritos.some(fav => fav.nombre === nombreDec);
+        if(existe) corazonEl.classList.add('activo');
+        else corazonEl.classList.remove('activo');
+    }
+    verificarFav();
+
+    corazonEl.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        let nombreDec = "";
+        let imagenDec = "";
+        let pesoDec = "";
+        let descDec = "";
+        try { nombreDec = decodeURIComponent(nombre); } catch(e) { nombreDec = nombre; }
+        try { imagenDec = decodeURIComponent(imagen); } catch(e) { imagenDec = imagen; }
+        try { pesoDec = decodeURIComponent(peso); } catch(e) { pesoDec = peso; }
+        try { descDec = decodeURIComponent(descripcion); } catch(e) { descDec = descripcion; }
+        const precioNum = parseFloat(precio);
+
+        const indice = listaFavoritos.findIndex(fav => fav.nombre === nombreDec);
+        
+        if(indice !== -1) {
+            listaFavoritos.splice(indice, 1);
+            this.classList.remove('activo');
+        } else {
+            listaFavoritos.push({ 
+                nombre: nombreDec, imagen: imagenDec, peso: pesoDec, precio: precioNum,
+                descripcion: descDec, colores: coloresDisponibles || "", aromas: aromasDisponibles || ""
+            });
+            this.classList.add('activo');
+        }
+        // ✅ CORREGIDO: Se quitó el error de escritura "listaFavoritosré"
+        localStorage.setItem('listaFavoritos', JSON.stringify(listaFavoritos));
+    });
+
+
+    // ✅ CONTROL DE CANTIDAD (+ / -)
+    btnMenos.addEventListener('click', () => {
+        if(cantidad > 1) { cantidad--; cantidadEl.textContent = cantidad; }
+    });
+    btnMas.addEventListener('click', () => { cantidad++; cantidadEl.textContent = cantidad; });
+
+
+    // ✅ ACTUALIZAR CONTADOR DEL CARRITO
+    function actualizarContador() {
+        let total = productosEnCarrito.reduce((sum, item) => sum + (Number(item.cantidad) || 0), 0);
+        if(contadorCarritoEl) contadorCarritoEl.textContent = total;
+    }
+    actualizarContador();
+
+
+    // ✅ AÑADIR AL CARRITO - VERSIÓN FINAL QUE GUARDA TODO
+    btnAnadir.addEventListener('click', function() {
+        let nombreDec = "";
+        let imagenDec = "";
+        let pesoDec = "";
+        let descDec = "";
+
+        try { nombreDec = decodeURIComponent(nombre); } catch(e) { nombreDec = nombre; }
+        try { imagenDec = decodeURIComponent(imagen); } catch(e) { imagenDec = imagen; }
+        try { pesoDec = decodeURIComponent(peso); } catch(e) { pesoDec = peso; }
+        try { descDec = decodeURIComponent(descripcion); } catch(e) { descDec = descripcion; }
+
+        const precioNumerico = parseFloat(precio);
+
+        if (isNaN(precioNumerico)) { alert("Error en el precio del producto"); return; }
+        if(listaColores.length > 0 && colorSeleccionado === "") { alert("⚠️ Ve a la pestaña COLORES y elige uno primero."); return; }
+        if(listaAromas.length > 0 && aromaSeleccionado === "") { alert("⚠️ Ve a la pestaña AROMAS y elige uno primero."); return; }
+
+        const existe = productosEnCarrito.find(item => 
+            item.nombre === nombreDec && 
+            item.color === colorSeleccionado && 
+            item.aroma === aromaSeleccionado
+        );
+        
+        if (existe) { 
+            existe.cantidad += cantidad; 
+        } 
+        else {
+            productosEnCarrito.push({
+                nombre: nombreDec, 
+                precio: precioNumerico, 
+                imagen: imagenDec, 
+                imagenes: imagenesExtra,
+                cantidad: cantidad,
+                color: colorSeleccionado || "Único", 
+                aroma: aromaSeleccionado || "Sin aroma",
+                peso: pesoDec,
+                descripcion: descDec,
+                colores_disponibles: listaColores.join(','),
+                aromas_disponibles: listaAromas.join(',')
+            });
+        }
+        
+        localStorage.setItem('carritoProductos', JSON.stringify(productosEnCarrito));
+        actualizarContador();
+
+        this.textContent = '✅ ¡Añadido!'; this.style.background = '#28a745';
+        setTimeout(() => {
+            this.textContent = '📥 Añadir al Carrito';
+            this.style.background = 'linear-gradient(90deg,#D96F32 0%, #C75D2C 100%)';
+        }, 1500);
+    });
+
+    // ==============================================
+    // 🔍 BÚSQUEDA — ¡CORREGIDO AL 100%!
+    // ==============================================
+    const inputBuscar = document.getElementById('texto-busqueda');
+    const misPaginas = ["FLORÉ.html", "velas.html", "ramos.html", "jabones.html"];
+    let baseDatos = [];
+    let cargado = false;
+    let resultadosDiv = null;
+
+    // ⚡ ✅ CARGAR PRODUCTOS
+    async function cargarProductos() {
+        if(cargado) return;
+        try {
+            baseDatos = [];
+            for(let pagina of misPaginas) {
+                let res = await fetch(pagina);
+                if(!res.ok) continue;
+                let html = await res.text();
+                let doc = new DOMParser().parseFromString(html, 'text/html');
+                
+                doc.querySelectorAll('.box-producto').forEach(prod => {
+                    let nombre = prod.querySelector('h3')?.textContent.trim() || "";
+                    const parrafoDesc = prod.querySelector('.contenido-producto > p:first-of-type');
+                    let descripcionCorta = parrafoDesc ? parrafoDesc.textContent.trim() : "Sin descripción disponible";
+                    let btn = prod.querySelector('.comprar');
+                    let descripcionLarga = btn ? btn.dataset.descripcion : descripcionCorta;
+                    let img = prod.querySelector('img')?.getAttribute('src') || "";
+                    
+                    if(nombre && btn) {
+                        baseDatos.push({
+                            nombre: nombre, 
+                            descripcion_mostrar: descripcionCorta,
+                            descripcion_enviar: descripcionLarga,
+                            imagen: img,
+                            precio: btn.dataset.precio || "", 
+                            peso: btn.dataset.peso || "",
+                            colores: btn.dataset.colores || "", 
+                            aromas: btn.dataset.aromas || "",
+                            imagenes: btn.dataset.imagenes || ""
+                        });
+                    }
+                });
+            }
+            cargado = true;
+        } catch(e) { console.error("Error al cargar productos:", e) }
+    }
+
+    // 🚀 FUNCIÓN DE BÚSQUEDA
+    async function buscar() {
+        if(!inputBuscar) return;
+        await cargarProductos();
+        let texto = quitarAcentos(inputBuscar.value.trim().toLowerCase());
+
+        if(texto === "") {
+            if(resultadosDiv) resultadosDiv.style.display = 'none'; 
+            seccionProducto.style.display = 'block'; 
+            return;
+        }
+
+        seccionProducto.style.display = 'none'; 
+
+        if(!resultadosDiv) {
+            resultadosDiv = document.createElement('section');
+            resultadosDiv.className = 'producto-menu'; 
+            resultadosDiv.id = 'resultados-busqueda';
+            document.body.appendChild(resultadosDiv);
+        }
+        
+        resultadosDiv.style.display = 'block';
+
+        resultadosDiv.innerHTML = `
+            <div class="prod-header" style="text-align:center; margin-bottom:40px;"> 
+                <h2 class="title">PRODUCTOS ENCONTRADOS</h2>
+            </div>
+            <div class="container">
+            </div>
+        `;
+
+        let contenedor = resultadosDiv.querySelector('.container');
+
+        let resultados = baseDatos.filter(p => {
+            const nombreLimpio = quitarAcentos(p.nombre.toLowerCase());
+            const descLimpia = quitarAcentos(p.descripcion_mostrar.toLowerCase());
+            return nombreLimpio.includes(texto) || descLimpia.includes(texto);
+        });
+
+        if(resultados.length === 0) {
+            contenedor.innerHTML = `<p style="width:100%;text-align:center;padding:50px;color:#5f2c19;font-size:18px;grid-column:1/-1;">❌ No hay productos que coincidan con: "${inputBuscar.value}"</p>`;
+            return;
+        }
+
+        resultados.forEach(p => {
+            const estaEnFav = listaFavoritos.some(fav => fav.nombre === p.nombre);
+            let tarjeta = document.createElement('div');
+            tarjeta.className = 'box-producto'; 
+            tarjeta.innerHTML = `
+                <div class="boton-favorito ${estaEnFav ? 'activo' : ''}"
+                    data-nombre="${p.nombre}"
+                    data-peso="${p.peso}"
+                    data-precio="${p.precio}"
+                    data-imagen="${p.imagen}"
+                    data-descripcion="${p.descripcion_enviar}"
+                    data-colores="${p.colores}"
+                    data-aromas="${p.aromas}"
+                    data-imagenes="${p.imagenes}">
+                    <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+
+                <div class="imagen-producto">
+                    <img src="${p.imagen}" alt="${p.nombre}">
+                </div>
+
+                <div class="contenido-producto">
+                    <h3>${p.nombre}</h3>
+                    <p>${p.descripcion_mostrar}</p>
+                    <p class="peso-producto">Peso: ${p.peso || 'Sin peso'}</p>
+                    <div class="iconos-compra">
+                        <div class="comprar" 
+                            data-nombre="${p.nombre}" 
+                            data-precio="${p.precio}" 
+                            data-peso="${p.peso}"
+                            data-imagen="${p.imagen}"
+                            data-descripcion="${p.descripcion_enviar}"
+                            data-colores="${p.colores}"
+                            data-aromas="${p.aromas}"
+                            data-imagenes="${p.imagenes}">
+                            <span>COMPRAR</span>
+                            <img src="IMAGENES/flecha arriba.png">
+                        </div>
+                    </div>
+                </div>`;
+            contenedor.appendChild(tarjeta);
+        });
+
+        activarCorazonesResultados();
+
+        contenedor.querySelectorAll('.comprar').forEach(btn => {
+            btn.addEventListener('click', function() {
+                let nombre = encodeURIComponent(this.dataset.nombre);
+                let precio = this.dataset.precio;
+                let img = encodeURIComponent(this.dataset.imagen);
+                let peso = encodeURIComponent(this.dataset.peso);
+                let desc = encodeURIComponent(this.dataset.descripcion);
+                let col = encodeURIComponent(this.dataset.colores);
+                let aro = encodeURIComponent(this.dataset.aromas);
+                let imgs = encodeURIComponent(this.dataset.imagenes || "");
+                window.location.href = `producto.html?nombre=${nombre}&precio=${precio}&peso=${peso}&imagen=${img}&descripcion=${desc}&colores=${col}&aromas=${aro}&imagenes=${imgs}`;
+            });
+        });
+    }
+
+    function activarCorazonesResultados(){
+        document.querySelectorAll('.boton-favorito').forEach(corazon => {
+            corazon.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const datos = {
+                    nombre: this.dataset.nombre,
+                    imagen: this.dataset.imagen,
+                    peso: this.dataset.peso,
+                    precio: this.dataset.precio,
+                    descripcion: this.dataset.descripcion,
+                    colores: this.dataset.colores,
+                    aromas: this.dataset.aromas,
+                    imagenes: this.dataset.imagenes || ""
+                };
+                const existe = listaFavoritos.some(f => f.nombre === datos.nombre);
+                if(existe){
+                    listaFavoritos = listaFavoritos.filter(f => f.nombre !== datos.nombre);
+                    this.classList.remove('activo');
+                }else{
+                    listaFavoritos.push(datos);
+                    this.classList.add('activo');
+                }
+                localStorage.setItem('listaFavoritos', JSON.stringify(listaFavoritos));
+            });
+        });
+    }
+
+    if(inputBuscar) inputBuscar.addEventListener('input', buscar);
+    cargarProductos();
+
+});
+</script>
+
+
+</body>
+</html>

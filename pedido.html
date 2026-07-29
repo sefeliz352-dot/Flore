@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Pedido - FLORÉ</title>
+    <link rel="stylesheet" href="ESTILO.css">
+     <link rel="icon" href="IMAGENES/flore-icono.png" type="image/png">
+    <style>
+        /* -------------------------- */
+        /* TUS ESTILOS ORIGINALES - SIN CAMBIOS */
+        /* -------------------------- */
+        header {
+            background-image: url(IMAGENES/01.jpeg);
+            height: 115px;
+            min-height: 150px;
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-color: #ebceb7;
+            position: relative;
+            z-index: 10;
+        }
+        .contenedor-pedido {
+            max-width: 900px;
+            margin: 0 auto 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        .titulo-seccion {
+            text-align: center;
+            color: #5f2c19;
+            font-size: 24px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ebceb7;
+            padding-bottom: 8px;
+        }
+        .datos-cliente, .metodo-pago {
+            background: #fdf8f3;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .dato {
+            color: #5f2c19;
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .dato strong {
+            color: #ca4c1e;
+        }
+        .lista-productos {
+            margin-bottom: 15px;
+        }
+        .producto-pedido {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .imagen-producto {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+        .info-producto {
+            flex: 1;
+            min-width: 120px;
+        }
+        .nombre-producto {
+            font-size: 16px;
+            color: #5f2c19;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .color-producto, .aroma-producto {
+            font-size: 12px;
+            color: #ca4c1e;
+            font-style: italic;
+            margin-bottom: 1px;
+        }
+        .precio, .cantidad, .subtotal {
+            font-size: 14px;
+            color: #5f2c19;
+            font-weight: 500;
+        }
+        .total-pedido {
+            padding: 15px;
+            text-align: right;
+            font-size: 22px;
+            color: #5f2c19;
+            font-weight: bold;
+            border-top: 2px solid #8f4226;
+            margin-top: 5px;
+        }
+        .campo {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0;
+            border: 1px solid #5f2c19;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #5f2c19;
+            background: #fff;
+            box-sizing: border-box;
+        }
+        .campo:focus {
+            outline: none;
+            border-color: #ca4c1e;
+        }
+        .boton-finalizar {
+            display: block;
+            width: 100%;
+            max-width: 320px;
+            margin: 20px auto 0;
+            padding: 12px;
+            background: linear-gradient(90deg,#D96F32 0%, #C75D2C 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+        .boton-finalizar:hover {
+            opacity: 0.9;
+        }
+        .barra-busqueda {
+            position: relative;
+            width: 165px;  
+            height: 50px;  
+            margin: 0 5px; 
+        }
+        .barra-busqueda input {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #5f2c19; 
+            border-radius: 25px; 
+            padding: 0 40px 0 18px; 
+            font-size: 14px;
+            color: #5f2c19;
+            background: transparent;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .barra-busqueda input::placeholder { color: #5f2c19; }
+        .barra-busqueda button {
+            position: absolute;
+            right: 10%; 
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        .icono-busqueda{ width: 18px; height: 18px; }
+
+        .carrito-item {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+        .icon-carrito {
+            width: 24px;
+            height: 24px;
+        }
+        .contador-carrito {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ca4c1e;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .aviso-exito {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            text-align: center;
+            z-index: 99999;
+            border: 2px solid #ebceb7;
+        }
+        .aviso-exito h2 {
+            color: #5f2c19;
+            margin: 0 0 12px 0;
+        }
+        .aviso-exito p {
+            color: #885a49;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .aviso-exito button {
+            background: #ca4c1e;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            .producto-pedido { flex-direction: column; text-align: center; }
+            .total-pedido { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="menu container">
+            <a href="FLORÉ.html"> 
+                <img src="IMAGENES/FloréLOGO.png" class="logo" alt="FLORÉ">
+            </a>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="FLORÉ.html">Inicio</a></li>
+                    <li><a href="velas.html">Velas</a></li>
+                    <li><a href="ramos.html">Ramos</a></li>
+                    <li><a href="jabones.html">Jabones</a></li>
+                    <li><a href="favoritos.html">Mis Favoritos</a></li>
+                    <div class="barra-busqueda">
+                        <input type="text" placeholder="Buscar artículos...">
+                        <button><img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda"></button>
+                    </div>
+                    <li class="carrito-item">
+                        <a href="carrito.html" class="enlace-carrito">
+                            <img src="IMAGENES/carro compras- cafe.png" alt="Carrito" class="icon-carrito">
+                            <span class="contador-carrito" id="contador-carrito">0</span>
+                        </a>
+                    </li>
+                    <li class="perfil-item">
+                        <a href="perfil.html" class="enlace-perfil">
+                            <img src="IMAGENES/usuario.png" alt="Perfil" class="icon-perfil">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-content container" style="height: 12vh;"></div>
+    </header>
+
+    <div class="aviso-exito" id="aviso-exito">
+        <h2>✅ ¡PEDIDO LISTO!</h2>
+        <p>Se abrió WhatsApp con tu pedido.<br>Solo envíalo y nos pondremos en contacto.</p>
+        <button onclick="window.location.href='FLORÉ.html'">ACEPTAR</button>
+    </div>
+
+    <main class="contenedor-pedido">
+        <h1 class="titulo-seccion">RESUMEN DE TU PEDIDO - FLORÉ</h1>
+
+        <div class="datos-cliente">
+            <h3 style="color:#5f2c19; margin-top:0;">Datos del Cliente</h3>
+            <div class="dato"><strong>Nombre:</strong> <span id="cli-nombre"></span></div>
+            <div class="dato"><strong>Correo:</strong> <span id="cli-correo"></span></div>
+            <div class="dato"><strong>Teléfono:</strong> <span id="cli-telefono"></span></div>
+            <div class="dato"><strong>Dirección:</strong> <span id="cli-direccion"></span></div>
+        </div>
+
+        <h3 class="titulo-seccion">Productos Solicitados</h3>
+        <div id="lista-pedido" class="lista-productos"></div>
+        <div class="total-pedido">Total a Pagar: <span id="total-final">Q0.00</span></div>
+
+        <div class="metodo-pago">
+            <h3 style="color:#5f2c19; margin-top:0;">Método de Pago: Transferencia Bancaria</h3>
+            <p style="color:#885a49; font-size:14px;">Realiza tu transferencia a los siguientes datos:</p>
+            
+            <div class="dato"><strong>Banco:</strong> Banco Industrial</div>
+            <div class="dato"><strong>Número de Cuenta:</strong> 123-456-7890</div>
+            <div class="dato"><strong>Nombre del Titular:</strong> FLORÉ</div>
+            <div class="dato"><strong>Moneda:</strong> Quetzales (Q)</div>
+
+            <hr style="border:none; border-top:1px solid #ebceb7; margin:10px 0;">
+            
+            <p style="color:#885a49; font-size:14px;">Enviar tu comprobante por WhatsApp</p>
+        </div>
+
+        <button class="boton-finalizar" id="btn-finalizar">ENVIAR PEDIDO POR WHATSAPP</button>
+    </main>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function(){
+    const contadorCarritoEl = document.getElementById('contador-carrito');
+    function actualizarContador() {
+        const carrito = JSON.parse(localStorage.getItem('carritoProductos')) || [];
+        const total = carrito.reduce((sum, item) => sum + (Number(item.cantidad) || 0), 0);
+        if(contadorCarritoEl) contadorCarritoEl.textContent = total;
+    }
+    actualizarContador();
+
+    let carrito = JSON.parse(localStorage.getItem('carritoProductos')) || [];
+    let perfil = JSON.parse(localStorage.getItem('datosPerfil')) || {};
+    document.getElementById('cli-nombre').textContent = perfil.nombre || 'No especificado';
+    document.getElementById('cli-correo').textContent = perfil.correo || 'No especificado';
+    document.getElementById('cli-telefono').textContent = perfil.telefono || 'No especificado';
+    document.getElementById('cli-direccion').textContent = perfil.direccion || 'No especificado';
+
+    const lista = document.getElementById('lista-pedido');
+    let total = 0;
+    if(carrito.length === 0){
+        lista.innerHTML = `<p style="text-align:center; color:#885a49;">No tienes productos en el carrito</p>`;
+        document.getElementById('total-final').textContent = 'Q0.00';
+        return;
+    }
+    carrito.forEach(prod => {
+        const subt = parseFloat(prod.precio) * parseInt(prod.cantidad);
+        total += subt;
+        const div = document.createElement('div');
+        div.className = 'producto-pedido';
+        div.innerHTML = `
+            <img src="${prod.imagen}" class="imagen-producto" alt="${prod.nombre}">
+            <div class="info-producto">
+                <div class="nombre-producto">${prod.nombre}</div>
+                ${prod.color && prod.color !== 'Único' ? `<div class="color-producto">Color: ${prod.color}</div>` : ''}
+                ${prod.aroma && prod.aroma !== 'Sin aroma' ? `<div class="aroma-producto">Aroma: ${prod.aroma}</div>` : ''}
+                <div class="precio">Precio unitario: Q${parseFloat(prod.precio).toFixed(2)}</div>
+                <div class="cantidad">Cantidad: ${prod.cantidad}</div>
+            </div>
+            <div class="subtotal">Subtotal: Q${subt.toFixed(2)}</div>
+        `;
+        lista.appendChild(div);
+    });
+    document.getElementById('total-final').textContent = `Q${total.toFixed(2)}`;
+
+    document.getElementById('btn-finalizar').addEventListener('click', function(){
+        const listaProductosTexto = carrito.map(p => {
+            return `- ${p.nombre} ${p.cantidad} u. | Q${parseFloat(p.precio).toFixed(2)} c/u | Subtotal: Q${(parseFloat(p.precio)*parseInt(p.cantidad)).toFixed(2)}`;
+        }).join('\n');
+
+        const mensaje = ` NUEVO PEDIDO - FLORÉ
+
+ DATOS DEL CLIENTE:
+Nombre: ${perfil.nombre || 'No indicado'}
+Correo: ${perfil.correo || 'No indicado'}
+Teléfono: ${perfil.telefono || 'No indicado'}
+Dirección: ${perfil.direccion || 'No indicada'}
+
+ TOTAL A PAGAR: Q${total.toFixed(2)}
+
+ PRODUCTOS:
+${listaProductosTexto}
+
+`;
+
+        window.open(`https://wa.me/50241190892?text=${encodeURIComponent(mensaje)}`, '_blank');
+
+        document.getElementById('aviso-exito').style.display = 'block';
+        localStorage.removeItem('carritoProductos');
+    });
+});
+    </script>
+</body>
+</html>
