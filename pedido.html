@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLORÉ</title>
+    <title>FLORÉ - Resumen de Pedido</title>
     <link rel="stylesheet" href="ESTILO.css">
-     <link rel="icon" href="IMAGENES/flore-icono.png" type="image/png">
+    <link rel="icon" href="IMAGENES/flore-icono.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
-        /* -------------------------- */
-        /* TUS ESTILOS ORIGINALES - SIN CAMBIOS */
-        /* -------------------------- */
         header {
             background-image: url(IMAGENES/01.jpeg);
             height: 115px;
@@ -38,7 +36,7 @@
             border-bottom: 2px solid #ebceb7;
             padding-bottom: 8px;
         }
-        .datos-cliente, .metodo-pago {
+        .datos-cliente, .metodo-pago, .comprobante-pago {
             background: #fdf8f3;
             padding: 12px;
             border-radius: 8px;
@@ -100,21 +98,6 @@
             border-top: 2px solid #8f4226;
             margin-top: 5px;
         }
-        .campo {
-            width: 100%;
-            padding: 8px;
-            margin: 6px 0;
-            border: 1px solid #5f2c19;
-            border-radius: 8px;
-            font-size: 14px;
-            color: #5f2c19;
-            background: #fff;
-            box-sizing: border-box;
-        }
-        .campo:focus {
-            outline: none;
-            border-color: #ca4c1e;
-        }
         .boton-finalizar {
             display: block;
             width: 100%;
@@ -162,7 +145,6 @@
             cursor: pointer;
         }
         .icono-busqueda{ width: 18px; height: 18px; }
-
         .carrito-item {
             position: relative;
             display: inline-flex;
@@ -189,7 +171,6 @@
             line-height: 1;
             text-align: center;
         }
-
         .aviso-exito {
             display: none;
             position: fixed;
@@ -222,7 +203,12 @@
             font-weight: bold;
             cursor: pointer;
         }
-
+        .comprobante-pago p {
+            margin:0 0 8px 0; color:#ca4c1e; font-weight:bold;
+        }
+        .comprobante-pago input[type="file"] {
+            width:100%; padding:8px; border:1px solid #5f2c19; border-radius:5px;
+        }
         @media (max-width: 600px) {
             .producto-pedido { flex-direction: column; text-align: center; }
             .total-pedido { text-align: center; }
@@ -265,8 +251,8 @@
     </header>
 
     <div class="aviso-exito" id="aviso-exito">
-        <h2>✅ ¡PEDIDO LISTO!</h2>
-        <p>Se abrió WhatsApp con tu pedido.<br>Solo envíalo y nos pondremos en contacto.</p>
+        <h2>✅ ¡PEDIDO ENVIADO!</h2>
+        <p>Nos pondremos en contacto contigo para confirmar todo.</p>
         <button onclick="window.location.href='index.html'">ACEPTAR</button>
     </div>
 
@@ -288,22 +274,25 @@
         <div class="metodo-pago">
             <h3 style="color:#5f2c19; margin-top:0;">Método de Pago: Transferencia Bancaria</h3>
             <p style="color:#885a49; font-size:14px;">Realiza tu transferencia a los siguientes datos:</p>
-            
             <div class="dato"><strong>Banco:</strong> Banco Industrial</div>
             <div class="dato"><strong>Número de Cuenta:</strong> 123-456-7890</div>
             <div class="dato"><strong>Nombre del Titular:</strong> FLORÉ</div>
-            <div class="dato"><strong>Moneda:</strong> Quetzales (Q)</div>
-
+            <div class="dato"><strong>Tipo:</strong> Monetaria</div>
             <hr style="border:none; border-top:1px solid #ebceb7; margin:10px 0;">
-            
-            <p style="color:#885a49; font-size:14px;">Enviar tu comprobante por WhatsApp</p>
         </div>
 
-        <button class="boton-finalizar" id="btn-finalizar">ENVIAR PEDIDO POR WHATSAPP</button>
+        <div class="comprobante-pago">
+            <p>⚠️ OBLIGATORIO: Adjunta la foto del comprobante de pago antes de enviar</p>
+            <input type="file" id="comprobante" accept="image/*" required>
+        </div>
+
+        <button class="boton-finalizar" id="btn-finalizar">ENVIAR PEDIDO</button>
     </main>
 
-    <script>
+<script>
 document.addEventListener('DOMContentLoaded', function(){
+    emailjs.init("ohheerwrTX2RgsPyc");
+
     const contadorCarritoEl = document.getElementById('contador-carrito');
     function actualizarContador() {
         const carrito = JSON.parse(localStorage.getItem('carritoProductos')) || [];
@@ -314,64 +303,141 @@ document.addEventListener('DOMContentLoaded', function(){
 
     let carrito = JSON.parse(localStorage.getItem('carritoProductos')) || [];
     let perfil = JSON.parse(localStorage.getItem('datosPerfil')) || {};
+
     document.getElementById('cli-nombre').textContent = perfil.nombre || 'No especificado';
     document.getElementById('cli-correo').textContent = perfil.correo || 'No especificado';
     document.getElementById('cli-telefono').textContent = perfil.telefono || 'No especificado';
-    document.getElementById('cli-direccion').textContent = perfil.direccion || 'No especificado';
+    document.getElementById('cli-direccion').textContent = perfil.direccion || 'No especificada';
 
     const lista = document.getElementById('lista-pedido');
     let total = 0;
     if(carrito.length === 0){
         lista.innerHTML = `<p style="text-align:center; color:#885a49;">No tienes productos en el carrito</p>`;
         document.getElementById('total-final').textContent = 'Q0.00';
-        return;
+    } else {
+        carrito.forEach(prod => {
+            const subt = parseFloat(prod.precio) * parseInt(prod.cantidad);
+            total += subt;
+            const div = document.createElement('div');
+            div.className = 'producto-pedido';
+            div.innerHTML = `
+                <img src="${prod.imagen}" class="imagen-producto" alt="${prod.nombre}">
+                <div class="info-producto">
+                    <div class="nombre-producto">${prod.nombre}</div>
+                    ${prod.color && prod.color !== 'Único' ? `<div class="color-producto">Color: ${prod.color}</div>` : ''}
+                    ${prod.aroma && prod.aroma !== 'Sin aroma' ? `<div class="aroma-producto">Aroma: ${prod.aroma}</div>` : ''}
+                    <div class="precio">Precio unitario: Q${parseFloat(prod.precio).toFixed(2)}</div>
+                    <div class="cantidad">Cantidad: ${prod.cantidad}</div>
+                </div>
+                <div class="subtotal">Subtotal: Q${subt.toFixed(2)}</div>
+            `;
+            lista.appendChild(div);
+        });
+        document.getElementById('total-final').textContent = `Q${total.toFixed(2)}`;
     }
-    carrito.forEach(prod => {
-        const subt = parseFloat(prod.precio) * parseInt(prod.cantidad);
-        total += subt;
-        const div = document.createElement('div');
-        div.className = 'producto-pedido';
-        div.innerHTML = `
-            <img src="${prod.imagen}" class="imagen-producto" alt="${prod.nombre}">
-            <div class="info-producto">
-                <div class="nombre-producto">${prod.nombre}</div>
-                ${prod.color && prod.color !== 'Único' ? `<div class="color-producto">Color: ${prod.color}</div>` : ''}
-                ${prod.aroma && prod.aroma !== 'Sin aroma' ? `<div class="aroma-producto">Aroma: ${prod.aroma}</div>` : ''}
-                <div class="precio">Precio unitario: Q${parseFloat(prod.precio).toFixed(2)}</div>
-                <div class="cantidad">Cantidad: ${prod.cantidad}</div>
-            </div>
-            <div class="subtotal">Subtotal: Q${subt.toFixed(2)}</div>
-        `;
-        lista.appendChild(div);
-    });
-    document.getElementById('total-final').textContent = `Q${total.toFixed(2)}`;
 
-    document.getElementById('btn-finalizar').addEventListener('click', function(){
-        const listaProductosTexto = carrito.map(p => {
-            return `- ${p.nombre} ${p.cantidad} u. | Q${parseFloat(p.precio).toFixed(2)} c/u | Subtotal: Q${(parseFloat(p.precio)*parseInt(p.cantidad)).toFixed(2)}`;
-        }).join('\n');
+    function leerImagenBase64(archivo) {
+        return new Promise((resolver) => {
+            const lector = new FileReader();
+            lector.onload = () => resolver(lector.result);
+            lector.readAsDataURL(archivo);
+        });
+    }
 
-        const mensaje = ` NUEVO PEDIDO - FLORÉ
+    document.getElementById('btn-finalizar').addEventListener('click', async function(){
+        const btn = this;
+        const inputComprobante = document.getElementById('comprobante');
 
- DATOS DEL CLIENTE:
-Nombre: ${perfil.nombre || 'No indicado'}
-Correo: ${perfil.correo || 'No indicado'}
-Teléfono: ${perfil.telefono || 'No indicado'}
-Dirección: ${perfil.direccion || 'No indicada'}
+        if(!inputComprobante.files || inputComprobante.files.length === 0){
+            alert("⚠️ DEBES ADJUNTAR EL COMPROBANTE DE PAGO ANTES DE ENVIAR");
+            inputComprobante.focus();
+            return;
+        }
 
- TOTAL A PAGAR: Q${total.toFixed(2)}
+        btn.disabled = true;
+        btn.textContent = "ENVIANDO...";
 
- PRODUCTOS:
-${listaProductosTexto}
+        let listaProductosCorreo = '';
+        carrito.forEach(p => {
+            listaProductosCorreo += `${p.nombre}\n`;
+            if(p.color && p.color !== 'Único') listaProductosCorreo += `Color: ${p.color}\n`;
+            if(p.aroma && p.aroma !== 'Sin aroma') listaProductosCorreo += `Aroma: ${p.aroma}\n`;
+            listaProductosCorreo += `Cantidad: ${p.cantidad}\n`;
+            listaProductosCorreo += `Precio unitario: Q${parseFloat(p.precio).toFixed(2)}\n`;
+            listaProductosCorreo += `Subtotal: Q${(parseFloat(p.precio) * parseInt(p.cantidad)).toFixed(2)}\n\n`;
+        });
+        listaProductosCorreo += `----------------------------------------\n`;
+        listaProductosCorreo += `TOTAL GENERAL: Q${total.toFixed(2)}`;
 
-`;
+        try {
+            const archivo = inputComprobante.files[0];
+            let etiquetaImagen = '';
+            let avisoImagen = '';
 
-        window.open(`https://wa.me/50241190892?text=${encodeURIComponent(mensaje)}`, '_blank');
+            // LÍMITE MÁS SEGURO: 40KB (evita que el código sea tan largo)
+            const TAMANO_MAX_KB = 40;
+            const tamanoBytes = archivo.size;
+            const tamanoKb = tamanoBytes / 1024;
 
-        document.getElementById('aviso-exito').style.display = 'block';
-        localStorage.removeItem('carritoProductos');
+            if(tamanoKb <= TAMANO_MAX_KB){
+                const base64 = await leerImagenBase64(archivo);
+                if(base64.length < 55000){
+                    // ✅ Etiqueta sin espacios ni caracteres que rompan
+                    etiquetaImagen = `<img src="${base64}" alt="Comprobante" style="max-width:100%; display:block; margin:10px 0; border-radius:8px;">`;
+                    avisoImagen = "✅ Imagen del comprobante adjuntada correctamente.";
+                } else {
+                    etiquetaImagen = '';
+                    avisoImagen = "⚠️ La imagen es muy pesada. Te contactaremos para verificarla.";
+                }
+            } else {
+                etiquetaImagen = '';
+                avisoImagen = "⚠️ La imagen es muy pesada. Te contactaremos para verificarla.";
+            }
+
+            await emailjs.send(
+                "11081214@",
+                "template_vrgjomo",
+                {
+                    to_email: "flore.artesanal11@gmail.com",
+                    nombre_cliente: perfil.nombre || "Sin nombre",
+                    correo_cliente: perfil.correo || "No especificado",
+                    direccion_cliente: perfil.direccion || "No especificada",
+                    telefono_cliente: perfil.telefono || "Sin teléfono",
+                    total_pedido: `Q${total.toFixed(2)}`,
+                    productos: listaProductosCorreo,
+                    aviso_comprobante: avisoImagen,
+                    imagen_comprobante: etiquetaImagen
+                }
+            );
+
+            document.getElementById('aviso-exito').style.display = 'block';
+            localStorage.removeItem('carritoProductos');
+
+        } catch (error) {
+            await emailjs.send(
+                "11081214@",
+                "template_vrgjomo",
+                {
+                    to_email: "flore.artesanal11@gmail.com",
+                    nombre_cliente: perfil.nombre || "Sin nombre",
+                    correo_cliente: perfil.correo || "No especificado",
+                    direccion_cliente: perfil.direccion || "No especificada",
+                    telefono_cliente: perfil.telefono || "Sin teléfono",
+                    total_pedido: `Q${total.toFixed(2)}`,
+                    productos: listaProductosCorreo,
+                    aviso_comprobante: "⚠️ No se pudo adjuntar la imagen. Te contactaremos para verificarla.",
+                    imagen_comprobante: ""
+                }
+            );
+            document.getElementById('aviso-exito').style.display = 'block';
+            localStorage.removeItem('carritoProductos');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = "ENVIAR PEDIDO";
+        }
     });
 });
-    </script>
+</script>
+
 </body>
 </html>
