@@ -491,90 +491,17 @@
 
         /* AJUSTES PARA MÓVIL */
        /* --- AJUSTES EXCLUSIVOS PARA PERFIL Y TODAS LAS PÁGINAS --- */
-@media(max-width: 768px){
-    .menu {
-        padding: 15px 10px;
-        flex-wrap: wrap;
-        justify-content: center !important; /* TODO CENTRADO */
-        align-items: center;
-        gap: 8px;
-    }
-
-    .logo {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 8px;
-    }
-    .logo img {
-        height: 45px;
-        margin: 0 auto;
-    }
-
-    .navbar ul {
-        flex-wrap: wrap;
-        justify-content: center !important; /* ENLACES CENTRADOS */
-        align-items: center;
-        gap: 6px;
-    }
-
-    .navbar ul li a {
-        font-size: 13px;
-        padding: 6px 8px;
-    }
-
-    /* BARRA DE BÚSQUEDA CENTRADA */
-    .barra-busqueda {
-        width: 160px;
-        height: 40px;
-        margin: 8px auto !important;
-    }
-
-    /* ICONOS CARRITO Y PERFIL CENTRADOS */
-    .carrito-item, .perfil-item {
-        margin: 5px 8px !important;
-    }
-
-    .icon-carrito, .icon-perfil {
-        width: 22px;
-    }
-
-    /* TÍTULO DE PERFIL */
-    .prod-header .title {
-        font-size: 32px;
-        margin-top: 20px;
-    }
-
-    /* MENÚ DE PESTAÑAS EN PERFIL */
-    .menu-perfil {
-        flex-direction: row;
-        width: 100%;
-        justify-content: center;
-        border-right: none;
-        border-bottom: 1px solid #ebceb7;
-        padding-bottom: 10px;
-    }
-
-    .opcion-perfil {
-        flex: 1;
-        text-align: center;
-        border-left: none;
-        border-bottom: 2px solid transparent;
-    }
-
-    .opcion-perfil.activa, .opcion-perfil:hover {
-        border-left: none;
-        border-bottom: 2px solid #ca4c1e;
-    }
-
-    /* FORMULARIO Y CONTENIDO */
-    .contenedor-perfil {
-        padding: 20px 15px;
-    }
-
-    .grupo-input input, .grupo-input textarea {
-        font-size: 15px;
-    }
-}
+@media (max-width: 768px) {
+            .barra-busqueda {
+                width: 130px;
+            }
+            .navbar ul {
+                gap: 12px;
+            }
+            .prod-header .title {
+                font-size: 22px;
+            }
+        }
     </style>
 </head>
 <body>
