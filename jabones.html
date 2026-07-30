@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLORÉ</title>
+    <title>FLORÉ - Jabones</title>
     <link rel="stylesheet" href="ESTILO.css">
-     <link rel="icon" href="IMAGENES/flore-icono.png" type="image/png">
+    <link rel="icon" href="IMAGENES/flore-icono.png" type="image/png">
+    
 </head>
 <body>
     <header>
         <div class="menu container">
             <a href="index.html">
-                <img src="IMAGENES/FloréLOGO.png" class="logo" alt="">
+                <img src="IMAGENES/FloréLOGO.png" class="logo" alt="Logo Floré">
             </a>
 
             <nav class="navbar">
                 <ul>
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="velas.html">Velas</a></li>
-                    <li><a href="jabones.html" style="color:#ca4c1e;">Jabones</a></li>
+                    <li><a href="jabones.html" style="color:#ca4c1e; font-weight:bold;">Jabones</a></li>
                     <li><a href="favoritos.html">Mis Favoritos</a></li>
 
-                    <!-- ✅ BARRA DE BÚSQUEDA CON DISEÑO IGUAL AL RESTO -->
-                    <div class="barra-busqueda">
+                    <li class="barra-busqueda">
                         <input type="text" id="texto-busqueda" placeholder="Buscar artículos...">
                         <button type="button">
                             <img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda">
                         </button>
-                        
-                    </div>
+                    </li>
 
                     <li class="carrito-item">
                         <a href="carrito.html" class="enlace-carrito">
@@ -40,53 +38,42 @@
 
                     <li class="perfil-item">
                         <a href="perfil.html" class="enlace-perfil">
-                            <img src="IMAGENES/usuario.png" alt="Carrito" class="icon-perfil">
+                            <img src="IMAGENES/usuario.png" alt="Perfil" class="icon-perfil">
                         </a>
                     </li>
-                    
                 </ul>
             </nav>
         </div>
 
-        <DIV class="header-content container">
+        <div class="header-content container">
             <div class="header-txt">
                 <h1>Jabones Artesanales</h1>
-                <P>
-                   Elaborados a mano con ingredientes naturales, cuidan tu piel y respetan el medio ambiente. 
-                   Sin químicos agresivos, con aromas únicos y propiedades nutritivas.
-                </P>
+                <p>Elaborados a mano con ingredientes naturales, cuidan tu piel y respetan el medio ambiente. Sin químicos agresivos, con aromas únicos y propiedades nutritivas.</p>
                 <p>¡Una experiencia suave y natural para tu cuidado diario!</p>
                 <div class="botones">
                     <a href="#productos-contenido" class="btn-1">Productos <img class="icon" src="IMAGENES/car.svg" alt=""></a>
                     <a href="#info" class="btn-2">Información <img class="icon" src="IMAGENES/arrow.svg" alt=""></a>
                 </div>
             </div>
-            <div class="header-img"></div>
-            <img src="IMAGENES/velajesus.png" class="velas" alt="">
-        </DIV>
+            <div class="header-img">
+                <img src="IMAGENES/velajesus.png" class="velas" alt="Jabones Artesanales">
+            </div>
+        </div>
     </header>
 
 
     <main class="producto-menu" id="productos-contenido">
         <div class="container">
-
             <div class="prod-header">
-                <!-- ✅ TÍTULO QUE CAMBIA SOLO -->
                 <h2 id="titulo-productos">PRODUCTOS DESTACADOS</h2>
             </div>
 
-            <!-- Secciones de anclaje -->
             <section id="velas"></section>
             <section id="ramos"></section>
             <section id="jabones"></section>
 
-
             <div class="contenedor-productos-todos" id="vista-original">
                 <div class="box-container-general" id="todos-los-productos">
-
-                    <!-- ============================================== -->
-                    <!-- ✅ TODOS LOS PRODUCTOS - CON CAMPOS COMPLETOS -->
-                    <!-- ============================================== -->
 
                     <!-- PRODUCTO 1 -->
                     <div class="box-producto">
@@ -99,12 +86,12 @@
                                 data-descripcion="Este hermoso jabón está elaborado con ingredientes naturales de alta calidad||Es ideal para el cuidado diario, deja la piel suave y con aroma fresco||Hecho totalmente a mano con dedicación y amor"
                                 data-colores="Amarillo,Naranja,Blanco"
                                 data-aromas="Limón,Hierbabuena,Vainilla">
-                                <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                 </svg>
                             </div>
                             <div class="imagen-producto">
-                                <img src="IMAGENES/margaritas.png" alt="Margaritas">
+                                <img src="IMAGENES/margaritas.png" alt="Jabón Girasol">
                             </div>
                             <div class="contenido-producto">
                                 <h3>GIRASOL</h3>
@@ -131,27 +118,27 @@
                     <div class="box-producto">
                         <div class="producto-item">
                             <div class="boton-favorito" 
-                                data-nombre="VELA CAFE" 
+                                data-nombre="JABÓN CAFÉ" 
                                 data-peso="50ml" 
                                 data-precio="30.00"
                                 data-imagen="IMAGENES/vela cafe.png"
                                 data-descripcion="Jabón con esencia de café natural||Exfolia suavemente y estimula la circulación||Aroma intenso y duradero, hecho artesanalmente"
                                 data-colores="Marrón,Beige"
                                 data-aromas="Café,Chocolate">
-                                <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                 </svg>
                             </div>
                             <div class="imagen-producto">
-                                <img src="IMAGENES/vela cafe.png" alt="Vela Café">
+                                <img src="IMAGENES/vela cafe.png" alt="Jabón Café">
                             </div>
                             <div class="contenido-producto">
-                                <h3>VELA CAFE</h3>
+                                <h3>JABÓN CAFÉ</h3>
                                 <p>Exfoliante natural con esencia de café.</p>
                                 <p class="peso-producto">Peso: 50ml</p>
                                 <div class="iconos-compra">
                                     <div class="comprar" 
-                                        data-nombre="VELA CAFE" 
+                                        data-nombre="JABÓN CAFÉ" 
                                         data-peso="50ml" 
                                         data-precio="30.00"
                                         data-imagen="IMAGENES/vela cafe.png"
@@ -170,27 +157,27 @@
                     <div class="box-producto">
                         <div class="producto-item">
                             <div class="boton-favorito" 
-                                data-nombre="VELA JESÚS" 
+                                data-nombre="JABÓN JESÚS" 
                                 data-peso="200g" 
                                 data-precio="40.00"
                                 data-imagen="IMAGENES/velasjesus.png"
                                 data-descripcion="Jabón suave de glicerina e hidrolatos||Hidrata y nutre profundamente todo tipo de piel||Ingredientes orgánicos, sin químicos añadidos"
                                 data-colores="Transparente,Rosa,Verde"
                                 data-aromas="Rosa,Lavanda,Manzanilla">
-                                <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                 </svg>
                             </div>
                             <div class="imagen-producto">
-                                <img src="IMAGENES/velasjesus.png" alt="Vela Jesús">
+                                <img src="IMAGENES/velasjesus.png" alt="Jabón Jesús">
                             </div>
                             <div class="contenido-producto">
-                                <h3>VELA JESÚS</h3>
+                                <h3>JABÓN JESÚS</h3>
                                 <p>Elaborado con glicerina e ingredientes orgánicos.</p>
                                 <p class="peso-producto">Peso: 200g</p>
                                 <div class="iconos-compra">
                                     <div class="comprar" 
-                                        data-nombre="VELA JESÚS" 
+                                        data-nombre="JABÓN JESÚS" 
                                         data-peso="200g" 
                                         data-precio="40.00"
                                         data-imagen="IMAGENES/velasjesus.png"
@@ -216,12 +203,12 @@
                                 data-descripcion="Jabón en forma de flor, decorado artesanalmente||Aroma dulce y duradero, ideal para regalo||Fórmula suave apta para pieles sensibles"
                                 data-colores="Rojo,Amarillo,Rosa,Blanco"
                                 data-aromas="Flores,Vainilla">
-                                <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                 </svg>
                             </div>
                             <div class="imagen-producto">
-                                <img src="IMAGENES/arreglo de tulipanes.png" alt="Arreglo de Tulipanes">
+                                <img src="IMAGENES/arreglo de tulipanes.png" alt="Jabón Tulipanes">
                             </div>
                             <div class="contenido-producto">
                                 <h3>Arreglo de Tulipanes</h3>
@@ -248,27 +235,27 @@
                     <div class="box-producto">
                         <div class="producto-item">
                             <div class="boton-favorito" 
-                                data-nombre="RAMOS 2" 
+                                data-nombre="JABÓN HIDRATANTE" 
                                 data-peso="400g" 
                                 data-precio="60.00"
                                 data-imagen="IMAGENES/margaritas.png"
                                 data-descripcion="Jabón extra hidratante con aceites vegetales||Deja la piel suave, elástica y perfumada||Sin parabenos ni sulfatos, 100% natural"
                                 data-colores="Verde,Azul,Blanco"
                                 data-aromas="Eucalipto,Árbol de Té">
-                                <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                 </svg>
                             </div>
                             <div class="imagen-producto">
-                                <img src="IMAGENES/margaritas.png" alt="Margaritas">
+                                <img src="IMAGENES/margaritas.png" alt="Jabón Hidratante">
                             </div>
                             <div class="contenido-producto">
-                                <h3>RAMOS 2</h3>
+                                <h3>JABÓN HIDRATANTE</h3>
                                 <p>Extra hidratante con aceites vegetales naturales.</p>
                                 <p class="peso-producto">Peso: 400g</p>
                                 <div class="iconos-compra">
                                     <div class="comprar" 
-                                        data-nombre="RAMOS 2" 
+                                        data-nombre="JABÓN HIDRATANTE" 
                                         data-peso="400g" 
                                         data-precio="60.00"
                                         data-imagen="IMAGENES/margaritas.png"
@@ -287,27 +274,27 @@
                     <div class="box-producto">
                         <div class="producto-item">
                             <div class="boton-favorito" 
-                                data-nombre="JABÓN 1" 
+                                data-nombre="JABÓN AVENA Y MIEL" 
                                 data-peso="100g" 
                                 data-precio="15.00"
                                 data-imagen="IMAGENES/margaritas.png"
                                 data-descripcion="Jabón clásico de avena y miel||Suaviza y calma irritaciones, ideal para piel sensible||Ingredientes nutritivos, hecho a mano"
                                 data-colores="Beige,Blanco"
                                 data-aromas="Miel,Avena">
-                                <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                 </svg>
                             </div>
                             <div class="imagen-producto">
-                                <img src="IMAGENES/margaritas.png" alt="Margaritas">
+                                <img src="IMAGENES/margaritas.png" alt="Jabón Avena y Miel">
                             </div>
                             <div class="contenido-producto">
-                                <h3>JABÓN 1</h3>
+                                <h3>JABÓN AVENA Y MIEL</h3>
                                 <p>Clásico de avena y miel, suaviza y calma.</p>
                                 <p class="peso-producto">Peso: 100g</p>
                                 <div class="iconos-compra">
                                     <div class="comprar" 
-                                        data-nombre="JABÓN 1" 
+                                        data-nombre="JABÓN AVENA Y MIEL" 
                                         data-peso="100g" 
                                         data-precio="15.00"
                                         data-imagen="IMAGENES/margaritas.png"
@@ -326,27 +313,27 @@
                     <div class="box-producto">
                         <div class="producto-item">
                             <div class="boton-favorito" 
-                                data-nombre="JABÓN 2" 
+                                data-nombre="JABÓN ARCILLA VERDE" 
                                 data-peso="120g" 
                                 data-precio="18.00"
                                 data-imagen="IMAGENES/margaritas.png"
                                 data-descripcion="Jabón de arcilla verde purificante||Limpia profundamente sin resecar||Regula la grasa natural de la piel"
                                 data-colores="Verde,Grisáceo"
                                 data-aromas="Hierbas,Limón">
-                                <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                 </svg>
                             </div>
                             <div class="imagen-producto">
-                                <img src="IMAGENES/margaritas.png" alt="Margaritas">
+                                <img src="IMAGENES/margaritas.png" alt="Jabón Arcilla Verde">
                             </div>
                             <div class="contenido-producto">
-                                <h3>JABÓN 2</h3>
+                                <h3>JABÓN ARCILLA VERDE</h3>
                                 <p>Arcilla verde purificante, limpieza profunda.</p>
                                 <p class="peso-producto">Peso: 120g</p>
                                 <div class="iconos-compra">
                                     <div class="comprar" 
-                                        data-nombre="JABÓN 2" 
+                                        data-nombre="JABÓN ARCILLA VERDE" 
                                         data-peso="120g" 
                                         data-precio="18.00"
                                         data-imagen="IMAGENES/margaritas.png"
@@ -360,32 +347,26 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
-            <!-- ✅ VISTA DE BÚSQUEDA (SE MUESTRA AL BUSCAR) -->
             <div id="vista-busqueda" style="display: none;">
                 <div id="resultados-busqueda" class="box-container-general"></div>
             </div>
-
         </div>
     </main>
 
     <section class="info" id="info">
         <div class="info-container">
             <div class="info-img">
-                <img src="IMAGENES/girasol-transparente.png" alt="">
+                <img src="IMAGENES/girasol-transparente.png" alt="Floré">
             </div>
             <div class="info-txt">
                 <p>Cada vela, una historia. Cada regalo, un recuerdo</p>
                 <h2>¿Quiénes somos?</h2>
                 <div class="info-sec">
                     <div class="info-txt2">
-                        <p>Somos una tienda digital, apasionada por crear belleza y
-                            bienestar a través de nuestras velas artesanales y arreglos florales.
-                            Creemos en el poder de lo hecho a mano para transformar espacios y
-                            momentos, ofreciendo productos únicos que combinan arte, naturaleza y fragancia. </p>
+                        <p>Somos una tienda digital, apasionada por crear belleza y bienestar a través de nuestras velas artesanales y arreglos florales. Creemos en el poder de lo hecho a mano para transformar espacios y momentos, ofreciendo productos únicos que combinan arte, naturaleza y fragancia.</p>
                         <p>Nuestro objetivo es llevar un pedacito de calidez y alegría a cada hogar.</p>
                     </div>
                 </div>
@@ -393,13 +374,12 @@
         </div>
     </section>
 
-
     <footer class="footer-container">
-        <img class="logo-2" src="IMAGENES/FloréLOGO.png" alt="">
+        <img class="logo-2" src="IMAGENES/FloréLOGO.png" alt="Logo Floré">
         <div class="links">
             <h4>Enlaces</h4>
             <ul>
-                <li><a href="#">Inicio</a></li>
+                <li><a href="index.html">Inicio</a></li>
                 <li><a href="#productos-contenido">Productos</a></li>
                 <li><a href="#info">Nosotros</a></li>
             </ul>
@@ -407,22 +387,25 @@
         <div class="links">
             <h4>Redes Sociales</h4>
             <div class="sociales">
-                <a href="https://www.facebook.com/profile.php?id=61588585256446"><div class="social"><img src="IMAGENES/facebook-cafe.svg" alt=""></div></a>
-                <a href="https://www.instagram.com/flore_arregloseternos/"><div class="social"><img src="IMAGENES/instagram-cafe.svg" alt=""></div></a>
-                <a href="#"><div class="social"><img src="IMAGENES/whatsapp-cafe.svg" alt=""></div></a>
+                <a href="https://www.facebook.com/profile.php?id=61588585256446" target="_blank" rel="noopener">
+                    <div class="social"><img src="IMAGENES/facebook-cafe.svg" alt="Facebook"></div>
+                </a>
+                <a href="https://www.instagram.com/flore_arregloseternos/" target="_blank" rel="noopener">
+                    <div class="social"><img src="IMAGENES/instagram-cafe.svg" alt="Instagram"></div>
+                </a>
+                <a href="#" target="_blank" rel="noopener">
+                    <div class="social"><img src="IMAGENES/whatsapp-cafe.svg" alt="WhatsApp"></div>
+                </a>
             </div>
         </div>
     </footer>
     <div class="derechos">
-            <p>© 2026 Floré - Todos los derechos reservados</p>
-        </div>
+        <p>© 2026 Floré - Todos los derechos reservados</p>
+    </div>
 
     <script src="Scrip.js"></script>
-
     <script>
   document.addEventListener('DOMContentLoaded', function () {
-
-    // 🧩 ELEMENTOS GENERALES
     const inputBuscar = document.getElementById('texto-busqueda');
     const titulo = document.getElementById('titulo-productos');
     const vistaOriginal = document.getElementById('vista-original');
@@ -436,25 +419,21 @@
     const contadorCarrito = document.getElementById('contador-carrito');
     let productosEnCarrito = JSON.parse(localStorage.getItem('carritoProductos')) || [];
 
-    // 📄 LISTA DE TODAS LAS PÁGINAS A BUSCAR
     const misPaginasConProductos = [
         "FLORÉ.html", "velas.html", "ramos.html", "jabones.html"
     ];
 
-    // 🔧 QUITAR ACENTOS PARA BÚSQUEDA PERFECTA
     function quitarAcentos(texto) {
         if (!texto) return "";
         return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     }
 
-    // 🛒 ACTUALIZAR CONTADOR CARRITO
     function actualizarContadorCarrito() {
         let total = productosEnCarrito.reduce((suma, item) => suma + (Number(item.cantidad) || 0), 0);
         if(contadorCarrito) contadorCarrito.textContent = total;
     }
     actualizarContadorCarrito();
 
-    // 📥 CARGAR TODOS LOS PRODUCTOS - ✅ AHORA LEE Y GUARDA TODO CORRECTAMENTE
     async function cargarTodosLosProductos() {
         if(baseDeDatosGlobal.length > 0) return;
         try {
@@ -470,16 +449,11 @@
                     const productosDeEstaPagina = documento.querySelectorAll('.box-producto');
                     productosDeEstaPagina.forEach(prod => {
                         const nombre = prod.querySelector('h3')?.textContent.trim() || "";
-                        
-                        // ✅ DESCRIPCIÓN CORTA: Para verla en la lista
                         const parrafoCorto = prod.querySelector('.contenido-producto > p:first-of-type');
                         const descripcionCorta = parrafoCorto ? parrafoCorto.textContent.trim() : "Sin descripción";
-
-                        // ✅ DESCRIPCIÓN LARGA + DATOS COMPLETOS: Los extraemos del botón
                         const botonDatos = prod.querySelector('.comprar');
                         if (!botonDatos) return;
 
-                        // ✅ LEEMOS CADA DATO ASEGURANDO QUE NO SEA UNDEFINED
                         const descripcionLarga = botonDatos.dataset.descripcion?.trim() || descripcionCorta;
                         const peso = botonDatos.dataset.peso?.trim() || "No especificado";
                         const colores = botonDatos.dataset.colores?.trim() || "";
@@ -509,14 +483,12 @@
         }
     }
 
-    // ✅ FUNCIÓN PRINCIPAL DE BÚSQUEDA
     async function buscarEnTiempoReal() {
         if(!inputBuscar || cargando) return;
         cargando = true;
 
         const textoBuscar = quitarAcentos(inputBuscar.value.trim());
 
-        // ✅ VOLVER A VISTA ORIGINAL AL BORRAR
         if (textoBuscar === "") {
             if(resultadosActivos) {
                 vistaBusqueda.style.display = "none";
@@ -528,7 +500,6 @@
             return;
         }
 
-        // ✅ CAMBIAR A MODO BÚSQUEDA
         resultadosActivos = true;
         vistaOriginal.style.display = "none";
         vistaBusqueda.style.display = "block";
@@ -536,7 +507,6 @@
 
         await cargarTodosLosProductos();
 
-        // ✅ FILTRAR
         const resultados = baseDeDatosGlobal.filter(producto => 
             quitarAcentos(producto.nombre).includes(textoBuscar) ||
             quitarAcentos(producto.descripcion_corta).includes(textoBuscar)
@@ -547,12 +517,11 @@
             : `NINGÚN PRODUCTO COINCIDE`;
 
         if(resultados.length === 0) {
-            contenedorResultados.innerHTML = `<p class="texto-vacio">❌ No se encontraron productos con: "${inputBuscar.value}"</p>`;
+            contenedorResultados.innerHTML = `<p class="texto-vacio" style="text-align:center; padding:40px; color:#5f2c19; font-size:17px;">❌ No se encontraron productos con: "${inputBuscar.value}"</p>`;
             cargando = false;
             return;
         }
 
-        // ✅ DIBUJAR RESULTADOS CON TODOS LOS DATOS
         resultados.forEach(prod => {
             const esFavorito = listaFavoritos.some(fav => fav.nombre === prod.nombre);
             const tarjeta = document.createElement('div');
@@ -596,14 +565,11 @@
             contenedorResultados.appendChild(tarjeta);
         });
 
-        // ✅ ACTIVAR EVENTOS
         activarEventosGlobales();
         cargando = false;
     }
 
-    // ⚙️ EVENTOS GLOBALES - ✅ CORREGIDO: ENVÍA TODO CODIFICADO
     function activarEventosGlobales() {
-        // Corazones favoritos
         document.querySelectorAll('.boton-favorito').forEach(corazon => {
             corazon.addEventListener('click', function() {
                 const datos = {
@@ -627,10 +593,8 @@
             });
         });
 
-        // ✅ BOTÓN COMPRAR: AHORA ENVÍA LA URL PERFECTA Y COMPLETA
         document.querySelectorAll('.comprar').forEach(btn => {
             btn.addEventListener('click', function() {
-                // 1. Extraemos y ASEGURAMOS que todos los datos existan
                 const datos = {
                     nombre: this.dataset.nombre || "Sin nombre",
                     precio: this.dataset.precio || "0.00",
@@ -641,7 +605,6 @@
                     aromas: this.dataset.aromas || ""
                 };
 
-                // 2. CODIFICAMOS TODO para que no se rompa nada con espacios ni tildes
                 const url = `producto.html?nombre=${encodeURIComponent(datos.nombre)}` +
                             `&precio=${encodeURIComponent(datos.precio)}` +
                             `&peso=${encodeURIComponent(datos.peso)}` +
@@ -650,13 +613,11 @@
                             `&colores=${encodeURIComponent(datos.colores)}` +
                             `&aromas=${encodeURIComponent(datos.aromas)}`;
 
-                // 3. Vamos a la vista previa
                 window.location.href = url;
             });
         });
     }
 
-    // 🚀 INICIAR
     if(inputBuscar) {
         inputBuscar.addEventListener('input', buscarEnTiempoReal);
     }

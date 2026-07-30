@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +11,8 @@
     <header>
         <div class="menu container">
             <a href="index.html">
-                <img src="IMAGENES/FloréLOGO.png" class="logo" alt="">
+                <img src="IMAGENES/FloréLOGO.png" class="logo" alt="FLORÉ">
             </a>
-
 
             <nav class="navbar">
                 <ul>
@@ -22,16 +20,12 @@
                     <li><a href="jabones.html">Jabones</a></li>
                     <li><a href="favoritos.html">Mis Favoritos</a></li>
 
-                    <!-- ✅ BARRA DE BÚSQUEDA CON DISEÑO IGUAL AL RESTO -->
                     <div class="barra-busqueda">
                         <input type="text" id="texto-busqueda" placeholder="Buscar artículos...">
                         <button type="button">
                             <img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda">
                         </button>
-                        
                     </div>
-
-                 
 
                     <li class="carrito-item">
                         <a href="carrito.html" class="enlace-carrito">
@@ -42,58 +36,43 @@
 
                     <li class="perfil-item">
                         <a href="perfil.html" class="enlace-perfil">
-                            <img src="IMAGENES/usuario.png" alt="Carrito" class="icon-perfil">
+                            <img src="IMAGENES/usuario.png" alt="Perfil" class="icon-perfil">
                         </a>
                     </li>
-
-
                 </ul>
             </nav>
         </div>
 
-        <DIV class="header-content container">
+        <div class="header-content container">
             <div class="header-txt">
                 <h1>Bienvenidos a Floré</h1>
-                <P>
-                    Aquí encontrarás velas artesanales y arreglos florales únicos,
-                    creados con amor para llenar tu hogar de luz, aroma y belleza.
-                    Explora nuestra colección y déjate inspirar.
-                </P>
+                <p>Aquí encontrarás velas artesanales y arreglos florales únicos, creados con amor para llenar tu hogar de luz, aroma y belleza.</p>
                 <p>¡Estamos aquí para ayudarte a crear momentos mágicos!</p>
                 <div class="botones">
                     <a href="#productos-contenido" class="btn-1">Productos <img class="icon" src="IMAGENES/car.svg" alt=""></a>
                     <a href="#info" class="btn-2">Información <img class="icon" src="IMAGENES/arrow.svg" alt=""></a>
                 </div>
             </div>
-            <div class="header-img"></div>
-            <img src="IMAGENES/velajesus.png" class="velas" alt="">
-        </DIV>
+            <div class="header-img">
+                <img src="IMAGENES/velajesus.png" class="velas" alt="Vela Jesús">
+            </div>
+        </div>
     </header>
-
 
     <main class="producto-menu" id="productos-contenido">
         <div class="container">
-
             <div class="prod-header">
-                <!-- ✅ TÍTULO QUE CAMBIA SOLO -->
                 <h2 id="titulo-productos">PRODUCTOS DESTACADOS</h2>
             </div>
 
-            <!-- Secciones de anclaje -->
             <section id="velas"></section>
             <section id="ramos"></section>
             <section id="jabones"></section>
 
-
-            <!-- ✅ VISTA ORIGINAL -->
             <div class="contenedor-productos-todos" id="vista-original">
                 <div class="box-container-general" id="todos-los-productos">
 
-                    <!-- ============================================== -->
-                    <!-- ✅ TODOS LOS PRODUCTOS CORREGIDOS -->
-                    <!-- ============================================== -->
-
-                    <!-- PRODUCTO: GIRASOL -->
+                    <!-- GIRASOL -->
                     <div class="box-producto">
                         <div class="producto-item">
                             <div class="boton-favorito" 
@@ -101,32 +80,27 @@
                                 data-peso="30g" 
                                 data-precio="25.00" 
                                 data-imagen="IMAGENES/Girasol.jpg"
-                                data-descripcion="Este hermoso girasol hecha con cera de soja. Hecho totalmente a mano con mucho detalle y dedicacion"
+                                data-descripcion="Este hermoso girasol hecho con cera de soja. Hecho totalmente a mano con mucho detalle y dedicación"
                                 data-colores="Amarillo,Naranja"
                                 data-aromas="Vainilla,Frutos Rojos">
                                 <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                                 </svg>
                             </div>
-
                             <div class="imagen-producto">
                                 <img src="IMAGENES/Girasol.jpg" alt="GIRASOL">
                             </div>
-
                             <div class="contenido-producto">
                                 <h3>Girasol</h3>
-                                <!-- ✅ AHORA MUESTRA LA DESCRIPCIÓN CORRECTA -->
-                                <p>"Este hermoso girasol hecha con cera de soja."</p>
+                                <p>Este hermoso girasol hecho con cera de soja.</p>
                                 <p class="peso-producto">Peso: 30g</p>
-
                                 <div class="iconos-compra">
-                                    <!-- ✅ BOTÓN CON TODOS LOS DATOS COMPLETOS -->
                                     <div class="comprar" 
                                         data-nombre="GIRASOL" 
                                         data-peso="30g" 
                                         data-precio="25.00" 
                                         data-imagen="IMAGENES/Girasol.jpg"
-                                        data-descripcion="Este hermoso girasol hecha con cera de soja.||Es el regalo perfecto para decorar cualquier espacio especial. Hecho totalmente a mano con mucho detalle y dedicacion"
+                                        data-descripcion="Este hermoso girasol hecho con cera de soja.||Es el regalo perfecto para decorar cualquier espacio especial. Hecho totalmente a mano con mucho detalle y dedicación"
                                         data-colores="Amarillo,Naranja"
                                         data-aromas="Vainilla,Frutos Rojos">
                                         <span>COMPRAR</span>
@@ -137,11 +111,11 @@
                         </div>
                     </div>
 
-                    <!-- PRODUCTO: VELA CAFE -->
+                    <!-- VELA CAFÉ -->
                     <div class="box-producto">
                         <div class="producto-item">
                             <div class="boton-favorito" 
-                                data-nombre="VELA CAFE" 
+                                data-nombre="VELA CAFÉ" 
                                 data-peso="50ml" 
                                 data-precio="30.00" 
                                 data-imagen="IMAGENES/vela cafe.png"
@@ -156,12 +130,12 @@
                                 <img src="IMAGENES/vela cafe.png" alt="Vela Café">
                             </div>
                             <div class="contenido-producto">
-                                <h3>VELA CAFE</h3>
+                                <h3>VELA CAFÉ</h3>
                                 <p>Vela aromática inspirada en el café recién hecho. Ideal para crear ambientes cálidos.</p>
                                 <p class="peso-producto">Peso: 50ml</p>
                                 <div class="iconos-compra">
                                     <div class="comprar" 
-                                        data-nombre="VELA CAFE" 
+                                        data-nombre="VELA CAFÉ" 
                                         data-peso="50ml" 
                                         data-precio="30.00" 
                                         data-imagen="IMAGENES/vela cafe.png"
@@ -176,7 +150,7 @@
                         </div>
                     </div>
 
-                    <!-- PRODUCTO: VELA JESÚS -->
+                    <!-- VELA JESÚS -->
                     <div class="box-producto">
                         <div class="producto-item">
                             <div class="boton-favorito" 
@@ -215,7 +189,7 @@
                         </div>
                     </div>
 
-                    <!-- PRODUCTO: ARREGLO DE TULIPANES -->
+                    <!-- ARREGLO DE TULIPANES -->
                     <div class="box-producto">
                         <div class="producto-item">
                             <div class="boton-favorito" 
@@ -254,7 +228,7 @@
                         </div>
                     </div>
 
-                    <!-- PRODUCTO: RAMOS 2 -->
+                    <!-- RAMOS 2 -->
                     <div class="box-producto">
                         <div class="producto-item">
                             <div class="boton-favorito" 
@@ -293,7 +267,7 @@
                         </div>
                     </div>
 
-                    <!-- PRODUCTO: JABÓN 1 -->
+                    <!-- JABÓN 1 -->
                     <div class="box-producto">
                         <div class="producto-item">
                             <div class="boton-favorito" 
@@ -309,7 +283,7 @@
                                 </svg>
                             </div>
                             <div class="imagen-producto">
-                                <img src="IMAGENES/margaritas.png" alt="Margaritas">
+                                <img src="IMAGENES/margaritas.png" alt="Jabón artesanal">
                             </div>
                             <div class="contenido-producto">
                                 <h3>JABÓN 1</h3>
@@ -332,7 +306,7 @@
                         </div>
                     </div>
 
-                    <!-- PRODUCTO: JABÓN 2 -->
+                    <!-- JABÓN 2 -->
                     <div class="box-producto">
                         <div class="producto-item">
                             <div class="boton-favorito" 
@@ -348,7 +322,7 @@
                                 </svg>
                             </div>
                             <div class="imagen-producto">
-                                <img src="IMAGENES/margaritas.png" alt="Margaritas">
+                                <img src="IMAGENES/margaritas.png" alt="Jabón exfoliante">
                             </div>
                             <div class="contenido-producto">
                                 <h3>JABÓN 2</h3>
@@ -370,32 +344,26 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
-            <!-- ✅ VISTA DE BÚSQUEDA (SE MUESTRA AL BUSCAR) -->
             <div id="vista-busqueda" style="display: none;">
                 <div id="resultados-busqueda" class="box-container-general"></div>
             </div>
-
         </div>
     </main>
 
     <section class="info" id="info">
         <div class="info-container">
             <div class="info-img">
-                <img src="IMAGENES/girasol-transparente.png" alt="">
+                <img src="IMAGENES/girasol-transparente.png" alt="Girasol">
             </div>
             <div class="info-txt">
                 <p>Cada vela, una historia. Cada regalo, un recuerdo</p>
                 <h2>¿Quiénes somos?</h2>
                 <div class="info-sec">
                     <div class="info-txt2">
-                        <p>Somos una tienda digital, apasionada por crear belleza y
-                            bienestar a través de nuestras velas artesanales y arreglos florales.
-                            Creemos en el poder de lo hecho a mano para transformar espacios y
-                            momentos, ofreciendo productos únicos que combinan arte, naturaleza y fragancia. </p>
+                        <p>Somos una tienda digital, apasionada por crear belleza y bienestar a través de nuestras velas artesanales y arreglos florales. Creemos en el poder de lo hecho a mano para transformar espacios y momentos, ofreciendo productos únicos que combinan arte, naturaleza y fragancia.</p>
                         <p>Nuestro objetivo es llevar un pedacito de calidez y alegría a cada hogar.</p>
                     </div>
                 </div>
@@ -403,9 +371,8 @@
         </div>
     </section>
 
-
     <footer class="footer-container">
-        <img class="logo-2" src="IMAGENES/FloréLOGO.png" alt="">
+        <img class="logo-2" src="IMAGENES/FloréLOGO.png" alt="FLORÉ">
         <div class="links">
             <h4>Enlaces</h4>
             <ul>
@@ -417,55 +384,52 @@
         <div class="links">
             <h4>Redes Sociales</h4>
             <div class="sociales">
-                <a href="https://www.facebook.com/profile.php?id=61588585256446"><div class="social"><img src="IMAGENES/facebook-cafe.svg" alt=""></div></a>
-                <a href="https://www.instagram.com/flore_arregloseternos/"><div class="social"><img src="IMAGENES/instagram-cafe.svg" alt=""></div></a>
-                <a href="#"><div class="social"><img src="IMAGENES/whatsapp-cafe.svg" alt=""></div></a>
+                <a href="https://www.facebook.com/profile.php?id=61588585256446" target="_blank" rel="noopener">
+                    <div class="social"><img src="IMAGENES/facebook-cafe.svg" alt="Facebook"></div>
+                </a>
+                <a href="https://www.instagram.com/flore_arregloseternos/" target="_blank" rel="noopener">
+                    <div class="social"><img src="IMAGENES/instagram-cafe.svg" alt="Instagram"></div>
+                </a>
+                <a href="#" target="_blank" rel="noopener">
+                    <div class="social"><img src="IMAGENES/whatsapp-cafe.svg" alt="WhatsApp"></div>
+                </a>
             </div>
         </div>
     </footer>
 
     <div class="derechos">
-            <p>© 2026 Floré - Todos los derechos reservados</p>
-        </div>
+        <p>© 2026 Floré - Todos los derechos reservados</p>
+    </div>
 
     <script src="Scrip.js"></script>
-
-     <script>
-  document.addEventListener('DOMContentLoaded', function () {
-
-    // 🧩 ELEMENTOS GENERALES
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
     const inputBuscar = document.getElementById('texto-busqueda');
     const titulo = document.getElementById('titulo-productos');
     const vistaOriginal = document.getElementById('vista-original');
     const vistaBusqueda = document.getElementById('vista-busqueda');
     const contenedorResultados = document.getElementById('resultados-busqueda');
+    const contadorCarrito = document.getElementById('contador-carrito');
 
     let resultadosActivos = false;
     let baseDeDatosGlobal = [];
     let cargando = false;
     let listaFavoritos = JSON.parse(localStorage.getItem('listaFavoritos')) || [];
-    const contadorCarrito = document.getElementById('contador-carrito');
     let productosEnCarrito = JSON.parse(localStorage.getItem('carritoProductos')) || [];
 
-    // 📄 LISTA DE TODAS LAS PÁGINAS A BUSCAR
-    const misPaginasConProductos = [
-        "FLORÉ.html", "velas.html", "ramos.html", "jabones.html"
-    ];
+    const misPaginasConProductos = ["FLORÉ.html", "velas.html", "ramos.html", "jabones.html"];
 
-    // 🔧 QUITAR ACENTOS PARA BÚSQUEDA PERFECTA
     function quitarAcentos(texto) {
         if (!texto) return "";
         return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     }
 
-    // 🛒 ACTUALIZAR CONTADOR CARRITO
     function actualizarContadorCarrito() {
         let total = productosEnCarrito.reduce((suma, item) => suma + (Number(item.cantidad) || 0), 0);
         if(contadorCarrito) contadorCarrito.textContent = total;
     }
     actualizarContadorCarrito();
 
-    // 📥 CARGAR TODOS LOS PRODUCTOS - ✅ AHORA LEE Y GUARDA TODO CORRECTAMENTE
     async function cargarTodosLosProductos() {
         if(baseDeDatosGlobal.length > 0) return;
         try {
@@ -481,16 +445,11 @@
                     const productosDeEstaPagina = documento.querySelectorAll('.box-producto');
                     productosDeEstaPagina.forEach(prod => {
                         const nombre = prod.querySelector('h3')?.textContent.trim() || "";
-                        
-                        // ✅ DESCRIPCIÓN CORTA: Para verla en la lista
                         const parrafoCorto = prod.querySelector('.contenido-producto > p:first-of-type');
                         const descripcionCorta = parrafoCorto ? parrafoCorto.textContent.trim() : "Sin descripción";
-
-                        // ✅ DESCRIPCIÓN LARGA + DATOS COMPLETOS: Los extraemos del botón
                         const botonDatos = prod.querySelector('.comprar');
                         if (!botonDatos) return;
 
-                        // ✅ LEEMOS CADA DATO ASEGURANDO QUE NO SEA UNDEFINED
                         const descripcionLarga = botonDatos.dataset.descripcion?.trim() || descripcionCorta;
                         const peso = botonDatos.dataset.peso?.trim() || "No especificado";
                         const colores = botonDatos.dataset.colores?.trim() || "";
@@ -500,14 +459,8 @@
 
                         if (nombre && imagen) {
                             baseDeDatosGlobal.push({
-                                nombre: nombre,
-                                descripcion_corta: descripcionCorta,
-                                descripcion_larga: descripcionLarga,
-                                imagen: imagen,
-                                precio: precio,
-                                peso: peso,
-                                colores: colores,
-                                aromas: aromas
+                                nombre, descripcion_corta: descripcionCorta, descripcion_larga: descripcionLarga,
+                                imagen, precio, peso, colores, aromas
                             });
                         }
                     });
@@ -516,38 +469,32 @@
                 }
             }
         } catch (error) {
-            console.error("❌ Error al cargar catálogo:", error);
+            console.error("Error al cargar catálogo:", error);
         }
     }
 
-    // ✅ FUNCIÓN PRINCIPAL DE BÚSQUEDA
     async function buscarEnTiempoReal() {
         if(!inputBuscar || cargando) return;
         cargando = true;
-
         const textoBuscar = quitarAcentos(inputBuscar.value.trim());
 
-        // ✅ VOLVER A VISTA ORIGINAL AL BORRAR
         if (textoBuscar === "") {
             if(resultadosActivos) {
                 vistaBusqueda.style.display = "none";
                 vistaOriginal.style.display = "block";
-                titulo.textContent = "VELAS AROMÁTICAS";
+                titulo.textContent = "PRODUCTOS DESTACADOS";
                 resultadosActivos = false;
             }
             cargando = false;
             return;
         }
 
-        // ✅ CAMBIAR A MODO BÚSQUEDA
         resultadosActivos = true;
         vistaOriginal.style.display = "none";
         vistaBusqueda.style.display = "block";
         contenedorResultados.innerHTML = "";
-
         await cargarTodosLosProductos();
 
-        // ✅ FILTRAR
         const resultados = baseDeDatosGlobal.filter(producto => 
             quitarAcentos(producto.nombre).includes(textoBuscar) ||
             quitarAcentos(producto.descripcion_corta).includes(textoBuscar)
@@ -563,7 +510,6 @@
             return;
         }
 
-        // ✅ DIBUJAR RESULTADOS CON TODOS LOS DATOS
         resultados.forEach(prod => {
             const esFavorito = listaFavoritos.some(fav => fav.nombre === prod.nombre);
             const tarjeta = document.createElement('div');
@@ -571,33 +517,25 @@
             tarjeta.innerHTML = `
                 <div class="producto-item">
                     <div class="boton-favorito ${esFavorito ? 'activo' : ''}"
-                        data-nombre="${prod.nombre}"
-                        data-peso="${prod.peso}"
-                        data-precio="${prod.precio}"
-                        data-imagen="${prod.imagen}"
+                        data-nombre="${prod.nombre}" data-peso="${prod.peso}"
+                        data-precio="${prod.precio}" data-imagen="${prod.imagen}"
                         data-descripcion="${prod.descripcion_larga}"
-                        data-colores="${prod.colores}"
-                        data-aromas="${prod.aromas}">
+                        data-colores="${prod.colores}" data-aromas="${prod.aromas}">
                         <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                         </svg>
                     </div>
-                    <div class="imagen-producto">
-                        <img src="${prod.imagen}" alt="${prod.nombre}">
-                    </div>
+                    <div class="imagen-producto"><img src="${prod.imagen}" alt="${prod.nombre}"></div>
                     <div class="contenido-producto">
                         <h3>${prod.nombre}</h3>
                         <p>${prod.descripcion_corta}</p>
                         <p class="peso-producto">Peso: ${prod.peso || 'Sin peso'}</p>
                         <div class="iconos-compra">
                             <div class="comprar" 
-                                data-nombre="${prod.nombre}" 
-                                data-precio="${prod.precio}" 
-                                data-peso="${prod.peso}"
-                                data-imagen="${prod.imagen}"
+                                data-nombre="${prod.nombre}" data-precio="${prod.precio}"
+                                data-peso="${prod.peso}" data-imagen="${prod.imagen}"
                                 data-descripcion="${prod.descripcion_larga}"
-                                data-colores="${prod.colores}"
-                                data-aromas="${prod.aromas}">
+                                data-colores="${prod.colores}" data-aromas="${prod.aromas}">
                                 <span>COMPRAR</span>
                                 <img src="IMAGENES/flecha arriba.png" alt="flecha-arriba">
                             </div>
@@ -607,52 +545,36 @@
             contenedorResultados.appendChild(tarjeta);
         });
 
-        // ✅ ACTIVAR EVENTOS
         activarEventosGlobales();
         cargando = false;
     }
 
-    // ⚙️ EVENTOS GLOBALES - ✅ CORREGIDO: ENVÍA TODO CODIFICADO
     function activarEventosGlobales() {
-        // Corazones favoritos
         document.querySelectorAll('.boton-favorito').forEach(corazon => {
             corazon.addEventListener('click', function() {
                 const datos = {
-                    nombre: this.dataset.nombre || "",
-                    imagen: this.dataset.imagen || "",
-                    peso: this.dataset.peso || "",
-                    precio: this.dataset.precio || "",
-                    descripcion: this.dataset.descripcion || "",
-                    colores: this.dataset.colores || "",
+                    nombre: this.dataset.nombre || "", imagen: this.dataset.imagen || "",
+                    peso: this.dataset.peso || "", precio: this.dataset.precio || "",
+                    descripcion: this.dataset.descripcion || "", colores: this.dataset.colores || "",
                     aromas: this.dataset.aromas || ""
                 };
                 const existe = listaFavoritos.some(f => f.nombre === datos.nombre);
-                if(existe) {
-                    listaFavoritos = listaFavoritos.filter(f => f.nombre !== datos.nombre);
-                    this.classList.remove('activo');
-                } else {
-                    listaFavoritos.push(datos);
-                    this.classList.add('activo');
-                }
+                existe 
+                    ? listaFavoritos = listaFavoritos.filter(f => f.nombre !== datos.nombre)
+                    : listaFavoritos.push(datos);
+                this.classList.toggle('activo', !existe);
                 localStorage.setItem('listaFavoritos', JSON.stringify(listaFavoritos));
             });
         });
 
-        // ✅ BOTÓN COMPRAR: AHORA ENVÍA LA URL PERFECTA Y COMPLETA
         document.querySelectorAll('.comprar').forEach(btn => {
             btn.addEventListener('click', function() {
-                // 1. Extraemos y ASEGURAMOS que todos los datos existan
                 const datos = {
-                    nombre: this.dataset.nombre || "Sin nombre",
-                    precio: this.dataset.precio || "0.00",
-                    peso: this.dataset.peso || "No especificado",
-                    imagen: this.dataset.imagen || "",
+                    nombre: this.dataset.nombre || "Sin nombre", precio: this.dataset.precio || "0.00",
+                    peso: this.dataset.peso || "No especificado", imagen: this.dataset.imagen || "",
                     descripcion: this.dataset.descripcion || "Sin descripción",
-                    colores: this.dataset.colores || "",
-                    aromas: this.dataset.aromas || ""
+                    colores: this.dataset.colores || "", aromas: this.dataset.aromas || ""
                 };
-
-                // 2. CODIFICAMOS TODO para que no se rompa nada con espacios ni tildes
                 const url = `producto.html?nombre=${encodeURIComponent(datos.nombre)}` +
                             `&precio=${encodeURIComponent(datos.precio)}` +
                             `&peso=${encodeURIComponent(datos.peso)}` +
@@ -660,21 +582,14 @@
                             `&descripcion=${encodeURIComponent(datos.descripcion)}` +
                             `&colores=${encodeURIComponent(datos.colores)}` +
                             `&aromas=${encodeURIComponent(datos.aromas)}`;
-
-                // 3. Vamos a la vista previa
                 window.location.href = url;
             });
         });
     }
 
-    // 🚀 INICIAR
-    if(inputBuscar) {
-        inputBuscar.addEventListener('input', buscarEnTiempoReal);
-    }
-
+    if(inputBuscar) inputBuscar.addEventListener('input', buscarEnTiempoReal);
     activarEventosGlobales();
-
 });
-</script>
+    </script>
 </body>
 </html>

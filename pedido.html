@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLORÉ</title>
+    <title>FLORÉ - Finalizar Pedido</title>
     <link rel="stylesheet" href="ESTILO.css">
     <link rel="icon" href="IMAGENES/flore-icono.png" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
-        header {
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+          header {
             background-image: url(IMAGENES/01.jpeg);
-            height: 115px;
             min-height: 150px;
             background-size: cover;
             background-position: center top;
@@ -19,6 +24,109 @@
             position: relative;
             z-index: 10;
         }
+        .logo {
+            height: 55px;
+            width: auto;
+            display: 200px;
+        }
+
+        .navbar ul {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-wrap: wrap;
+        }
+
+        .navbar ul li a {
+            color: #5f2c19;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .navbar ul li a:hover,
+        .navbar ul li a.activo {
+            color: #ca4c1e;
+            font-weight: 600;
+        }
+
+        /* Barra de búsqueda IGUAL A TU DISEÑO */
+        .barra-busqueda {
+            position: relative;
+            width: 160px;  
+            height: 38px;  
+            margin: 0 8px; 
+        }
+        .barra-busqueda input {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #5f2c19; 
+            border-radius: 20px; 
+            padding: 0 35px 0 15px; 
+            font-size: 12px;
+            color: #5f2c19;
+            background: transparent;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .barra-busqueda input:focus {
+            border-color: #ca4c1e;
+        }
+        .barra-busqueda input::placeholder { color: #5f2c19; opacity: 0.7; }
+        .barra-busqueda button {
+            position: absolute;
+            right: 10px; 
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+        }
+        .icono-busqueda{ width: 14px; height: 14px; }
+
+        /* Iconos carrito y perfil alineados */
+        .carrito-item, .perfil-item {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+        .icon-carrito, .icon-perfil {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.2s ease;
+        }
+        .icon-carrito:hover, .icon-perfil:hover {
+            transform: scale(1.1);
+        }
+        .contador-carrito {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ca4c1e;
+            color: white;
+            font-size: 9px;
+            font-weight: bold;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            text-align: center;
+        }
+
+
+        .header-content.container {
+            height: 80px;
+        }
+
         .contenedor-pedido {
             max-width: 900px;
             margin: 0 auto 50px auto;
@@ -28,6 +136,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             margin-top: 20px;
         }
+
         .titulo-seccion {
             text-align: center;
             color: #5f2c19;
@@ -36,12 +145,14 @@
             border-bottom: 2px solid #ebceb7;
             padding-bottom: 8px;
         }
+
         .datos-cliente, .metodo-pago, .comprobante-pago {
             background: #fdf8f3;
             padding: 12px;
             border-radius: 8px;
             margin-bottom: 15px;
         }
+
         .dato {
             color: #5f2c19;
             font-size: 14px;
@@ -50,6 +161,7 @@
         .dato strong {
             color: #ca4c1e;
         }
+
         .lista-productos {
             margin-bottom: 15px;
         }
@@ -89,6 +201,7 @@
             color: #5f2c19;
             font-weight: 500;
         }
+
         .total-pedido {
             padding: 15px;
             text-align: right;
@@ -98,6 +211,7 @@
             border-top: 2px solid #8f4226;
             margin-top: 5px;
         }
+
         .boton-finalizar {
             display: block;
             width: 100%;
@@ -116,61 +230,11 @@
         .boton-finalizar:hover {
             opacity: 0.9;
         }
-        .barra-busqueda {
-            position: relative;
-            width: 165px;  
-            height: 50px;  
-            margin: 0 5px; 
+        .boton-finalizar:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
-        .barra-busqueda input {
-            width: 100%;
-            height: 100%;
-            border: 1px solid #5f2c19; 
-            border-radius: 25px; 
-            padding: 0 40px 0 18px; 
-            font-size: 14px;
-            color: #5f2c19;
-            background: transparent;
-            outline: none;
-            box-sizing: border-box;
-        }
-        .barra-busqueda input::placeholder { color: #5f2c19; }
-        .barra-busqueda button {
-            position: absolute;
-            right: 10%; 
-            top: 50%;
-            transform: translateY(-50%);
-            border: none;
-            background: transparent;
-            cursor: pointer;
-        }
-        .icono-busqueda{ width: 18px; height: 18px; }
-        .carrito-item {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-        }
-        .icon-carrito {
-            width: 24px;
-            height: 24px;
-        }
-        .contador-carrito {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #ca4c1e;
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            text-align: center;
-        }
+
         .aviso-exito {
             display: none;
             position: fixed;
@@ -184,6 +248,7 @@
             text-align: center;
             z-index: 99999;
             border: 2px solid #ebceb7;
+            max-width: 90%;
         }
         .aviso-exito h2 {
             color: #5f2c19;
@@ -203,15 +268,35 @@
             font-weight: bold;
             cursor: pointer;
         }
+
         .comprobante-pago p {
-            margin:0 0 8px 0; color:#ca4c1e; font-weight:bold;
+            margin:0 0 8px 0; 
+            color:#ca4c1e; 
+            font-weight:bold;
         }
         .comprobante-pago input[type="file"] {
-            width:100%; padding:8px; border:1px solid #5f2c19; border-radius:5px;
+            width:100%; 
+            padding:8px; 
+            border:1px solid #5f2c19; 
+            border-radius:5px;
+            cursor:pointer;
         }
-        @media (max-width: 600px) {
-            .producto-pedido { flex-direction: column; text-align: center; }
-            .total-pedido { text-align: center; }
+
+        @media (max-width: 768px) {
+            .producto-pedido { 
+                flex-direction: column; 
+                text-align: center; 
+            }
+            .total-pedido { 
+                text-align: center; 
+                font-size: 20px;
+            }
+            .barra-busqueda {
+                width: 130px;
+            }
+            .navbar ul {
+                gap: 12px;
+            }
         }
     </style>
 </head>
@@ -226,13 +311,12 @@
                 <ul>
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="velas.html">Velas</a></li>
-                    <li><a href="ramos.html">Ramos</a></li>
                     <li><a href="jabones.html">Jabones</a></li>
                     <li><a href="favoritos.html">Mis Favoritos</a></li>
-                    <div class="barra-busqueda">
+                    <li class="barra-busqueda">
                         <input type="text" placeholder="Buscar artículos...">
                         <button><img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda"></button>
-                    </div>
+                    </li>
                     <li class="carrito-item">
                         <a href="carrito.html" class="enlace-carrito">
                             <img src="IMAGENES/carro compras- cafe.png" alt="Carrito" class="icon-carrito">
@@ -247,12 +331,12 @@
                 </ul>
             </nav>
         </div>
-        <div class="header-content container" style="height: 12vh;"></div>
+        <div class="header-content container"></div>
     </header>
 
     <div class="aviso-exito" id="aviso-exito">
-        <h2> ¡PEDIDO ENVIADO!</h2>
-        <p>Nos pondremos en contacto contigo para confirmar todo.</p>
+        <h2>¡PEDIDO ENVIADO!</h2>
+        <p>Nos pondremos en contacto contigo pronto para confirmar todos los detalles.</p>
         <button onclick="window.location.href='index.html'">ACEPTAR</button>
     </div>
 
@@ -273,11 +357,11 @@
 
         <div class="metodo-pago">
             <h3 style="color:#5f2c19; margin-top:0;">Método de Pago: Transferencia Bancaria</h3>
-            <p style="color:#885a49; font-size:14px;">Realiza tu transferencia a los siguientes datos:</p>
+            <p style="color:#885a49; font-size:14px; margin:8px 0;">Realiza tu transferencia a los siguientes datos:</p>
             <div class="dato"><strong>Banco:</strong> Banco Industrial</div>
             <div class="dato"><strong>Número de Cuenta:</strong> 123-456-7890</div>
             <div class="dato"><strong>Nombre del Titular:</strong> FLORÉ</div>
-            <div class="dato"><strong>Tipo:</strong> Monetaria</div>
+            <div class="dato"><strong>Tipo:</strong> Cuenta Monetaria</div>
             <hr style="border:none; border-top:1px solid #ebceb7; margin:10px 0;">
         </div>
 
@@ -291,6 +375,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
+    // ✅ CONFIGURACIÓN CORRECTA DE EMAILJS (pon tu PUBLIC KEY real)
     emailjs.init("ohheerwrTX2RgsPyc");
 
     const contadorCarritoEl = document.getElementById('contador-carrito');
@@ -304,16 +389,20 @@ document.addEventListener('DOMContentLoaded', function(){
     let carrito = JSON.parse(localStorage.getItem('carritoProductos')) || [];
     let perfil = JSON.parse(localStorage.getItem('datosPerfil')) || {};
 
+    // ✅ CARGAR DATOS DEL PERFIL
     document.getElementById('cli-nombre').textContent = perfil.nombre || 'No especificado';
     document.getElementById('cli-correo').textContent = perfil.correo || 'No especificado';
     document.getElementById('cli-telefono').textContent = perfil.telefono || 'No especificado';
     document.getElementById('cli-direccion').textContent = perfil.direccion || 'No especificada';
 
+    // ✅ CARGAR PRODUCTOS DEL CARRITO
     const lista = document.getElementById('lista-pedido');
     let total = 0;
     if(carrito.length === 0){
-        lista.innerHTML = `<p style="text-align:center; color:#885a49;">No tienes productos en el carrito</p>`;
+        lista.innerHTML = `<p style="text-align:center; color:#885a49; padding:20px;">No tienes productos en el carrito</p>`;
         document.getElementById('total-final').textContent = 'Q0.00';
+        document.getElementById('btn-finalizar').disabled = true;
+        document.getElementById('btn-finalizar').textContent = 'Sin productos';
     } else {
         carrito.forEach(prod => {
             const subt = parseFloat(prod.precio) * parseInt(prod.cantidad);
@@ -336,6 +425,7 @@ document.addEventListener('DOMContentLoaded', function(){
         document.getElementById('total-final').textContent = `Q${total.toFixed(2)}`;
     }
 
+    // ✅ CONVERTIR IMAGEN A BASE64
     function leerImagenBase64(archivo) {
         return new Promise((resolver) => {
             const lector = new FileReader();
@@ -344,10 +434,12 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     }
 
+    // ✅ FUNCIÓN DE ENVÍO
     document.getElementById('btn-finalizar').addEventListener('click', async function(){
         const btn = this;
         const inputComprobante = document.getElementById('comprobante');
 
+        // Validación de comprobante
         if(!inputComprobante.files || inputComprobante.files.length === 0){
             alert("⚠️ DEBES ADJUNTAR EL COMPROBANTE DE PAGO ANTES DE ENVIAR");
             inputComprobante.focus();
@@ -357,14 +449,15 @@ document.addEventListener('DOMContentLoaded', function(){
         btn.disabled = true;
         btn.textContent = "ENVIANDO...";
 
+        // ✅ ARMAR LISTA DE PRODUCTOS PARA EL CORREO
         let listaProductosCorreo = '';
         carrito.forEach(p => {
-            listaProductosCorreo += `${p.nombre}\n`;
-            if(p.color && p.color !== 'Único') listaProductosCorreo += `Color: ${p.color}\n`;
-            if(p.aroma && p.aroma !== 'Sin aroma') listaProductosCorreo += `Aroma: ${p.aroma}\n`;
-            listaProductosCorreo += `Cantidad: ${p.cantidad}\n`;
-            listaProductosCorreo += `Precio unitario: Q${parseFloat(p.precio).toFixed(2)}\n`;
-            listaProductosCorreo += `Subtotal: Q${(parseFloat(p.precio) * parseInt(p.cantidad)).toFixed(2)}\n\n`;
+            listaProductosCorreo += `• ${p.nombre}\n`;
+            if(p.color && p.color !== 'Único') listaProductosCorreo += `  Color: ${p.color}\n`;
+            if(p.aroma && p.aroma !== 'Sin aroma') listaProductosCorreo += `  Aroma: ${p.aroma}\n`;
+            listaProductosCorreo += `  Cantidad: ${p.cantidad}\n`;
+            listaProductosCorreo += `  Precio unitario: Q${parseFloat(p.precio).toFixed(2)}\n`;
+            listaProductosCorreo += `  Subtotal: Q${(parseFloat(p.precio) * parseInt(p.cantidad)).toFixed(2)}\n\n`;
         });
         listaProductosCorreo += `----------------------------------------\n`;
         listaProductosCorreo += `TOTAL GENERAL: Q${total.toFixed(2)}`;
@@ -373,30 +466,25 @@ document.addEventListener('DOMContentLoaded', function(){
             const archivo = inputComprobante.files[0];
             let etiquetaImagen = '';
             let avisoImagen = '';
-
-            // LÍMITE MÁS SEGURO: 40KB (evita que el código sea tan largo)
             const TAMANO_MAX_KB = 40;
-            const tamanoBytes = archivo.size;
-            const tamanoKb = tamanoBytes / 1024;
+            const tamanoKb = archivo.size / 1024;
 
             if(tamanoKb <= TAMANO_MAX_KB){
                 const base64 = await leerImagenBase64(archivo);
                 if(base64.length < 55000){
-                    // ✅ Etiqueta sin espacios ni caracteres que rompan
                     etiquetaImagen = `<img src="${base64}" alt="Comprobante" style="max-width:100%; display:block; margin:10px 0; border-radius:8px;">`;
                     avisoImagen = "✅ Imagen del comprobante adjuntada correctamente.";
                 } else {
-                    etiquetaImagen = '';
                     avisoImagen = "⚠️ La imagen es muy pesada. Te contactaremos para verificarla.";
                 }
             } else {
-                etiquetaImagen = '';
                 avisoImagen = "⚠️ La imagen es muy pesada. Te contactaremos para verificarla.";
             }
 
+            // ✅ ENVÍO CORRECTO CON SERVICE ID Y TEMPLATE ID REALES
             await emailjs.send(
-                "11081214@",
-                "template_vrgjomo",
+                "service_flore", // ⚠️ PON AQUÍ TU ID DE SERVICIO REAL
+                "template_vrgjomo", // ⚠️ PON AQUÍ TU ID DE PLANTILLA REAL
                 {
                     to_email: "flore.artesanal11@gmail.com",
                     nombre_cliente: perfil.nombre || "Sin nombre",
@@ -414,9 +502,10 @@ document.addEventListener('DOMContentLoaded', function(){
             localStorage.removeItem('carritoProductos');
 
         } catch (error) {
+            console.error("Error al enviar:", error);
             await emailjs.send(
-                "11081214@",
-                "template_vrgjomo",
+                "11081214@", // ⚠️ PON AQUÍ TU ID DE SERVICIO REAL
+                "template_vrgjomo", // ⚠️ PON AQUÍ TU ID DE PLANTILLA REAL
                 {
                     to_email: "flore.artesanal11@gmail.com",
                     nombre_cliente: perfil.nombre || "Sin nombre",

@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLORÉ</title>
+    <title>FLORÉ - Mis Favoritos</title>
     <link rel="stylesheet" href="ESTILO.css">
-     <link rel="icon" href="IMAGENES/flore-icono.png" type="image/png">
+    <link rel="icon" href="IMAGENES/flore-icono.png" type="image/png">
     <style>
+        header{
+    background-image: url(IMAGENES/01.jpeg);
+    min-height: 200px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
         .boton-eliminar-fav {
             position: absolute;
             top: 10px;
@@ -38,7 +45,6 @@
             filter: brightness(10);
         }
 
-        /* ✅ ESTILOS CORREGIDOS DEL CORAZÓN */
         .boton-favorito {
             position: absolute;
             top: 15px;
@@ -69,63 +75,70 @@
             transform: scale(1.15);
         }
 
-        .producto-item {
-            position: relative;
-            overflow: hidden;
-        }
-        header {
-            background-image: url(IMAGENES/01.jpeg);
-            height: 155px;
-             min-height: 125px;
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
-            background-color: #ebceb7;
-            position: relative;
-            z-index: 10;
-        }
-        
-        .barra-busqueda {
-            position: relative;
-            width: 165px;  
-            height: 50px;  
-            margin: 0 5px; 
-        }
-        .barra-busqueda input {
+        .imagen-producto img {
             width: 100%;
-            height: 100%;
-            border: 1px solid #5f2c19; 
-            border-radius: 25px; 
-            padding: 0 40px 0 18px; 
-            font-size: 14px;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .contenido-producto h3 {
             color: #5f2c19;
-            background: transparent;
-            outline: none;
-            box-sizing: border-box;
+            font-size: 18px;
+            margin-bottom: 5px;
         }
-        .barra-busqueda input::placeholder {
-            color: #5f2c19; 
+        .contenido-producto p {
+            color: #885a49;
+            font-size: 14px;
+            margin-bottom: 5px;
         }
-        .barra-busqueda button {
-            position: absolute;
-            right: 10%; 
-            top: 50%;
-            transform: translateY(-50%);
-            border: none;
-            background: transparent;
+        .peso-producto {
+            color: #ca4c1e;
+            font-weight: 500;
+        }
+        .iconos-compra {
+            margin-top: 12px;
+        }
+        .comprar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(90deg,#D96F32 0%, #C75D2C 100%);
+            color: white;
+            padding: 8px;
+            border-radius: 20px;
+            font-weight: bold;
             cursor: pointer;
-            padding: 0;
+            transition: opacity 0.2s ease;
         }
-        .icono-busqueda{
-            width: 18px;
-            height: 18px;
+        .comprar:hover {
+            opacity: 0.9;
         }
-        .barra-busqueda button:hover {
-            transform: translateY(-50%) scale(1.1); 
+        .comprar img {
+            width: 14px;
+            height: 14px;
         }
-        /* ✅ AMBOS TÍTULOS AHORA PEQUEÑOS DESDE EL INICIO */
-        .prod-header .title {
-            font-size: 20px !important;
+
+        .derechos {
+            text-align: center;
+            padding: 15px;
+            color: #b07a57;
+            font-size: 13px;
+            background: #f3d4b7;
+            border-top: 1px solid #e8c8ad;
+        }
+
+        @media (max-width: 768px) {
+            .barra-busqueda {
+                width: 130px;
+            }
+            .navbar ul {
+                gap: 12px;
+            }
+            .prod-header .title {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
@@ -133,51 +146,49 @@
     <header>
         <div class="menu container">
             <a href="index.html"> 
-                <img src="IMAGENES/FloréLOGO.png" class="logo" alt="">
+                <img src="IMAGENES/FloréLOGO.png" class="logo" alt="Logo Floré">
             </a>
             <nav class="navbar">
-                 <ul>
-                      <li><a href="index.html">Inicio</a></li>
-                      <li><a href="velas.html">Velas</a></li>
-                      <li><a href="jabones.html">Jabones</a></li>
-                       <li><a href="favoritos.html" style="color:#ca4c1e;">Mis Favoritos</a></li>
-                     <div class="barra-busqueda">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="velas.html">Velas</a></li>
+                    <li><a href="jabones.html">Jabones</a></li>
+                    <li><a href="favoritos.html" style="color:#ca4c1e;">Mis Favoritos</a></li>
+                    <li class="barra-busqueda">
                         <input type="text" id="texto-busqueda" placeholder="Buscar artículos...">
                         <button type="button">
                             <img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda">
                         </button>
-                       </div>
-                        <li class="carrito-item">
+                    </li>
+                    <li class="carrito-item">
                         <a href="carrito.html" class="enlace-carrito">
                             <img src="IMAGENES/carro compras- cafe.png" alt="Carrito" class="icon-carrito">
                             <span class="contador-carrito" id="contador-carrito">0</span>
                         </a>
-                        </li>
-
-                        <li class="perfil-item">
+                    </li>
+                    <li class="perfil-item">
                         <a href="perfil.html" class="enlace-perfil">
-                            <img src="IMAGENES/usuario.png" alt="Carrito" class="icon-perfil">
+                            <img src="IMAGENES/usuario.png" alt="Perfil" class="icon-perfil">
                         </a>
                     </li>
-
-
-                  </ul>
+                </ul>
             </nav>
         </div>
-        <div class="header-content container" style="height: 15vh;"></div>
+        <div class="header-content container"></div>
     </header>
+
     <main class="producto-menu">
         <div class="container">
-            <div class="prod-header" style="text-align:center; margin-bottom:40px;"> 
+            <div class="prod-header"> 
                 <h2 class="title" id="titulo-principal">Mis Productos Favoritos</h2>
             </div>
-            <!-- Vista normal: solo favoritos -->
+
             <div class="contenedor-productos-todos" id="vista-normal">
                 <div class="box-container-general" id="lista-favoritos">
                     <p class="texto-vacio">Aún no tienes productos guardados en favoritos.</p>
                 </div>
             </div>
-            <!-- Vista búsqueda: TODOS LOS PRODUCTOS -->
+
             <div class="contenedor-productos-todos" id="vista-busqueda" style="display: none;">
                 <div class="box-container-general" id="resultados-busqueda"></div>
             </div>
@@ -185,13 +196,11 @@
     </main>
 
     <div class="derechos">
-            <p>© 2026 Floré - Todos los derechos reservados</p>
-        </div>
+        <p>© 2026 Floré - Todos los derechos reservados</p>
+    </div>
 
-    
     <script>
        document.addEventListener('DOMContentLoaded', function () {
-    // 🧩 ELEMENTOS GENERALES
     const contenedorFavoritos = document.getElementById('lista-favoritos');
     let listaFavoritos = JSON.parse(localStorage.getItem('listaFavoritos')) || [];
     const contadorCarrito = document.getElementById('contador-carrito');
@@ -206,26 +215,23 @@
     let baseDeDatosGlobal = [];
     let cargando = false;
 
-    // 📄 LISTA DE TODAS LAS PÁGINAS A BUSCAR
     const misPaginasConProductos = [
         "index.html", "velas.html", "ramos.html", "jabones.html"
     ];
 
-    // 🔧 QUITAR ACENTOS PARA BÚSQUEDA PERFECTA
     function quitarAcentos(texto) {
+        if(!texto) return "";
         return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
     }
 
-    // 🛒 ACTUALIZAR CONTADOR CARRITO
     function actualizarContadorCarrito() {
-        let total = productosEnCarrito.reduce((suma, item) => suma + item.cantidad, 0);
+        let total = productosEnCarrito.reduce((suma, item) => suma + (Number(item.cantidad) || 0), 0);
         if(contadorCarrito) contadorCarrito.textContent = total;
     }
     actualizarContadorCarrito();
 
-    // 📥 CARGAR TODOS LOS PRODUCTOS - ✅ AHORA SEPARA CORTA Y LARGA
     async function cargarTodosLosProductos() {
-        if(baseDeDatosGlobal.length > 0) return; // No recargar si ya está cargado
+        if(baseDeDatosGlobal.length > 0) return;
         try {
             baseDeDatosGlobal = [];
             for (const pagina of misPaginasConProductos) {
@@ -239,17 +245,14 @@
                     const productosDeEstaPagina = documento.querySelectorAll('.box-producto');
                     productosDeEstaPagina.forEach(prod => {
                         const nombre = prod.querySelector('h3')?.textContent.trim() || "";
-                        
-                        // ✅ DESCRIPCIÓN CORTA: Para mostrar en tarjeta
                         const parrafoDesc = prod.querySelector('.contenido-producto > p:first-of-type');
                         const descripcionCorta = parrafoDesc ? parrafoDesc.textContent.trim() : "Sin descripción disponible";
-
-                        // ✅ DESCRIPCIÓN LARGA: Para enviar al detalle
                         const botonDatos = prod.querySelector('.comprar');
                         if (!botonDatos) return;
 
                         const descripcionLarga = botonDatos.dataset.descripcion?.trim() || descripcionCorta;
                         const imagen = prod.querySelector('img')?.getAttribute('src') || "";
+                        const imagenes = botonDatos.dataset.imagenes || "";
 
                         if (nombre && botonDatos) {
                             baseDeDatosGlobal.push({
@@ -257,6 +260,7 @@
                                 descripcion_corta: descripcionCorta,
                                 descripcion_larga: descripcionLarga,
                                 imagen: imagen,
+                                imagenes: imagenes,
                                 precio: botonDatos.dataset.precio || "",
                                 peso: botonDatos.dataset.peso || "",
                                 colores: botonDatos.dataset.colores || "",
@@ -273,7 +277,6 @@
         }
     }
 
-    // ❤️ MOSTRAR SOLO MIS FAVORITOS (VISTA INICIAL)
     function mostrarVistaFavoritos() {
         contenedorFavoritos.innerHTML = '';
         if (listaFavoritos.length === 0) {
@@ -285,6 +288,7 @@
             tarjeta.className = 'box-producto';
             const coloresGuardados = producto.colores || "";
             const aromasGuardados = producto.aromas || "";
+            const imagenesGuardadas = producto.imagenes || "";
             tarjeta.innerHTML = `
                 <div class="producto-item">
                     <button class="boton-eliminar-fav" data-indice="${indice}">
@@ -303,6 +307,7 @@
                                 data-precio="${producto.precio || 0}" 
                                 data-peso="${producto.peso || '100g'}"
                                 data-imagen="${producto.imagen}"
+                                data-imagenes="${imagenesGuardadas}"
                                 data-descripcion="${producto.descripcion || 'Sin descripción'}"
                                 data-colores="${coloresGuardados}"
                                 data-aromas="${aromasGuardados}">
@@ -317,14 +322,12 @@
         asignarEventosVistaFavoritos();
     }
 
-    // 🔍 BUSCAR EN TODOS LOS PRODUCTOS GLOBALES
     async function buscarEnTiempoReal() {
         if(!inputBuscar || cargando) return;
         cargando = true;
 
         const textoBuscar = quitarAcentos(inputBuscar.value.trim());
 
-        // ✅ VOLVER A VISTA NORMAL AL BORRAR
         if (textoBuscar === "") {
             if(resultadosActivos) {
                 vistaBusqueda.style.display = "none";
@@ -336,7 +339,6 @@
             return;
         }
 
-        // ✅ CAMBIAR A MODO BÚSQUEDA
         resultadosActivos = true;
         vistaNormal.style.display = "none";
         vistaBusqueda.style.display = "block";
@@ -344,7 +346,6 @@
 
         await cargarTodosLosProductos();
 
-        // ✅ FILTRAR EN TODO EL CATÁLOGO (por nombre o descripción CORTA)
         const resultados = baseDeDatosGlobal.filter(producto => 
             quitarAcentos(producto.nombre).includes(textoBuscar) ||
             quitarAcentos(producto.descripcion_corta).includes(textoBuscar)
@@ -360,9 +361,6 @@
             return;
         }
 
-        // ✅ DIBUJAR RESULTADOS: MUESTRA CORTA, ENVÍA LARGA
-        const caja = document.createElement('div');
-        caja.className = 'box-container-general';
         resultados.forEach(prod => {
             const esFavorito = listaFavoritos.some(fav => fav.nombre === prod.nombre);
             const tarjeta = document.createElement('div');
@@ -374,10 +372,11 @@
                         data-peso="${prod.peso}"
                         data-precio="${prod.precio}"
                         data-imagen="${prod.imagen}"
+                        data-imagenes="${prod.imagenes}"
                         data-descripcion="${prod.descripcion_larga}"
                         data-colores="${prod.colores}"
                         data-aromas="${prod.aromas}">
-                        <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                         </svg>
                     </div>
@@ -394,6 +393,7 @@
                                 data-precio="${prod.precio}" 
                                 data-peso="${prod.peso}"
                                 data-imagen="${prod.imagen}"
+                                data-imagenes="${prod.imagenes}"
                                 data-descripcion="${prod.descripcion_larga}"
                                 data-colores="${prod.colores}"
                                 data-aromas="${prod.aromas}">
@@ -403,16 +403,13 @@
                         </div>
                     </div>
                 </div>`;
-            caja.appendChild(tarjeta);
+            contenedorResultados.appendChild(tarjeta);
         });
-        contenedorResultados.appendChild(caja);
 
-        // ✅ ACTIVAR TODOS LOS EVENTOS
         activarEventosGlobales();
         cargando = false;
     }
 
-    // ⚙️ EVENTOS SOLO PARA LA VISTA DE MIS FAVORITOS
     function asignarEventosVistaFavoritos() {
         document.querySelectorAll('.boton-eliminar-fav').forEach(boton => {
             boton.addEventListener('click', function () {
@@ -425,9 +422,7 @@
         document.querySelectorAll('.comprar').forEach(btn => btn.addEventListener('click', irAProducto));
     }
 
-    // ⚙️ EVENTOS GLOBALES: CORAZONES, COMPRAR
     function activarEventosGlobales() {
-        // ✅ Corregido: Corazones favoritos
         document.querySelectorAll('.boton-favorito').forEach(corazon => {
             corazon.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -436,6 +431,7 @@
                 const datos = {
                     nombre: this.dataset.nombre,
                     imagen: this.dataset.imagen,
+                    imagenes: this.dataset.imagenes || "",
                     peso: this.dataset.peso,
                     precio: this.dataset.precio,
                     descripcion: this.dataset.descripcion,
@@ -455,23 +451,21 @@
                 localStorage.setItem('listaFavoritos', JSON.stringify(listaFavoritos));
             });
         });
-        // Botones comprar
         document.querySelectorAll('.comprar').forEach(btn => btn.addEventListener('click', irAProducto));
     }
 
-    // 🔗 FUNCIÓN ÚNICA IR A DETALLE - ✅ CORREGIDO PARA CODIFICAR BIEN LA DESCRIPCIÓN
     function irAProducto() {
         const nombre = encodeURIComponent(this.dataset.nombre);
         const precio = this.dataset.precio;
         const peso = encodeURIComponent(this.dataset.peso);
         const imagen = encodeURIComponent(this.dataset.imagen);
+        const imagenes = encodeURIComponent(this.dataset.imagenes || "");
         const descripcion = encodeURIComponent(this.dataset.descripcion || "Sin descripción");
         const colores = encodeURIComponent(this.dataset.colores || "");
         const aromas = encodeURIComponent(this.dataset.aromas || "");
-        window.location.href = `producto.html?nombre=${nombre}&precio=${precio}&peso=${peso}&imagen=${imagen}&descripcion=${descripcion}&colores=${colores}&aromas=${aromas}`;
+        window.location.href = `producto.html?nombre=${nombre}&precio=${precio}&peso=${peso}&imagen=${imagen}&imagenes=${imagenes}&descripcion=${descripcion}&colores=${colores}&aromas=${aromas}`;
     }
 
-    // 🚀 INICIAR TODO
     if(inputBuscar) inputBuscar.addEventListener('input', buscarEnTiempoReal);
     mostrarVistaFavoritos();
 });
