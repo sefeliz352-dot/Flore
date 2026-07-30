@@ -597,7 +597,7 @@ header{
 @media(max-width: 768px){
 
     .menu{
-        padding: 12px 15px;
+        padding: 10px 15px;
         flex-wrap: wrap; 
         justify-content: center;
         gap: 8px;
@@ -627,15 +627,22 @@ header{
         margin: 5px 8px;
     }
 
+    /* ✅ REDUCIMOS EL ESPACIO GRANDE EN BLANCO */
+    header {
+        min-height: 420px; /* Antes era mucho más alto */
+        background-position: center top;
+    }
+
     .header-content{
         flex-direction: column;
-        padding: 120px 20px 40px 20px;
+        padding: 15px 20px 30px 20px; /* Menos espacio arriba */
     }
 
     .header-txt{
         width: 100%;
         padding: 0;
         text-align: center;
+        margin-top: 10px; /* Un espacio pequeño ordenado */
     }
 
     .header-txt h1{
@@ -652,6 +659,7 @@ header{
         flex-direction: column;
         align-items: center;
         gap: 12px;
+        margin-top: 20px; /* Espacio justo entre texto y botones */
     }
 
     .btn-1, .btn-2{
@@ -663,7 +671,7 @@ header{
     .header-img{
         width: 90%;
         max-width: 320px;
-        margin: 20px auto 0 auto;
+        margin: 15px auto 0 auto;
     }
 
     .producto-menu{
