@@ -638,7 +638,6 @@ header{
         justify-content: center;
         margin-bottom: 10px;
         transform: translateY(15px);
-        font-size: 20px;
     }
 
     .menu .navbar ul {
@@ -677,7 +676,7 @@ header{
     }
 
     .navbar ul li a {
-        font-size: 12px;
+        font-size: 20px;
         padding: 5px 8px;
     }
 
