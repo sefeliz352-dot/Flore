@@ -51,7 +51,7 @@ header{
     height: 55px;
     width: auto;
     display: block;
-    transform: translateY(15px);
+    transform: translateY(5px);
 }
 
 /* Navegación al CENTRO */
@@ -59,7 +59,7 @@ header{
     position: absolute;
     left: 30%;
     transform: translateX(-50%);
-    transform: translateY(15px);
+    transform: translateY(5px);
 }
 
 .menu .navbar ul {
@@ -97,7 +97,7 @@ header{
     display: flex;
     align-items: center;
     gap: 8px;
-      transform: translateY(15px);
+      transform: translateY(5px);
 }
 
 /* ============================================== */
@@ -676,7 +676,7 @@ header{
     }
 
     .navbar ul li a {
-        font-size: 20px;
+        font-size: 12px;
         padding: 5px 8px;
     }
 
@@ -807,7 +807,7 @@ header{
 
 @media(max-width: 576px){
     .menu .navbar ul li a {
-        font-size: 20px;
+        font-size: 13px;
         padding: 5px 6px;
     }
 
