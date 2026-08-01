@@ -3,577 +3,464 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLORÉ - Perfil</title>
+    <title>Producto</title>
     <link rel="stylesheet" href="Estilo.css"> 
-    <link rel="icon" href="IMAGENES/flore-icono.png" type="image/png">
+     <link rel="icon" href="IMAGENES/flore-icono.png" type="image/png">
     <style>
-        * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+        /* ✅ SOLO ARREGLAMOS LA BARRA, EL RESTO SE QUEDA IGUAL */
+        .encabezado {
+            background-image: url(IMAGENES/01.jpeg);
+            min-height: 150px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            z-index: 99999 !important;
+        }
 
-header {
-    background-image: url(IMAGENES/01.jpeg);
-    min-height: 150px;
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-color: #ebceb7;
-    position: relative;
-    z-index: 10;
-}
+        .menu.container, .header-content.container {
+            position: relative;
+            z-index: 99999 !important;
+            background: transparent !important;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-.logo {
-    height: 55px;
-    width: auto;
-    display: block; /* ✅ Corregido: "display: 200px" no existe */
-}
+        .navbar ul {
+            position: relative;
+            z-index: 99999 !important;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            list-style: none;
+            padding: 0 !important;
+            margin: 0 !important;
+            line-height: normal;
+            flex-wrap: nowrap;
+        }
+        .navbar ul li,
+        .navbar ul li a,
+        .barra-busqueda {
+            pointer-events: auto !important;
+            cursor: pointer;
+            position: relative;
+            z-index: 99999 !important;
+            padding: 5px !important;
+            margin: 0 !important;
+            line-height: inherit;
+            white-space: nowrap;
+        }
 
-.navbar ul {
-    display: flex;
-    align-items: center;
-    gap: 12px; /* ✅ Menos espacio entre enlaces */
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    flex-wrap: wrap;
-}
+        .navbar ul li a {
+            display: inline;
+            color: #5f2c19;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .navbar ul li a:hover {
+            color: #ca4c1e;
+            text-shadow: none !important;
+            transform: none !important;
+        }
 
-.navbar ul li a {
-    color: #5f2c19;
-    font-weight: 500;
-    text-decoration: none;
-    transition: color 0.2s ease;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.navbar ul li a:hover,
-.navbar ul li a.activo {
-    color: #ca4c1e;
-    font-weight: 600;
-}
+        .barra-busqueda {
+            position: relative;
+            width: 165px;  
+            height: 50px;  
+            margin: 0 5px; 
+            filter: none !important;
+        }
+        .barra-busqueda input {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #5f2c19; 
+            border-radius: 25px; 
+            padding: 0 40px 0 18px; 
+            font-size: 14px;
+            color: #5f2c19;
+            background: transparent;
+            outline: none;
+            box-sizing: border-box;
+            box-shadow: none !important;
+        }
+        .barra-busqueda input:focus {
+            box-shadow: none !important;
+            border-color: #ca4c1e;
+        }
+        .barra-busqueda input::placeholder { color: #5f2c19; }
+        .barra-busqueda button {
+            position: absolute;
+            right: 10%; 
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+            filter: none !important;
+        }
+        .icono-busqueda{
+            width: 18px;
+            height: 18px;
+            transition: none !important;
+            filter: none !important;
+        }
 
-/* Barra de búsqueda IGUAL A TU DISEÑO */
-.barra-busqueda {
-    position: relative;
-    width: 160px;  
-    height: 38px;  
-    margin: 0 5px; 
-}
-.barra-busqueda input {
-    width: 100%;
-    height: 100%;
-    border: 1px solid #5f2c19; 
-    border-radius: 20px; 
-    padding: 0 35px 0 15px; 
-    font-size: 12px;
-    color: #5f2c19;
-    background: transparent;
-    outline: none;
-    box-sizing: border-box;
-}
-.barra-busqueda input:focus {
-    border-color: #ca4c1e;
-}
-.barra-busqueda input::placeholder { color: #5f2c19; opacity: 0.7; }
-.barra-busqueda button {
+        /* ✅ ESTILOS CORREGIDOS PARA EL CONTADOR DEL CARRITO */
+        .carrito-item {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+        .icon-carrito, .icon-perfil {
+            transition: none !important;
+            filter: none !important;
+            width: 24px;
+            height: 24px;
+        }
+        .icon-carrito:hover, .icon-perfil:hover {
+            filter: none !important;
+            transform: none !important;
+        }
+       .contador-carrito {
     position: absolute;
-    right: 10px; 
-    top: 50%;
-    transform: translateY(-50%);
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    padding: 0;
-}
-.icono-busqueda{ width: 14px; height: 14px; }
-
-/* Iconos carrito y perfil AL LADO DE LA BARRA */
-.carrito-item, .perfil-item {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    margin: 0 3px; /* ✅ Muy juntos */
-}
-.icon-carrito, .icon-perfil {
-    width: 20px;
-    height: 20px;
-    transition: transform 0.2s ease;
-}
-.icon-carrito:hover, .icon-perfil:hover {
-    transform: scale(1.1);
-}
-.contador-carrito {
-    position: absolute;
-    top: -8px;
+    top: -10px;
     right: -8px;
-    background: #ca4c1e;
-    color: white;
-    font-size: 9px;
-    font-weight: bold;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-    text-align: center;
-}
-
-/* ============================================== */
-/* ✅ SECCIÓN PERFIL - MÁS COMPACTA */
-/* ============================================== */
-.prod-header {
-    text-align: center;
-    margin-bottom: 20px;
-    top: 10px;
-}
-.prod-header .title {
-    color: #5f2c19;
-    font-size: 28px;
-    font-family: serif;
-    margin: 0;
-}
-
-.contenedor-perfil {
-    display: flex;
-    gap: 15px; /* ✅ Menos espacio */
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 3px 12px rgba(95, 44, 25, 0.08);
-    padding: 20px 15px; /* ✅ Menos relleno interno */
-    flex-wrap: wrap;
-    max-width: 800px;
-    margin: 15px auto;
-}
-
-.menu-perfil {
-    width: 100%;
-    display: flex;
-    gap: 8px;
-    border-bottom: 1px solid #ebceb7;
-    padding-bottom: 8px;
-}
-.menu-perfil ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 8px;
-    width: 100%;
-}
-.opcion-perfil {
-    flex: 1;
-    padding: 8px 6px; /* ✅ Más pequeño */
-    color: #5f2c19;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-bottom: 2px solid transparent;
-    margin-bottom: 0;
-    border-radius: 5px 5px 0 0;
-    text-align: center;
-    font-size: 13px; /* ✅ Letra más chica */
-}
-.opcion-perfil.activa, .opcion-perfil:hover {
-    background: #fff3ed;
-    border-bottom: 2px solid #ca4c1e;
-    color: #ca4c1e;
-}
-
-.contenido-perfil {
-    width: 100%;
-}
-
-.subtitulo-seccion {
-    color: #5f2c19;
-    font-size: 16px; /* ✅ Más pequeño */
-    margin-bottom: 12px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #ebceb7;
-    font-family: serif;
-}
-
-.formulario-perfil {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* ✅ Menos espacio entre campos */
-}
-
-.grupo-input {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-.grupo-input label {
-    color: #5f2c19;
-    font-weight: 500;
-    font-size: 13px;
-}
-.grupo-input input, .grupo-input textarea {
-    padding: 8px 10px;
-    border: 1px solid #ebceb7;
-    border-radius: 8px;
-    font-size: 13px;
-    color: #5f2c19;
-    background: #fff;
-    width: 100%;
-}
-.grupo-input input:focus, .grupo-input textarea:focus {
-    outline: none;
-    border-color: #ca4c1e;
-    box-shadow: 0 0 0 2px rgba(202, 76, 30, 0.1);
-}
-.grupo-input small {
-    color: #885a49;
-    font-size: 11px;
-}
-
-.boton-principal {
     background: linear-gradient(90deg,#D96F32 0%, #C75D2C 100%);
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 14px;
-    cursor: pointer;
-    transition: opacity 0.2s;
-    margin-top: 5px;
-    width: 100%;
-    max-width: 280px;
-    align-self: center;
-}
-.boton-principal:hover {
-    opacity: 0.9;
-}
-
-.texto-ayuda, .texto-vacio {
-    color: #885a49;
-    font-style: italic;
-    text-align: center;
-    padding: 15px 10px;
-    font-size: 13px;
-}
-
-.datos-guardados {
-    margin-top: 15px;
-    padding: 12px;
-    background: #fdf8f3;
-    border-radius: 8px;
-    border-left: 3px solid #ca4c1e;
-}
-.datos-guardados h3 {
-    color: #5f2c19;
-    margin: 0 0 8px 0;
-    font-size: 15px;
-}
-.entrada-datos {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 6px 0; /* ✅ Más compacto */
-    border-bottom: 1px solid #ebceb7;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-.entrada-datos:last-child {
-    border-bottom: none;
-}
-.dato-registrado {
-    color: #5f2c19;
-    font-size: 14px; /* ✅ Tamaño igual al resto del sitio */
-    flex: 1;
-}
-.dato-registrado strong {
-    color: #ca4c1e;
-}
-.btn-eliminar {
-    background: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 4px 8px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: background 0.2s;
-    flex-shrink: 0;
-}
-.btn-eliminar:hover {
-    background: #c82333;
-}
-
-.item-pedido {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px;
-    border-bottom: 1px solid #ebceb7;
-    flex-wrap: wrap;
-}
-.img-pedido {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    border-radius: 6px;
-    background: #fff;
-    flex-shrink: 0;
-}
-.detalle-pedido {
-    flex: 1;
-    min-width: 180px;
-}
-.detalle-pedido h4 {
-    margin: 0 0 4px 0;
-    color: #5f2c19;
-    font-size: 14px;
-}
-.detalle-pedido p {
-    margin: 2px 0;
-    font-size: 12px;
-    color: #885a49;
-}
-.estado-pedido {
+    color: #ffffff;
     font-size: 12px;
     font-weight: bold;
-    color: #28a745;
-    margin-top: 5px;
-    width: 100%;
-}
-
-/* ============================================== */
-/* ✅ PIE DE PÁGINA UNIFICADO */
-/* ============================================== */
-.info{
-    background: url(IMAGENES/01.jpeg), linear-gradient(rgba(246, 233, 222), rgba(246, 233, 222));
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: auto;
-    padding: 40px 15px;
-    margin-top: 0px;
-}
-
-.info-container{
-    display: flex;
-    position: relative;
-    align-items: center;
-    margin: 0 auto;
-    gap: 30px;
-    max-width: 1200px;
-    width: 90%;
-    padding: 0;
-    flex-wrap: wrap;
-}
-
-.info-txt{
-    width: 100%;
-    max-width: 600px;
-    margin-top: 0px;
-    padding: 0;
-    font-weight: 600;
-    text-align: center;
-}
-
-.info-txt h2{
-    color: #5f2c19;
-    font-size: 32px;
-    margin-bottom: 20px;
-}
-
-.info-txt p{
-    font-size: 16px;
-    color: #5f2c19;
-    margin-bottom: 8px;
-}
-
-.info-sec{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-} 
-
-.info-txt2{
-    font-size: 15px;
-    line-height: 1.6;
-    font-weight: 700;
-}
-
-.info-img {
-    display: none;
-}
-
-.footer-container{
-    padding: 30px 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 20px;
-}
-
-.logo-2{
-    width: 140px;
-    height: auto;
-}
-
-.links h4{
-    color: #5f2c19;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-    text-align: center;
-    font-size: 16px;
-}
-
-.links ul li a{
-    color: #5f2c19;
-    font-size: 15px;
-    margin-bottom: 5px;
-    display: inline-block;
-}
-
-.sociales{
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.social{
-    margin: 0;
-    height: 40px;
-    width: 40px;
-    border:1px solid #C75D2C;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.social:hover{
-    background: linear-gradient(90deg,#ca8c69 0%, #dfb39f 100%);
-}
+        .contenedor-pagina {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            position: relative;
+            z-index: 1 !important;
+        }
 
-.comprar.agregado {
-    animation: agregarACarrito 0.5s ease-out;
-}
+        .prod-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
-.derechos{
-    text-align: center;
-    padding: 20px;
-    font-size: 13px;
-}
+        .prod-header .title {
+            color: #8b4513;
+            font-size: 36px;
+            font-family: 'serif';
+            margin: 0;
+        }
 
-@keyframes agregarACarrito {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); background-color: #5cb85c; }
-    100% { transform: scale(1); }
-}
+        .contenedor-perfil {
+            display: flex;
+            gap: 40px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.1);
+            padding: 30px;
+        }
 
-@media (min-width: 769px) {
-    .menu-perfil {
-        width: 180px;
-        flex-direction: column;
-        border-bottom: none;
-        padding-bottom: 0;
-        border-right: 2px solid #ebceb7;
-        padding-right: 15px;
-    }
-    .menu-perfil ul {
-        flex-direction: column;
-        gap: 5px;
-    }
-    .opcion-perfil {
-        text-align: left;
-        border-bottom: none;
-        border-left: 3px solid transparent;
-        border-radius: 5px;
-        padding: 10px;
-    }
-    .opcion-perfil.activa, .opcion-perfil:hover {
-        border-left: 3px solid #ca4c1e;
-        border-bottom: none;
-        background: #fff3ed;
-    }
-    .contenido-perfil {
-        flex: 3;
-    }
-    .boton-principal {
-        align-self: flex-start;
-    }
-    .contenido-pie {
-        justify-content: space-between;
-        text-align: left;
-    }
-    .sociales {
-        justify-content: flex-start;
-    }
-    .info-txt {
-        text-align: left;
-    }
-}
+        .menu-perfil {
+            min-width: 220px;
+        }
 
-/* AJUSTES PARA MÓVIL */
-@media (max-width: 768px) {
-    .barra-busqueda {
-        width: 130px;
-    }
-    .navbar ul {
-        gap: 8px;
-        justify-content: center;
-    }
-    .prod-header .title {
-        font-size: 22px;
-    }
-    .menu-perfil ul {
-        gap: 5px;
-    }
-    .opcion-perfil {
-        font-size: 12px;
-        padding: 6px 4px;
-    }
-}
+        .menu-perfil ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .opcion-perfil {
+            padding: 15px 20px;
+            color: #8b4513;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .opcion-perfil.activa, .opcion-perfil:hover {
+            background: #fff3ed;
+            border-left: 3px solid #8b4513;
+            color: #8b4513;
+        }
+
+        .contenido-perfil {
+            flex: 1;
+        }
+
+        .subtitulo-seccion {
+            color: #8b4513;
+            font-size: 22px;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e8c8ad;
+            font-family: 'serif';
+        }
+
+        .formulario-perfil {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .grupo-input {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .grupo-input label {
+            color: #8b4513;
+            font-weight: 500;
+        }
+
+        .grupo-input input, .grupo-input textarea {
+            padding: 12px 15px;
+            border: 1px solid #e8c8ad;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #5a2e10;
+            background: #fff;
+        }
+
+        .grupo-input input:focus, .grupo-input textarea:focus {
+            outline: none;
+            border-color: #8b4513;
+            box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.1);
+        }
+
+        .grupo-input small {
+            color: #b07a57;
+            font-size: 12px;
+        }
+
+        .boton-principal {
+            background: #8b4513;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .boton-principal:hover {
+            background: #a0522d;
+        }
+
+        .texto-ayuda, .texto-vacio {
+            color: #b07a57;
+            font-style: italic;
+        }
+
+        /* ✅ Tarjeta donde se muestran todos los datos guardados */
+        .datos-guardados {
+            margin-top: 25px;
+            padding: 20px;
+            background: #fff3ed;
+            border-radius: 8px;
+            border-left: 3px solid #8b4513;
+        }
+        .datos-guardados h3 {
+            color: #8b4513;
+            margin: 0 0 12px 0;
+            font-size: 18px;
+        }
+        .entrada-datos {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 8px 0;
+            border-bottom: 1px solid #e8c8ad;
+            gap: 10px;
+        }
+        .entrada-datos:last-child {
+            border-bottom: none;
+        }
+        .dato-registrado {
+            color: #5a2e10;
+            font-size: 15px;
+            flex: 1;
+        }
+        .dato-registrado strong {
+            color: #8b4513;
+        }
+        .btn-eliminar {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+        .btn-eliminar:hover {
+            background: #c82333;
+        }
+
+        .item-pedido {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
+            border-bottom: 1px solid #e8c8ad;
+        }
+
+        .img-pedido {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 6px;
+            background: #fff;
+        }
+
+        .detalle-pedido h4 {
+            margin: 0 0 5px 0;
+            color: #8b4513;
+            font-size: 15px;
+        }
+
+        .detalle-pedido p {
+            margin: 2px 0;
+            font-size: 13px;
+            color: #b07a57;
+        }
+
+        .estado-pedido {
+            font-size: 12px;
+            font-weight: bold;
+            color: #28a745;
+            margin-left: auto;
+        }
+
+        .mensaje-error {
+            color: #dc3545;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .pie-pagina {
+            background: #f3d4b7;
+            padding: 40px 20px 20px;
+            margin-top: 50px;
+        }
+
+        .contenido-pie {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .columna-pie h3 {
+            color: #8b4513;
+            font-family: 'serif';
+        }
+
+        .columna-pie p, .columna-pie a {
+            color: #5a2e10;
+            text-decoration: none;
+        }
+
+        .sociales {
+            display: flex;
+            gap: 10px;
+        }
+        .social img {
+            width: 28px;
+            filter: invert(30%) sepia(60%) saturate(400%) hue-rotate(340deg);
+        }
+
+        .derechos {
+            text-align: center;
+            margin-top: 20px;
+            color: #b07a57;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .encabezado {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+            .menu-navegacion {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .contenedor-perfil {
+                flex-direction: column;
+            }
+            .navbar ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <header>
+    <header class="encabezado">
         <div class="menu container">
-            <!-- LOGO A LA IZQUIERDA -->
-            <a href="index.html">
-                <img src="IMAGENES/FloréLOGO.png" class="logo" alt="Logo Floré">
-            </a>
+            <a href="index.html" class="enlace-logo">
+        <img src="IMAGENES/FloréLOGO.png" class="logo" alt="FLORÉ">
+    </a>
 
-            <!-- MENÚ ALINEADO IGUAL A TU DISEÑO -->
-            <nav class="navbar">
-                <ul>
-                    <li><a href="index.html">INICIO</a></li>
-                    <li><a href="velas.html">VELAS</a></li>
-                    <li><a href="jabones.html">JABONES</a></li>
-                    <li><a href="favoritos.html">MIS FAVORITOS</a></li>
-                    <li class="barra-busqueda">
-                        <input type="text" id="texto-busqueda" placeholder="Buscar...">
-                        <button type="button">
-                            <img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda">
-                        </button>
-                    </li>
-                    <li class="carrito-item">
-                        <a href="carrito.html" class="enlace-carrito">
-                            <img src="IMAGENES/carro compras- cafe.png" alt="Carrito" class="icon-carrito">
-                            <span class="contador-carrito" id="contador-carrito">0</span>
-                        </a>
-                    </li>
-                    <li class="perfil-item">
-                        <a href="perfil.html" class="enlace-perfil activo">
-                            <img src="IMAGENES/usuario.png" alt="Perfil" class="icon-perfil">
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+    
+    <!-- Navegación al centro -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="velas.html">Velas</a></li>
+            <li><a href="jabones.html">Jabones</a></li>
+            <li><a href="favoritos.html">Mis Favoritos</a></li>
+        </ul>
+    </nav>
+
+    <!-- Acciones al lado derecho: Buscador + Carrito + Perfil -->
+    <div class="menu-acciones">
+        <div class="barra-busqueda">
+            <input type="text" id="texto-busqueda" placeholder="Buscar artículos...">
+            <button type="button">
+                <img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda">
+            </button>
         </div>
-        <div class="header-content container"></div>
+
+        <div class="carrito-item">
+            <a href="carrito.html" class="enlace-carrito">
+                <img src="IMAGENES/carro compras- cafe.png" alt="Carrito" class="icon-carrito">
+                <span class="contador-carrito" id="contador-carrito">0</span>
+            </a>
+        </div>
+
+        <div class="perfil-item">
+            <a href="perfil.html" class="enlace-perfil">
+                <img src="IMAGENES/usuario.png" alt="Perfil" class="icon-perfil">
+            </a>
+        </div>
+    </div>
+</div>
     </header>
 
 
@@ -615,6 +502,7 @@ header {
                         <button type="submit" class="boton-principal">GUARDAR CAMBIOS</button>
                     </form>
 
+                    <!-- ✅ Aquí se muestran TODOS los datos guardados con opción de eliminar -->
                     <div class="datos-guardados">
                         <h3>Tus Datos Registrados</h3>
                         <div id="mostrar-datos">
@@ -623,7 +511,7 @@ header {
                     </div>
                 </section>
 
-                <section class="seccion-perfil" id="pedidos" style="display:none;">
+                <section class="seccion-perfil" id="pedidos">
                     <h2 class="subtitulo-seccion">Historial de Pedidos</h2>
                     <div id="lista-pedidos">
                         <p class="texto-vacio">Aún no has realizado ninguna compra.</p>
@@ -634,35 +522,29 @@ header {
         </div>
     </main>
 
-    <footer class="footer-container">
-        <img class="logo-2" src="IMAGENES/FloréLOGO.png" alt="FLORÉ">
-        <div class="links">
-            <h4>Enlaces</h4>
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#productos-contenido">Productos</a></li>
-                <li><a href="#info">Nosotros</a></li>
-            </ul>
-        </div>
-        <div class="links">
-            <h4>Redes Sociales</h4>
-            <div class="sociales">
-                <a href="https://www.facebook.com/profile.php?id=61588585256446" target="_blank" rel="noopener">
-                    <div class="social"><img src="IMAGENES/facebook-cafe.svg" alt="Facebook"></div>
-                </a>
-                <a href="https://www.instagram.com/flore_arregloseternos/" target="_blank" rel="noopener">
-                    <div class="social"><img src="IMAGENES/instagram-cafe.svg" alt="Instagram"></div>
-                </a>
-                <a href="#" target="_blank" rel="noopener">
-                    <div class="social"><img src="IMAGENES/whatsapp-cafe.svg" alt="WhatsApp"></div>
-                </a>
+    <footer class="pie-pagina">
+        <div class="contenido-pie">
+            <div class="columna-pie">
+                <h3>Contáctanos</h3>
+                <p>📍 Guatemala, Ciudad</p>
+                <p>📞 +502 3214-0196</p>
+                <p>📞 +502 5564-8946</p>
+                <p>✉️ contacto@flore.com</p>
+            </div>
+        
+            <div class="columna-pie">
+                <h3>Síguenos</h3>
+                <div class="sociales">
+                <a href="https://www.facebook.com/profile.php?id=61588585256446"><div class="social"><img src="IMAGENES/facebook-cafe.svg" alt=""></div></a>
+                <a href="https://www.instagram.com/flore_arregloseternos/"><div class="social"><img src="IMAGENES/instagram-cafe.svg" alt=""></div></a>
+                <a href="#"><div class="social"><img src="IMAGENES/whatsapp-cafe.svg" alt=""></div></a>
+            </div>
             </div>
         </div>
+        <div class="derechos">
+            <p>© 2026 Floré - Todos los derechos reservados</p>
+        </div>
     </footer>
-
-    <div class="derechos">
-        <p>© 2026 Floré - Todos los derechos reservados</p>
-    </div>
 
 
     <script>
@@ -677,6 +559,7 @@ header {
         }
         actualizarContador();
 
+        // ✅ Mostrar todos los datos guardados con botón de eliminar
         function mostrarDatosGuardados() {
             const contenedor = document.getElementById('mostrar-datos');
             if(listaDatosGuardados.length === 0) {
@@ -693,13 +576,14 @@ header {
                         <div><strong>Nombre:</strong> ${dato.nombre || 'No especificado'}</div>
                         <div><strong>Correo:</strong> ${dato.correo || 'No especificado'}</div>
                         <div><strong>Teléfono:</strong> ${dato.telefono || 'No especificado'}</div>
-                        <div><strong>Dirección:</strong> ${dato.direccion || 'No especificada'}</div>
+                        <div><strong>Dirección:</strong> ${dato.direccion || 'No especificado'}</div>
                     </div>
                     <button class="btn-eliminar" data-indice="${indice}">Eliminar</button>
                 `;
                 contenedor.appendChild(elemento);
             });
 
+            // ✅ Asignar función a los botones de eliminar
             document.querySelectorAll('.btn-eliminar').forEach(boton => {
                 boton.addEventListener('click', function() {
                     const indice = parseInt(this.getAttribute('data-indice'));
@@ -710,12 +594,14 @@ header {
             });
         }
 
+        // ✅ Cargar datos al iniciar
         mostrarDatosGuardados();
         mostrarPedidos();
 
         document.getElementById('form-datos').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // ✅ Obtener nuevos datos
             const nuevoDato = {
                 nombre: document.getElementById('perfil-nombre').value.trim(),
                 correo: document.getElementById('perfil-correo').value.trim(),
@@ -723,16 +609,23 @@ header {
                 direccion: document.getElementById('perfil-direccion').value.trim()
             };
 
+            // ✅ Solo guardar si al menos un campo no está vacío
             if(nuevoDato.nombre || nuevoDato.correo || nuevoDato.telefono || nuevoDato.direccion) {
                 listaDatosGuardados.push(nuevoDato);
                 localStorage.setItem('lista_usuarios', JSON.stringify(listaDatosGuardados));
+                
+                // ✅ GUARDAR TAMBIÉN EN datosPerfil PARA QUE LO LEA pedido.html
                 localStorage.setItem('datosPerfil', JSON.stringify(nuevoDato));
                 
                 mostrarDatosGuardados();
                 alert("✅ Datos guardados correctamente");
             }
 
-            this.reset();
+            // ✅ VACIAR TODOS LOS CAMPOS AUTOMÁTICAMENTE
+            document.getElementById('perfil-nombre').value = "";
+            document.getElementById('perfil-correo').value = "";
+            document.getElementById('perfil-telefono').value = "";
+            document.getElementById('perfil-direccion').value = "";
         });
 
         document.querySelectorAll('.opcion-perfil').forEach(opcion => {
@@ -741,7 +634,7 @@ header {
                 document.querySelectorAll('.seccion-perfil').forEach(sec => sec.style.display = 'none');
                 
                 this.classList.add('activa');
-                document.getElementById(this.dataset.seccion).style.display = 'block';
+                document.getElementById(this.getAttribute('data-seccion')).style.display = 'block';
             });
         });
 
@@ -754,20 +647,21 @@ header {
                 return;
             }
 
-            contenedor.innerHTML = "";
+            let html = "";
             carrito.forEach(ped => {
-                const item = document.createElement('div');
-                item.className = "item-pedido";
-                item.innerHTML = `
+                html += `
+                <div class="item-pedido">
                     <img src="${ped.imagen}" alt="${ped.nombre}" class="img-pedido">
                     <div class="detalle-pedido">
                         <h4>${ped.nombre}</h4>
-                        <p>Cantidad: ${ped.cantidad} | Precio: Q${parseFloat(ped.precio).toFixed(2)}</p>
+                        <p>Cantidad: ${ped.cantidad} | Precio: Q${ped.precio.toFixed(2)}</p>
                         <p>Color: ${ped.color || 'Único'} | Aroma: ${ped.aroma || 'Sin aroma'}</p>
                         <span class="estado-pedido">✅ Pendiente de confirmación</span>
-                    </div>`;
-                contenedor.appendChild(item);
+                    </div>
+                </div>`;
             });
+
+            contenedor.innerHTML = html;
         }
 
     });

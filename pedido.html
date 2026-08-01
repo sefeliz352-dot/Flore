@@ -14,7 +14,7 @@
             padding: 0;
         }
 
-          header {
+        header {
             background-image: url(IMAGENES/01.jpeg);
             min-height: 150px;
             background-size: cover;
@@ -27,7 +27,7 @@
         .logo {
             height: 55px;
             width: auto;
-            display: 200px;
+            display: block;
         }
 
         .navbar ul {
@@ -55,7 +55,6 @@
             font-weight: 600;
         }
 
-        /* Barra de búsqueda IGUAL A TU DISEÑO */
         .barra-busqueda {
             position: relative;
             width: 160px;  
@@ -90,16 +89,11 @@
         }
         .icono-busqueda{ width: 14px; height: 14px; }
 
-        /* Iconos carrito y perfil alineados */
         .carrito-item, .perfil-item {
             position: relative;
-            display: inline-flex;
+            display: flex;
             align-items: center;
-        }
-        .icon-carrito, .icon-perfil {
-            width: 20px;
-            height: 20px;
-            transition: transform 0.2s ease;
+            margin: 0 3px; 
         }
         .icon-carrito:hover, .icon-perfil:hover {
             transform: scale(1.1);
@@ -108,20 +102,17 @@
             position: absolute;
             top: -8px;
             right: -8px;
-            background: #ca4c1e;
-            color: white;
-            font-size: 9px;
+            background: linear-gradient(90deg,#D96F32 0%, #C75D2C 100%);
+            color: #ffffff;
+            font-size: 11px;
             font-weight: bold;
-            width: 14px;
-            height: 14px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            line-height: 1;
-            text-align: center;
         }
-
 
         .header-content.container {
             height: 80px;
@@ -175,8 +166,8 @@
             flex-wrap: wrap;
         }
         .imagen-producto {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             object-fit: contain;
             border-radius: 5px;
         }
@@ -282,6 +273,78 @@
             cursor:pointer;
         }
 
+        /* === DISEÑO DE BÚSQUEDA IDÉNTICO A CARRITO.HTML === */
+        .vista-busqueda {
+            background-color: #f6e9de;
+            padding: 40px 15px;
+            display: none;
+        }
+        .vista-busqueda .title {
+            text-align: center;
+            color: #5f2c19;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-family: serif;
+        }
+        .box-container-general {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+        .boton-favorito {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            z-index: 15;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .boton-favorito .corazon-icono {
+            color: #885a49;
+            fill: transparent;
+            transition: all 0.3s ease;
+            width: 22px;
+            height: 22px;
+        }
+        .boton-favorito.activo .corazon-icono {
+            color: #ca4c1e;
+            fill: #ca4c1e;
+        }
+        .boton-favorito:hover {
+            transform: scale(1.15);
+        }
+        .producto-item {
+            position: relative;
+            overflow: hidden;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            padding: 15px;
+        }
+        /* ✅ TAMAÑO DE IMÁGENES IGUAL AL RESTO DEL SITIO */
+        .producto-item .imagen-producto {
+            width: 100%;
+            height: 160px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .texto-vacio {
+            text-align: center;
+            padding: 40px 20px;
+            color: #885a49;
+            font-style: italic;
+            grid-column: 1 / -1;
+        }
+
         @media (max-width: 768px) {
             .producto-pedido { 
                 flex-direction: column; 
@@ -301,35 +364,37 @@
     </style>
 </head>
 <body>
-
     <header>
         <div class="menu container">
-            <a href="index.html"> 
+            <a href="index.html" class="enlace-logo">
                 <img src="IMAGENES/FloréLOGO.png" class="logo" alt="FLORÉ">
             </a>
             <nav class="navbar">
                 <ul>
-                    <li><a href="index.html">Inicio</a></li>
                     <li><a href="velas.html">Velas</a></li>
                     <li><a href="jabones.html">Jabones</a></li>
                     <li><a href="favoritos.html">Mis Favoritos</a></li>
-                    <li class="barra-busqueda">
-                        <input type="text" placeholder="Buscar artículos...">
-                        <button><img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda"></button>
-                    </li>
-                    <li class="carrito-item">
-                        <a href="carrito.html" class="enlace-carrito">
-                            <img src="IMAGENES/carro compras- cafe.png" alt="Carrito" class="icon-carrito">
-                            <span class="contador-carrito" id="contador-carrito">0</span>
-                        </a>
-                    </li>
-                    <li class="perfil-item">
-                        <a href="perfil.html" class="enlace-perfil">
-                            <img src="IMAGENES/usuario.png" alt="Perfil" class="icon-perfil">
-                        </a>
-                    </li>
                 </ul>
             </nav>
+            <div class="menu-acciones">
+                <div class="barra-busqueda">
+                    <input type="text" id="texto-busqueda" placeholder="Buscar artículos...">
+                    <button type="button">
+                        <img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda">
+                    </button>
+                </div>
+                <div class="carrito-item">
+                    <a href="carrito.html" class="enlace-carrito">
+                        <img src="IMAGENES/carro compras- cafe.png" alt="Carrito" class="icon-carrito">
+                        <span class="contador-carrito" id="contador-carrito">0</span>
+                    </a>
+                </div>
+                <div class="perfil-item">
+                    <a href="perfil.html" class="enlace-perfil">
+                        <img src="IMAGENES/usuario.png" alt="Perfil" class="icon-perfil">
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="header-content container"></div>
     </header>
@@ -340,9 +405,9 @@
         <button onclick="window.location.href='index.html'">ACEPTAR</button>
     </div>
 
-    <main class="contenedor-pedido">
+    <!-- ✅ VISTA PRINCIPAL DE PEDIDO -->
+    <main id="vista-pedido" class="contenedor-pedido">
         <h1 class="titulo-seccion">TU PEDIDO</h1>
-
         <div class="datos-cliente">
             <h3 style="color:#5f2c19; margin-top:0;">Datos del Cliente</h3>
             <div class="dato"><strong>Nombre:</strong> <span id="cli-nombre"></span></div>
@@ -350,11 +415,9 @@
             <div class="dato"><strong>Teléfono:</strong> <span id="cli-telefono"></span></div>
             <div class="dato"><strong>Dirección:</strong> <span id="cli-direccion"></span></div>
         </div>
-
         <h3 class="titulo-seccion">Productos Solicitados</h3>
         <div id="lista-pedido" class="lista-productos"></div>
         <div class="total-pedido">Total a Pagar: <span id="total-final">Q0.00</span></div>
-
         <div class="metodo-pago">
             <h3 style="color:#5f2c19; margin-top:0;">Método de Pago: Transferencia Bancaria</h3>
             <p style="color:#885a49; font-size:14px; margin:8px 0;">Realiza tu transferencia a los siguientes datos:</p>
@@ -364,18 +427,26 @@
             <div class="dato"><strong>Tipo:</strong> Cuenta Monetaria</div>
             <hr style="border:none; border-top:1px solid #ebceb7; margin:10px 0;">
         </div>
-
         <div class="comprobante-pago">
             <p>⚠️ OBLIGATORIO: Adjunta la foto del comprobante de pago antes de enviar</p>
             <input type="file" id="comprobante" accept="image/*" required>
         </div>
-
         <button class="boton-finalizar" id="btn-finalizar">ENVIAR PEDIDO</button>
+    </main>
+
+    <!-- ✅ VISTA DE BÚSQUEDA: ESTRUCTURA Y ESTILO IDÉNTICO A CARRITO.HTML -->
+    <main class="vista-busqueda" id="vista-busqueda">
+        <div class="container">
+            <h2 class="title" id="titulo-busqueda">PRODUCTOS ENCONTRADOS</h2>
+            <div class="box-container-general" id="resultados-busqueda"></div>
+        </div>
     </main>
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
-    // ✅ CONFIGURACIÓN CORRECTA DE EMAILJS (pon tu PUBLIC KEY real)
+    // ==============================================
+    // ✅ LÓGICA ORIGINAL DE PEDIDO (INTACTA)
+    // ==============================================
     emailjs.init("ohheerwrTX2RgsPyc");
 
     const contadorCarritoEl = document.getElementById('contador-carrito');
@@ -389,13 +460,11 @@ document.addEventListener('DOMContentLoaded', function(){
     let carrito = JSON.parse(localStorage.getItem('carritoProductos')) || [];
     let perfil = JSON.parse(localStorage.getItem('datosPerfil')) || {};
 
-    // ✅ CARGAR DATOS DEL PERFIL
     document.getElementById('cli-nombre').textContent = perfil.nombre || 'No especificado';
     document.getElementById('cli-correo').textContent = perfil.correo || 'No especificado';
     document.getElementById('cli-telefono').textContent = perfil.telefono || 'No especificado';
     document.getElementById('cli-direccion').textContent = perfil.direccion || 'No especificada';
 
-    // ✅ CARGAR PRODUCTOS DEL CARRITO
     const lista = document.getElementById('lista-pedido');
     let total = 0;
     if(carrito.length === 0){
@@ -425,7 +494,6 @@ document.addEventListener('DOMContentLoaded', function(){
         document.getElementById('total-final').textContent = `Q${total.toFixed(2)}`;
     }
 
-    // ✅ CONVERTIR IMAGEN A BASE64
     function leerImagenBase64(archivo) {
         return new Promise((resolver) => {
             const lector = new FileReader();
@@ -434,12 +502,10 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     }
 
-    // ✅ FUNCIÓN DE ENVÍO
     document.getElementById('btn-finalizar').addEventListener('click', async function(){
         const btn = this;
         const inputComprobante = document.getElementById('comprobante');
 
-        // Validación de comprobante
         if(!inputComprobante.files || inputComprobante.files.length === 0){
             alert("⚠️ DEBES ADJUNTAR EL COMPROBANTE DE PAGO ANTES DE ENVIAR");
             inputComprobante.focus();
@@ -449,7 +515,6 @@ document.addEventListener('DOMContentLoaded', function(){
         btn.disabled = true;
         btn.textContent = "ENVIANDO...";
 
-        // ✅ ARMAR LISTA DE PRODUCTOS PARA EL CORREO
         let listaProductosCorreo = '';
         carrito.forEach(p => {
             listaProductosCorreo += `• ${p.nombre}\n`;
@@ -481,10 +546,9 @@ document.addEventListener('DOMContentLoaded', function(){
                 avisoImagen = "⚠️ La imagen es muy pesada. Te contactaremos para verificarla.";
             }
 
-            // ✅ ENVÍO CORRECTO CON SERVICE ID Y TEMPLATE ID REALES
             await emailjs.send(
-                "service_flore", // ⚠️ PON AQUÍ TU ID DE SERVICIO REAL
-                "template_vrgjomo", // ⚠️ PON AQUÍ TU ID DE PLANTILLA REAL
+                "service_flore",
+                "template_vrgjomo",
                 {
                     to_email: "flore.artesanal11@gmail.com",
                     nombre_cliente: perfil.nombre || "Sin nombre",
@@ -504,8 +568,8 @@ document.addEventListener('DOMContentLoaded', function(){
         } catch (error) {
             console.error("Error al enviar:", error);
             await emailjs.send(
-                "11081214@", // ⚠️ PON AQUÍ TU ID DE SERVICIO REAL
-                "template_vrgjomo", // ⚠️ PON AQUÍ TU ID DE PLANTILLA REAL
+                "service_flore",
+                "template_vrgjomo",
                 {
                     to_email: "flore.artesanal11@gmail.com",
                     nombre_cliente: perfil.nombre || "Sin nombre",
@@ -525,6 +589,199 @@ document.addEventListener('DOMContentLoaded', function(){
             btn.textContent = "ENVIAR PEDIDO";
         }
     });
+
+    // ==============================================
+    // 🔍 BÚSQUEDA: FUNCIONA IGUAL QUE EN CARRITO.HTML
+    // ==============================================
+    const inputBuscar = document.getElementById('texto-busqueda');
+    const vistaPedido = document.getElementById('vista-pedido');
+    const vistaBusqueda = document.getElementById('vista-busqueda');
+    const tituloBusqueda = document.getElementById('titulo-busqueda');
+    const contenedorResultados = document.getElementById('resultados-busqueda');
+
+    let resultadosActivos = false;
+    let baseDeDatosGlobal = [];
+    let cargando = false;
+    let listaFavoritos = JSON.parse(localStorage.getItem('listaFavoritos')) || [];
+
+    const misPaginasConProductos = ["index.html", "velas.html", "ramos.html", "jabones.html"];
+
+    function quitarAcentos(texto) {
+        if(!texto) return "";
+        return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+
+    async function cargarTodosLosProductos() {
+        if(baseDeDatosGlobal.length > 0) return;
+        try {
+            baseDeDatosGlobal = [];
+            for (const pagina of misPaginasConProductos) {
+                try {
+                    const respuesta = await fetch(pagina);
+                    if (!respuesta.ok) continue;
+                    const textoHtml = await respuesta.text();
+                    const parser = new DOMParser();
+                    const documento = parser.parseFromString(textoHtml, 'text/html');
+
+                    const productosDeEstaPagina = documento.querySelectorAll('.box-producto');
+                    productosDeEstaPagina.forEach(prod => {
+                        const nombre = prod.querySelector('h3')?.textContent.trim() || "";
+                        const parrafoDesc = prod.querySelector('.contenido-producto > p:first-of-type');
+                        const descripcion = parrafoDesc ? parrafoDesc.textContent.trim() : "Sin descripción disponible";
+                        const imagen = prod.querySelector('img')?.getAttribute('src') || "";
+                        const botonDatos = prod.querySelector('.comprar');
+
+                        if (nombre && botonDatos) {
+                            baseDeDatosGlobal.push({
+                                nombre: nombre,
+                                descripcion: descripcion,
+                                imagen: imagen,
+                                imagenes: botonDatos.dataset.imagenes || "", 
+                                precio: botonDatos.dataset.precio || "",
+                                peso: botonDatos.dataset.peso || "",
+                                colores: botonDatos.dataset.colores || "",
+                                aromas: botonDatos.dataset.aromas || ""
+                            });
+                        }
+                    });
+                } catch(err) { 
+                    console.warn("Error al cargar página:", pagina);
+                }
+            }
+        } catch (error) { 
+            console.error("❌ Error al cargar catálogo:", error);
+        }
+    }
+
+    async function buscarEnTiempoReal() {
+        if(!inputBuscar || cargando || !vistaPedido || !vistaBusqueda || !contenedorResultados) return;
+        cargando = true;
+
+        const textoBuscar = quitarAcentos(inputBuscar.value.trim());
+
+        if (textoBuscar === "") {
+            if(resultadosActivos) {
+                vistaBusqueda.style.display = "none";
+                vistaPedido.style.display = "block";
+                resultadosActivos = false;
+            }
+            cargando = false;
+            return;
+        }
+
+        resultadosActivos = true;
+        vistaPedido.style.display = "none";
+        vistaBusqueda.style.display = "block";
+        contenedorResultados.innerHTML = "";
+
+        await cargarTodosLosProductos();
+
+        const resultados = baseDeDatosGlobal.filter(producto => 
+            quitarAcentos(producto.nombre).includes(textoBuscar) ||
+            quitarAcentos(producto.descripcion).includes(textoBuscar)
+        );
+
+        if(tituloBusqueda) tituloBusqueda.textContent = resultados.length > 0 
+            ? `PRODUCTOS ENCONTRADOS (${resultados.length})` 
+            : `NINGÚN PRODUCTO COINCIDE`;
+
+        if(resultados.length === 0) {
+            contenedorResultados.innerHTML = `<p class="texto-vacio">❌ No se encontraron productos con: "${inputBuscar.value}"</p>`;
+            cargando = false;
+            return;
+        }
+
+        resultados.forEach(prod => {
+            const esFavorito = listaFavoritos.some(fav => fav.nombre === prod.nombre);
+            const tarjeta = document.createElement('div');
+            tarjeta.className = 'box-producto';
+            tarjeta.innerHTML = `
+                <div class="producto-item">
+                    <div class="boton-favorito ${esFavorito ? 'activo' : ''}"
+                        data-nombre="${prod.nombre}"
+                        data-peso="${prod.peso}"
+                        data-precio="${prod.precio}"
+                        data-imagen="${prod.imagen}"
+                        data-descripcion="${prod.descripcion}"
+                        data-colores="${prod.colores}"
+                        data-aromas="${prod.aromas}"
+                        data-imagenes="${prod.imagenes}">
+                        <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </div>
+                    <div class="imagen-producto">
+                        <img src="${prod.imagen}" alt="${prod.nombre}">
+                    </div>
+                    <div class="contenido-producto">
+                        <h3>${prod.nombre}</h3>
+                        <p>${prod.descripcion}</p>
+                        <p class="peso-producto">Peso: ${prod.peso || 'Sin peso'}</p>
+                        <div class="iconos-compra">
+                            <div class="comprar" 
+                                data-nombre="${prod.nombre}" 
+                                data-precio="${prod.precio}" 
+                                data-peso="${prod.peso}"
+                                data-imagen="${prod.imagen}"
+                                data-descripcion="${prod.descripcion}"
+                                data-colores="${prod.colores}"
+                                data-aromas="${prod.aromas}"
+                                data-imagenes="${prod.imagenes}">
+                                <span>COMPRAR</span>
+                                <img src="IMAGENES/flecha arriba.png" alt="flecha-arriba">
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            contenedorResultados.appendChild(tarjeta);
+        });
+
+        activarEventosBusqueda();
+        cargando = false;
+    }
+
+    function activarEventosBusqueda() {
+        document.querySelectorAll('.boton-favorito').forEach(corazon => {
+            corazon.addEventListener('click', function() {
+                const datos = {
+                    nombre: this.dataset.nombre,
+                    imagen: this.dataset.imagen,
+                    peso: this.dataset.peso,
+                    precio: this.dataset.precio,
+                    descripcion: this.dataset.descripcion,
+                    colores: this.dataset.colores,
+                    aromas: this.dataset.aromas,
+                    imagenes: this.dataset.imagenes || ""
+                };
+                const existe = listaFavoritos.some(f => f.nombre === datos.nombre);
+                existe 
+                    ? listaFavoritos = listaFavoritos.filter(f => f.nombre !== datos.nombre)
+                    : listaFavoritos.push(datos);
+                this.classList.toggle('activo', !existe);
+                localStorage.setItem('listaFavoritos', JSON.stringify(listaFavoritos));
+            });
+        });
+
+        document.querySelectorAll('.comprar').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const nombre = encodeURIComponent(this.dataset.nombre);
+                const precio = this.dataset.precio;
+                const peso = encodeURIComponent(this.dataset.peso);
+                const imagen = encodeURIComponent(this.dataset.imagen);
+                const imagenes = encodeURIComponent(this.dataset.imagenes || "");
+                const descripcion = encodeURIComponent(this.dataset.descripcion || "Sin descripción");
+                const colores = encodeURIComponent(this.dataset.colores || "");
+                const aromas = encodeURIComponent(this.dataset.aromas || "");
+                
+                window.location.href = `producto.html?nombre=${nombre}&precio=${precio}&peso=${peso}&imagen=${imagen}&imagenes=${imagenes}&descripcion=${descripcion}&colores=${colores}&aromas=${aromas}`;
+            });
+        });
+    }
+
+    if(inputBuscar) {
+        inputBuscar.addEventListener('input', buscarEnTiempoReal);
+    }
+
 });
 </script>
 

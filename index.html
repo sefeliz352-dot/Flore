@@ -10,38 +10,46 @@
 <body>
     <header>
         <div class="menu container">
-            <a href="index.html">
-                <img src="IMAGENES/FloréLOGO.png" class="logo" alt="FLORÉ">
-            </a>
+    <!-- Logo al lado izquierdo -->
+    <a href="index.html" class="enlace-logo">
+        <img src="IMAGENES/FloréLOGO.png" class="logo" alt="FLORÉ">
+    </a>
 
-            <nav class="navbar">
-                <ul>
-                    <li><a href="velas.html">Velas</a></li>
-                    <li><a href="jabones.html">Jabones</a></li>
-                    <li><a href="favoritos.html">Mis Favoritos</a></li>
+    
+    <!-- Navegación al centro -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="velas.html">Velas</a></li>
+            <li><a href="jabones.html">Jabones</a></li>
+            <li><a href="favoritos.html">Mis Favoritos</a></li>
+        </ul>
+    </nav>
 
-                    <div class="barra-busqueda">
-                        <input type="text" id="texto-busqueda" placeholder="Buscar artículos...">
-                        <button type="button">
-                            <img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda">
-                        </button>
-                    </div>
-
-                    <li class="carrito-item">
-                        <a href="carrito.html" class="enlace-carrito">
-                            <img src="IMAGENES/carro compras- cafe.png" alt="Carrito" class="icon-carrito">
-                            <span class="contador-carrito" id="contador-carrito">0</span>
-                        </a>
-                    </li>
-
-                    <li class="perfil-item">
-                        <a href="perfil.html" class="enlace-perfil">
-                            <img src="IMAGENES/usuario.png" alt="Perfil" class="icon-perfil">
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+    <!-- Acciones al lado derecho: Buscador + Carrito + Perfil -->
+    <div class="menu-acciones">
+        <div class="barra-busqueda">
+            <input type="text" id="texto-busqueda" placeholder="Buscar artículos...">
+            <button type="button">
+                <img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda">
+            </button>
         </div>
+
+        <div class="carrito-item">
+            <a href="carrito.html" class="enlace-carrito">
+                <img src="IMAGENES/carro compras- cafe.png" alt="Carrito" class="icon-carrito">
+                <span class="contador-carrito" id="contador-carrito">0</span>
+            </a>
+        </div>
+
+        <div class="perfil-item">
+            <a href="perfil.html" class="enlace-perfil">
+                <img src="IMAGENES/usuario.png" alt="Perfil" class="icon-perfil">
+            </a>
+        </div>
+    </div>
+</div>
+
+
 
         <div class="header-content container">
             <div class="header-txt">
@@ -417,7 +425,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let listaFavoritos = JSON.parse(localStorage.getItem('listaFavoritos')) || [];
     let productosEnCarrito = JSON.parse(localStorage.getItem('carritoProductos')) || [];
 
-    const misPaginasConProductos = ["FLORÉ.html", "velas.html", "ramos.html", "jabones.html"];
+    // Páginas con productos reales
+    const misPaginasConProductos = ["index.html", "velas.html", "jabones.html", "favoritos.html"];
 
     function quitarAcentos(texto) {
         if (!texto) return "";
@@ -425,13 +434,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function actualizarContadorCarrito() {
-        let total = productosEnCarrito.reduce((suma, item) => suma + (Number(item.cantidad) || 0), 0);
-        if(contadorCarrito) contadorCarrito.textContent = total;
+        const total = productosEnCarrito.reduce((suma, item) => suma + (Number(item.cantidad) || 0), 0);
+        if (contadorCarrito) contadorCarrito.textContent = total;
     }
     actualizarContadorCarrito();
 
     async function cargarTodosLosProductos() {
-        if(baseDeDatosGlobal.length > 0) return;
+        if (baseDeDatosGlobal.length > 0) return;
         try {
             baseDeDatosGlobal = [];
             for (const pagina of misPaginasConProductos) {
@@ -456,15 +465,16 @@ document.addEventListener('DOMContentLoaded', function () {
                         const aromas = botonDatos.dataset.aromas?.trim() || "";
                         const precio = botonDatos.dataset.precio?.trim() || "0.00";
                         const imagen = prod.querySelector('img')?.getAttribute('src') || "";
+                        const imagenes = botonDatos.dataset.imagenes?.trim() || "";
 
                         if (nombre && imagen) {
                             baseDeDatosGlobal.push({
                                 nombre, descripcion_corta: descripcionCorta, descripcion_larga: descripcionLarga,
-                                imagen, precio, peso, colores, aromas
+                                imagen, imagenes, precio, peso, colores, aromas
                             });
                         }
                     });
-                } catch(err) {
+                } catch (err) {
                     console.warn("No se pudo cargar:", pagina, err);
                 }
             }
@@ -473,16 +483,26 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    async function buscarEnTiempoReal() {
-        if(!inputBuscar || cargando) return;
+    // ✅ NUEVO: Recibe la búsqueda que viene de perfil.html u otras páginas
+    async function cargarBusquedaDesdeURL() {
+        const params = new URLSearchParams(window.location.search);
+        const termino = params.get('buscar');
+        if (!termino || termino.trim().length < 2) return;
+
+        if (inputBuscar) inputBuscar.value = termino.trim();
+        await buscarEnTiempoReal(termino.trim());
+    }
+
+    async function buscarEnTiempoReal(terminoForzado = null) {
+        if (!inputBuscar || cargando) return;
         cargando = true;
-        const textoBuscar = quitarAcentos(inputBuscar.value.trim());
+        const textoBuscar = terminoForzado ? quitarAcentos(terminoForzado) : quitarAcentos(inputBuscar.value.trim());
 
         if (textoBuscar === "") {
-            if(resultadosActivos) {
+            if (resultadosActivos) {
                 vistaBusqueda.style.display = "none";
                 vistaOriginal.style.display = "block";
-                titulo.textContent = "PRODUCTOS DESTACADOS";
+                if (titulo) titulo.textContent = "PRODUCTOS DESTACADOS";
                 resultadosActivos = false;
             }
             cargando = false;
@@ -495,17 +515,17 @@ document.addEventListener('DOMContentLoaded', function () {
         contenedorResultados.innerHTML = "";
         await cargarTodosLosProductos();
 
-        const resultados = baseDeDatosGlobal.filter(producto => 
+        const resultados = baseDeDatosGlobal.filter(producto =>
             quitarAcentos(producto.nombre).includes(textoBuscar) ||
             quitarAcentos(producto.descripcion_corta).includes(textoBuscar)
         );
 
-        titulo.textContent = resultados.length > 0 
-            ? `PRODUCTOS ENCONTRADOS (${resultados.length})` 
+        if (titulo) titulo.textContent = resultados.length > 0
+            ? `PRODUCTOS ENCONTRADOS (${resultados.length})`
             : `NINGÚN PRODUCTO COINCIDE`;
 
-        if(resultados.length === 0) {
-            contenedorResultados.innerHTML = `<p class="texto-vacio">❌ No se encontraron productos con: "${inputBuscar.value}"</p>`;
+        if (resultados.length === 0) {
+            contenedorResultados.innerHTML = `<p class="texto-vacio">❌ No se encontraron productos con: "${textoBuscar}"</p>`;
             cargando = false;
             return;
         }
@@ -519,6 +539,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="boton-favorito ${esFavorito ? 'activo' : ''}"
                         data-nombre="${prod.nombre}" data-peso="${prod.peso}"
                         data-precio="${prod.precio}" data-imagen="${prod.imagen}"
+                        data-imagenes="${prod.imagenes}"
                         data-descripcion="${prod.descripcion_larga}"
                         data-colores="${prod.colores}" data-aromas="${prod.aromas}">
                         <svg class="corazon-icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -531,9 +552,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         <p>${prod.descripcion_corta}</p>
                         <p class="peso-producto">Peso: ${prod.peso || 'Sin peso'}</p>
                         <div class="iconos-compra">
-                            <div class="comprar" 
+                            <div class="comprar"
                                 data-nombre="${prod.nombre}" data-precio="${prod.precio}"
                                 data-peso="${prod.peso}" data-imagen="${prod.imagen}"
+                                data-imagenes="${prod.imagenes}"
                                 data-descripcion="${prod.descripcion_larga}"
                                 data-colores="${prod.colores}" data-aromas="${prod.aromas}">
                                 <span>COMPRAR</span>
@@ -551,15 +573,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function activarEventosGlobales() {
         document.querySelectorAll('.boton-favorito').forEach(corazon => {
-            corazon.addEventListener('click', function() {
+            corazon.addEventListener('click', function () {
                 const datos = {
                     nombre: this.dataset.nombre || "", imagen: this.dataset.imagen || "",
-                    peso: this.dataset.peso || "", precio: this.dataset.precio || "",
-                    descripcion: this.dataset.descripcion || "", colores: this.dataset.colores || "",
-                    aromas: this.dataset.aromas || ""
+                    imagenes: this.dataset.imagenes || "", peso: this.dataset.peso || "",
+                    precio: this.dataset.precio || "", descripcion: this.dataset.descripcion || "",
+                    colores: this.dataset.colores || "", aromas: this.dataset.aromas || ""
                 };
                 const existe = listaFavoritos.some(f => f.nombre === datos.nombre);
-                existe 
+                existe
                     ? listaFavoritos = listaFavoritos.filter(f => f.nombre !== datos.nombre)
                     : listaFavoritos.push(datos);
                 this.classList.toggle('activo', !existe);
@@ -568,27 +590,29 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         document.querySelectorAll('.comprar').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 const datos = {
                     nombre: this.dataset.nombre || "Sin nombre", precio: this.dataset.precio || "0.00",
                     peso: this.dataset.peso || "No especificado", imagen: this.dataset.imagen || "",
-                    descripcion: this.dataset.descripcion || "Sin descripción",
+                    imagenes: this.dataset.imagenes || "", descripcion: this.dataset.descripcion || "Sin descripción",
                     colores: this.dataset.colores || "", aromas: this.dataset.aromas || ""
                 };
                 const url = `producto.html?nombre=${encodeURIComponent(datos.nombre)}` +
-                            `&precio=${encodeURIComponent(datos.precio)}` +
-                            `&peso=${encodeURIComponent(datos.peso)}` +
-                            `&imagen=${encodeURIComponent(datos.imagen)}` +
-                            `&descripcion=${encodeURIComponent(datos.descripcion)}` +
-                            `&colores=${encodeURIComponent(datos.colores)}` +
-                            `&aromas=${encodeURIComponent(datos.aromas)}`;
+                    `&precio=${encodeURIComponent(datos.precio)}` +
+                    `&peso=${encodeURIComponent(datos.peso)}` +
+                    `&imagen=${encodeURIComponent(datos.imagen)}` +
+                    `&imagenes=${encodeURIComponent(datos.imagenes)}` +
+                    `&descripcion=${encodeURIComponent(datos.descripcion)}` +
+                    `&colores=${encodeURIComponent(datos.colores)}` +
+                    `&aromas=${encodeURIComponent(datos.aromas)}`;
                 window.location.href = url;
             });
         });
     }
 
-    if(inputBuscar) inputBuscar.addEventListener('input', buscarEnTiempoReal);
+    if (inputBuscar) inputBuscar.addEventListener('input', () => buscarEnTiempoReal());
     activarEventosGlobales();
+    cargarBusquedaDesdeURL(); // ✅ Ejecuta la búsqueda automática al entrar
 });
     </script>
 </body>

@@ -29,6 +29,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             margin-top: 20px;
         }
+        
 
         .titulo-carrito {
             text-align: center;
@@ -284,35 +285,44 @@
     <header>
         <div class="menu container">
             <a href="index.html"> 
-                <img src="IMAGENES/FloréLOGO.png" class="logo" alt="Logo Floré">
-            </a>
+                <img src="IMAGENES/FloréLOGO.png" class="logo" alt="FLORÉ">
+    </a>
 
-            <nav class="navbar">
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="velas.html">Velas</a></li>
-                    <li><a href="jabones.html">Jabones</a></li>
-                    <li><a href="favoritos.html">Mis Favoritos</a></li>
-                    <li class="barra-busqueda">
-                        <input type="text" id="texto-busqueda" placeholder="Buscar artículos...">
-                        <button type="button">
-                            <img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda">
-                        </button>
-                    </li>
-                    <li class="carrito-item">
-                        <a href="carrito.html" class="enlace-carrito" style="color:#ca4c1e;">
-                            <img src="IMAGENES/carro compras- cafe.png" alt="Carrito" class="icon-carrito">
-                            <span class="contador-carrito" id="contador-carrito">0</span>
-                        </a>
-                    </li>
-                    <li class="perfil-item">
-                        <a href="perfil.html" class="enlace-perfil">
-                            <img src="IMAGENES/usuario.png" alt="Perfil" class="icon-perfil">
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+    
+    <!-- Navegación al centro -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="velas.html">Velas</a></li>
+            <li><a href="jabones.html">Jabones</a></li>
+            <li><a href="favoritos.html">Mis Favoritos</a></li>
+        </ul>
+    </nav>
+
+    <!-- Acciones al lado derecho: Buscador + Carrito + Perfil -->
+    <div class="menu-acciones">
+        <div class="barra-busqueda">
+            <input type="text" id="texto-busqueda" placeholder="Buscar artículos...">
+            <button type="button">
+                <img src="IMAGENES/BUSCAR CAFE.png" alt="Buscar" class="icono-busqueda">
+            </button>
         </div>
+
+        <div class="carrito-item">
+            <a href="carrito.html" class="enlace-carrito">
+                <img src="IMAGENES/carro compras- cafe.png" alt="Carrito" class="icon-carrito">
+                <span class="contador-carrito" id="contador-carrito">0</span>
+            </a>
+        </div>
+
+        <div class="perfil-item">
+            <a href="perfil.html" class="enlace-perfil">
+                <img src="IMAGENES/usuario.png" alt="Perfil" class="icon-perfil">
+            </a>
+        </div>
+    </div>
+</div>
+
+
         <div class="header-content container"></div>
     </header>
 
