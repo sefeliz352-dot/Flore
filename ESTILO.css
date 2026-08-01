@@ -671,7 +671,7 @@ header{
         flex-wrap: wrap;
         justify-content: center !important;
         align-items: center;
-        gap: 5px;
+        gap: 15px;
     }
 
     .navbar ul li a {
