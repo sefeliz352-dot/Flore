@@ -637,6 +637,7 @@ header{
         width: 100%;
         justify-content: center;
         margin-bottom: 10px;
+        transform: translateY(15px);
     }
 
     .menu .navbar ul {
@@ -671,7 +672,7 @@ header{
         flex-wrap: wrap;
         justify-content: center !important;
         align-items: center;
-        gap: 15px;
+        gap: 5px;
     }
 
     .navbar ul li a {
