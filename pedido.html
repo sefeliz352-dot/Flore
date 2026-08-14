@@ -217,6 +217,8 @@
             font-weight: bold;
             cursor: pointer;
             transition: opacity 0.2s ease;
+            position: relative; /* ✅ Agregado */
+            z-index: 10;         /* ✅ Agregado */
         }
         .boton-finalizar:hover {
             opacity: 0.9;
@@ -429,9 +431,11 @@
         </div>
         <div class="comprobante-pago">
             <p>⚠️ OBLIGATORIO: Adjunta la foto del comprobante de pago antes de enviar</p>
-            <input type="file" id="comprobante" accept="image/*" required>
+            <!-- ✅ QUITADO EL ATRIBUTO "required" -->
+            <input type="file" id="comprobante" accept="image/*">
         </div>
-        <button class="boton-finalizar" id="btn-finalizar">ENVIAR PEDIDO</button>
+        <!-- ✅ AGREGADO type="button" -->
+        <button type="button" class="boton-finalizar" id="btn-finalizar">ENVIAR PEDIDO</button>
     </main>
 
     <!-- ✅ VISTA DE BÚSQUEDA: ESTRUCTURA Y ESTILO IDÉNTICO A CARRITO.HTML -->
