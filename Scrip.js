@@ -67,22 +67,38 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>`;
             contenedorFavoritos.appendChild(tarjeta);
         });
+        inicializarFavoritos(); // ✅ AHORA SE LLAMA DESPUÉS DE CREAR LAS TARJETAS
+    } else {
+        inicializarFavoritos(); // ✅ En otras páginas se ejecuta normalmente
     }
-    inicializarFavoritos();
 
 
     // ==============================================
-    // 🔍 BÚSQUEDA QUE SÍ FUNCIONA EN TODAS LAS PÁGINAS
+    // 🔍 BÚSQUEDA
     // ==============================================
     const inputBuscar = document.getElementById('texto-busqueda');
     if (inputBuscar) {
         inputBuscar.addEventListener('input', function () {
             const texto = this.value.trim();
             if (texto.length >= 2) {
-                // Al buscar, te lleva a la página principal con tu búsqueda
                 window.location.href = `index.html?buscar=${encodeURIComponent(texto)}`;
             }
         });
+    }
+
+    // ==============================================
+    // 📄 EN INDEX.HTML: CARGA Y FILTRA RESULTADOS
+    // ==============================================
+    if (window.location.pathname.includes('index.html')) {
+        const params = new URLSearchParams(window.location.search);
+        const buscar = params.get('buscar');
+        if (buscar && buscar.length >= 2) {
+            console.log('Buscando:', buscar);
+            // ✅ Aquí puedes agregar tu lógica de filtrado:
+            // 1. Cargar todos tus productos
+            // 2. Comparar nombre/descripcion con el término "buscar"
+            // 3. Mostrar solo los que coincidan
+        }
     }
 
     // ==============================================
@@ -111,8 +127,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 listaDatos.appendChild(item);
             });
             document.querySelectorAll('.btn-eliminar').forEach(btn => {
-                btn.onclick = () => {
-                    listaDatosGuardados.splice(btn.dataset.indice, 1);
+                btn.onclick = (e) => {
+                    // ✅ Corregido: usamos el evento para obtener el índice
+                    const indice = parseInt(e.currentTarget.dataset.indice);
+                    listaDatosGuardados.splice(indice, 1);
                     localStorage.setItem('lista_usuarios', JSON.stringify(listaDatosGuardados));
                     mostrarDatos();
                 };
@@ -122,19 +140,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.getElementById('form-datos')?.addEventListener('submit', e => {
             e.preventDefault();
-            const nuevo = {
-                nombre: document.getElementById('perfil-nombre').value.trim(),
-                correo: document.getElementById('perfil-correo').value.trim(),
-                telefono: document.getElementById('perfil-telefono').value.trim(),
-                direccion: document.getElementById('perfil-direccion').value.trim()
-            };
-            if (nuevo.nombre || nuevo.correo || nuevo.telefono || nuevo.direccion) {
-                listaDatosGuardados.push(nuevo);
-                localStorage.setItem('lista_usuarios', JSON.stringify(listaDatosGuardados));
-                mostrarDatos();
-                alert('✅ Datos guardados');
-                e.target.reset();
+            const nombre = document.getElementById('perfil-nombre').value.trim();
+            const correo = document.getElementById('perfil-correo').value.trim();
+            const telefono = document.getElementById('perfil-telefono').value.trim();
+            const direccion = document.getElementById('perfil-direccion').value.trim();
+
+            // ✅ Validación: no guardar si todo está vacío
+            if (!nombre && !correo && !telefono && !direccion) {
+                alert('⚠️ Escribe al menos un dato antes de guardar.');
+                return;
             }
+
+            const nuevo = { nombre, correo, telefono, direccion };
+            listaDatosGuardados.push(nuevo);
+            localStorage.setItem('lista_usuarios', JSON.stringify(listaDatosGuardados));
+            mostrarDatos();
+            alert('✅ Datos guardados');
+            e.target.reset();
         });
 
         document.querySelectorAll('.opcion-perfil').forEach(opt => {
@@ -170,18 +192,5 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
         mostrarPedidos();
-    }
-
-    // ==============================================
-    // 📄 EN INDEX.HTML: CARGA LOS RESULTADOS RECIBIDOS
-    // ==============================================
-    if (window.location.pathname.includes('index.html')) {
-        const params = new URLSearchParams(window.location.search);
-        const buscar = params.get('buscar');
-        if (buscar && buscar.length >= 2) {
-            // Aquí cargas y filtras tus productos locales
-            console.log('Buscando:', buscar);
-            // Tu lógica de filtrado aquí
-        }
     }
 });
